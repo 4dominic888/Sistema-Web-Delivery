@@ -1,0 +1,32 @@
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.deps.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.AssemblyReference.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfoInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfo.cs
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CopyComplete
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\refint\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Persistence\obj\Debug\net7.0\ref\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.deps.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.runtimeconfig.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.AssemblyReference.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfoInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfo.cs
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CopyComplete
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\refint\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.genruntimeconfig.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\ref\Delivery.Persistence.dll

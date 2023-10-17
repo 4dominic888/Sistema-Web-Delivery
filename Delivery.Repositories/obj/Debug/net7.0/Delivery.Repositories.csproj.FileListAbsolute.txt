@@ -1,0 +1,25 @@
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.deps.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfoInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfo.cs
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\refint\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Delivery.Repositories\obj\Debug\net7.0\ref\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.deps.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.runtimeconfig.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.AssemblyReference.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfoInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfo.cs
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\refint\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.genruntimeconfig.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\ref\Delivery.Repositories.dll
