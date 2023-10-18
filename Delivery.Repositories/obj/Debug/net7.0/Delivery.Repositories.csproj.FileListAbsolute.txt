@@ -23,3 +23,17 @@ C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delive
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.pdb
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.genruntimeconfig.cache
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\ref\Delivery.Repositories.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.deps.json
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.runtimeconfig.json
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.AssemblyReference.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfoInputs.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfo.cs
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CoreCompileInputs.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\refint\Delivery.Repositories.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.genruntimeconfig.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\ref\Delivery.Repositories.dll

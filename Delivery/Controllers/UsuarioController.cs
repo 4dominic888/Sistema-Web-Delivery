@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Delivery.Domain.User;
 
 namespace Delivery.Controllers
 {
@@ -11,6 +12,15 @@ namespace Delivery.Controllers
 
         public IActionResult Register()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(
+            [Bind("Surname, Name, Phone, Sexo, Email, Password, DateBirth")] Cliente cliente)
+        {
+            Console.WriteLine(ModelState.IsValid);
+            
             return View();
         }
     }

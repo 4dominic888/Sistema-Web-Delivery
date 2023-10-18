@@ -1,4 +1,12 @@
-﻿<style>
+﻿@using Delivery.Domain.User;
+@model Usuario;
+@{
+    var listaGeneros = Enum.GetValues(typeof(Sexo)).Cast<Sexo>().ToList();
+    int i = -1;
+    ViewBag.selectValido = -1;
+}
+
+<style>
     body {
         background-image: url('../assets/FondoLogin.png');
         background-repeat: no-repeat;
@@ -31,59 +39,97 @@
                 <div class="card-body">
                     <h2 class="card-title mb-3" style="margin: 10px; font-family: Arial Rounded MT;">Registrarse</h2>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"> <i class="fa-solid fa-user"></i> </span>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputGroup1" placeholder="name">
-                            <label for="floatingInputGroup1">Apellidos</label>
+                    <form id="formulario" asp-action="Register">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+
+                                <!--Apellido-->
+                                <span class="input-group-text"> <i class="fa-solid fa-user"></i> </span>
+                                <div class="form-floating">
+                                    <input asp-for="Surname" type="text" class="form-control" id="floatingInputGroup1" placeholder="name">
+                                    <label for="floatingInputGroup1">Apellidos</label>
+                                </div>
+
+
+                                <!--Nombre-->
+                                <div class="form-floating">
+                                    <input asp-for="Name" type="text" class="form-control" id="floatingInputGroup1" placeholder="name">
+                                    <label for="floatingInputGroup1">Nombre</label>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputGroup1" placeholder="name">
-                            <label for="floatingInputGroup1">Nombre</label>
+
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+
+                                <!--Telefono-->
+                                <span class="input-group-text"> <i class="fa-solid fa-phone"></i> </span>
+                                <div class="form-floating" style="width: 420px">
+                                    <input asp-for="Phone" type="tel" class="form-control" id="floatingInputGroup1" placeholder="telefono">
+                                    <label for="floatingInputGroup1">Telefono</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"> <i class="fa-solid fa-phone"></i> </span>
-                        <div class="form-floating" style="width: 420px">
-                            <input type="tel" class="form-control" id="floatingInputGroup1" placeholder="telefono">
-                            <label for="floatingInputGroup1">Telefono</label>
+
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+
+                                <!--Email-->
+                                <span class="input-group-text"> <i class="fa-regular fa-envelope"></i> </span>
+                                <div class="form-floating" style="width:420px">
+                                    <input asp-for="Email" type="email" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
+                                    <label for="floatingInputGroup1">Correo electrónico</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"> <i class="fa-regular fa-envelope"></i> </span>
-                        <div class="form-floating" style="width:420px">
-                            <input type="email" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
-                            <label for="floatingInputGroup1">Correo electrónico</label>
+
+                        <div class="form-group">
+                            <div class="input-group mb-3" style="width:460px">
+
+                                <!--Genero-->
+                                <span class="input-group-text"> <i class="fa-solid fa-genderless"></i> </span>
+                                <select asp-for="Sexo" id="selectGenero" class="form-select form-control">
+                                    <option disabled selected hidden value="">Seleccione un género</option>
+                                    @foreach(Sexo item in listaGeneros)
+                                    {
+                                        i++;
+                                        <option value="@i">@item</option>
+                                    }
+                                </select>
+
+
+                                <!--Fecha de nacimiento-->
+                                <div class="form-floating" style="width:200px">
+                                    <input asp-for="DateBirth" type="date" class="form-control" id="floatingInputGroup1">
+                                    <label for="floatingInputGroup1">Fecha de nacimiento</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3" style="width:460px">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
 
-                        <span class="input-group-text" for="inputGroupSelect01"> <i class="fa-solid fa-genderless"></i> </span>
-                        <select class="form-select form-control">
-                            <option selected disabled>Indique su sexo</option>
-                            <option value="1">Masculino</option>
-                            <option value="2">Femenino</option>
-                            <option value="3">Otros</option>
-                        </select>
-
-                        <div class="form-floating" style="width:200px">
-                            <input type="date" class="form-control" id="floatingInputGroup1">
-                            <label for="floatingInputGroup1">Fecha de nacimiento</label>
+                                <!--Contraseña-->
+                                <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
+                                <div class="form-floating" style="width:420px">
+                                    <input asp-for="Password" type="password" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
+                                    <label for="floatingInputGroup1">Contraseña</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
-                        <div class="form-floating" style="width:420px">
-                            <input type="password" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
-                            <label for="floatingInputGroup1">Contraseña</label>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg mb-3 col-10">Registrarse</button> <br />
                         </div>
-                    </div>
 
-                    <a class="btn btn-primary btn-lg mb-3 col-10" id="prueba">Registrarse</a> <br />
+                    </form>
 
                     <a class="icon-link offset-3" href="./Login.html">
                         ¿Ya tienes una cuenta?
@@ -96,8 +142,17 @@
 
 @section Scripts{
     <script>
-        $('#prueba').on('click', () => {
-            console.log("clickeado");
-        })
+
+        $('#formulario').on('submit', function(evt){
+
+            let num = $('#selectGenero').val();
+
+            if (num == null) {
+                alert("Selecciona una opcion de genero");
+                evt.preventDefault();
+            }
+
+        });
+
     </script>
 }

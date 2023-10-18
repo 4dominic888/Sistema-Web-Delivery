@@ -23,3 +23,17 @@ C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delive
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.pdb
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.genruntimeconfig.cache
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Debug\net7.0\ref\Delivery.Domain.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\bin\Debug\net7.0\Delivery.Domain.deps.json
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\bin\Debug\net7.0\Delivery.Domain.runtimeconfig.json
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\bin\Debug\net7.0\Delivery.Domain.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\bin\Debug\net7.0\Delivery.Domain.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.csproj.AssemblyReference.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.AssemblyInfoInputs.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.AssemblyInfo.cs
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.csproj.CoreCompileInputs.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\refint\Delivery.Domain.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\Delivery.Domain.genruntimeconfig.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Domain\obj\Debug\net7.0\ref\Delivery.Domain.dll

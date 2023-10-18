@@ -30,3 +30,20 @@ C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delive
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.pdb
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.genruntimeconfig.cache
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Persistence\obj\Debug\net7.0\ref\Delivery.Persistence.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.deps.json
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.runtimeconfig.json
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.AssemblyReference.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfoInputs.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfo.cs
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CoreCompileInputs.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CopyComplete
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\refint\Delivery.Persistence.dll
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.pdb
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.genruntimeconfig.cache
+D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\ref\Delivery.Persistence.dll

@@ -48,7 +48,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdComida");
 
-                    b.ToTable("CaracteristicaComidas");
+                    b.ToTable("CaracteristicaComidas", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.Comida", b =>
@@ -91,7 +91,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdPedido");
 
-                    b.ToTable("Comidas");
+                    b.ToTable("Comidas", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Direccion", b =>
@@ -115,7 +115,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Direcciones");
+                    b.ToTable("Direcciones", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.MetodoPago", b =>
@@ -145,7 +145,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MetodoPagos");
+                    b.ToTable("MetodoPagos", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Pedido", b =>
@@ -197,7 +197,7 @@ namespace Delivery.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[IdRepartidor] IS NOT NULL");
 
-                    b.ToTable("Pedidos");
+                    b.ToTable("Pedidos", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Administrador", b =>
@@ -250,7 +250,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdPreferenciaPagina");
 
-                    b.ToTable("Administradores");
+                    b.ToTable("Administradores", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>
@@ -309,7 +309,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdPreferenciaPagina");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.PreferenciasPagina", b =>
@@ -328,7 +328,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PreferenciasPaginas");
+                    b.ToTable("PreferenciasPaginas", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Repartidor", b =>
@@ -384,7 +384,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdPreferenciaPagina");
 
-                    b.ToTable("Repartidores");
+                    b.ToTable("Repartidores", (string)null);
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.CaracteristicaComida", b =>
