@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "Delivery.Repositories/1.0.0": {
         "dependencies": {
+          "Delivery.Domain": "1.0.0",
+          "Delivery.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.12",
           "Microsoft.EntityFrameworkCore.Design": "7.0.12",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
@@ -610,6 +612,25 @@
             "fileVersion": "6.0.21.52210"
           }
         }
+      },
+      "Delivery.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.12",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12"
+        },
+        "runtime": {
+          "Delivery.Domain.dll": {}
+        }
+      },
+      "Delivery.Persistence/1.0.0": {
+        "dependencies": {
+          "Delivery.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.12",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12"
+        },
+        "runtime": {
+          "Delivery.Persistence.dll": {}
+        }
       }
     }
   },
@@ -1038,6 +1059,16 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "Delivery.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Delivery.Persistence/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -37,3 +37,8 @@ D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\r
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.pdb
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.genruntimeconfig.cache
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\ref\Delivery.Repositories.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Domain.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Persistence.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Persistence.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Domain.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CopyComplete

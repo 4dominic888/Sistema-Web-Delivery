@@ -12,22 +12,27 @@ namespace Delivery.Domain.User
         public int Id { get; set; }
 
 
-        [Required, NotNull]
+        [Required(ErrorMessage = "Este campo es requerido"), NotNull]
         [Display(Name = "Apellido")]
-        [MinLength(3), MaxLength(200)]
+        [MinLength(3, 
+            ErrorMessage = "El apellido es demasiado corto"), 
+        MaxLength(200, 
+            ErrorMessage = "El apellido es demasiado largo")]
         public string Surname { get; set; }
 
 
-        [Required,NotNull]
+        [Required(ErrorMessage = "Este campo es requerido"), NotNull]
         [Display(Name = "Nombre")]
-        [MinLength(3), MaxLength(200)]
+        [MinLength(3,
+            ErrorMessage = "El nombre es demasiado corto"),
+        MaxLength(200,
+            ErrorMessage = "El nombre es demasiado largo")]
         public string Name { get; set; }
 
-
-        [Required,NotNull]
+        [RegularExpression(@"^9\d{8}$", ErrorMessage = "El número de teléfono no es válido.")]
+        [Required(ErrorMessage = "Este campo es requerido"), NotNull]
         [Display(Name = "Telefono")]
         [DataType(DataType.PhoneNumber)]
-        [MinLength(10), MaxLength(15)]
         public string Phone { get; set; }
 
 
@@ -36,17 +41,22 @@ namespace Delivery.Domain.User
 
 
 
-        [Required, NotNull]
+        [Required(ErrorMessage = "Este campo es requerido"), NotNull]
         [Display(Name = "Correo electrónico")]
         [DataType(DataType.EmailAddress)]
-        [MinLength(3), MaxLength(200)]
+        [MinLength(3,
+            ErrorMessage = "El email es demasiado corto"),
+        MaxLength(200,
+            ErrorMessage = "El email es demasiado largo")]
         public string Email { get; set; }
 
 
-        [Required,NotNull]
+        [Required(ErrorMessage = "Este campo es requerido"), NotNull]
         [Display(Name = "Contraseña")]
         [DataType(DataType.Password)]
-        [MinLength(8), MaxLength(80)]
+        [MinLength(8, 
+            ErrorMessage = "La contraseña es demasiada corta"), 
+        MaxLength(100, ErrorMessage = "Lac contraseña es demasiada larga")]
         public string Password { get; set; }
 
 
@@ -57,13 +67,11 @@ namespace Delivery.Domain.User
 
 
         [MaxLength(100)]
-        public string Rol { get; set; } = nameof(Usuario);
+        public string Rol { get; set; }
 
 
-        public int IdPreferenciaPagina { get; set; }
-
-        [ForeignKey(nameof(IdPreferenciaPagina))]
-        public PreferenciasPagina PreferenciasPagina { get; set; }
+        public bool ContenidoDestacado { get; set; } = false;
+        public bool Recomendaciones { get; set; } = false;
 
     }
 }

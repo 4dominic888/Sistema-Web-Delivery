@@ -578,6 +578,8 @@
       },
       "Delivery.Repositories/1.0.0": {
         "dependencies": {
+          "Delivery.Domain": "1.0.0",
+          "Delivery.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.12",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12"
         },

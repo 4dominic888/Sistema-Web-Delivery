@@ -6,10 +6,6 @@ namespace Delivery.Domain.User
 {
     public class Cliente : Usuario
     {
-        public int? IdPreferenciaCategoria { get; set; }
-
-
-        [ForeignKey(nameof(IdPreferenciaCategoria))]
         public CategoriaComida PreferenciaCategoria { get; set;}
 
 

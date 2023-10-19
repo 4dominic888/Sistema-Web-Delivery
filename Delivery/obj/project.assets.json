@@ -1087,6 +1087,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "Delivery.Domain": "1.0.0",
+          "Delivery.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.12",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12"
         },
@@ -2947,19 +2949,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\UCLAB612\\.nuget\\packages\\": {}
+    "C:\\Users\\4dominic888\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery\\Delivery.csproj",
+      "projectUniqueName": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\Delivery.csproj",
       "projectName": "Delivery",
-      "projectPath": "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery\\Delivery.csproj",
-      "packagesPath": "C:\\Users\\UCLAB612\\.nuget\\packages\\",
-      "outputPath": "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery\\obj\\",
+      "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\Delivery.csproj",
+      "packagesPath": "C:\\Users\\4dominic888\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\UCLAB612\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\4dominic888\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2967,21 +2969,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
-              "projectPath": "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
+            "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
+              "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
             },
-            "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
-              "projectPath": "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj"
+            "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
+              "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj"
             },
-            "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj": {
-              "projectPath": "D:\\Delivery borrar\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj"
+            "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj": {
+              "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj"
             }
           }
         }
@@ -3036,7 +3037,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

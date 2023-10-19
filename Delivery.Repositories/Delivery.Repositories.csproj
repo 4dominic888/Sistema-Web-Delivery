@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Delivery.Domain\Delivery.Domain.csproj" />
+    <ProjectReference Include="..\Delivery.Persistence\Delivery.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

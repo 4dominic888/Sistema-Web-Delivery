@@ -23,6 +23,7 @@ namespace Delivery.Persistence.Data
                 .HasForeignKey(e => e.IdCliente);
 
                 c.Property(e => e.DateBirth).HasColumnType("Date");
+                c.Property(e => e.Phone).HasMaxLength(9);
             });
 
             modelBuilder.Entity<Repartidor>(r =>
@@ -31,11 +32,13 @@ namespace Delivery.Persistence.Data
                 .WithOne(e => e.Repartidor)
                 .HasForeignKey<Pedido>(e => e.IdRepartidor);
                 r.Property(e => e.DateBirth).HasColumnType("Date");
+                r.Property(e => e.Phone).HasMaxLength(9);
             });
 
             modelBuilder.Entity<Administrador>(a =>
             {
                 a.Property(e => e.DateBirth).HasColumnType("Date");
+                a.Property(e => e.Phone).HasMaxLength(9);
             });
 
             modelBuilder.Entity<Comida>(c =>
@@ -69,7 +72,6 @@ namespace Delivery.Persistence.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<PreferenciasPagina> PreferenciasPaginas { get; set; }
         public DbSet<Direccion> Direcciones { get; set; }
         public DbSet<MetodoPago> MetodoPagos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }

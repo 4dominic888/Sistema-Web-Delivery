@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/a856d5cc62.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url('../assets/FondoLogin.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .centrado{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+    </style>
+</head>
+<body>
+
+    <!--Esta cosa se quita luego-->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./Home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./Vistas de usuario/Login.html">Login</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!--Esta cosa se quita luego-->
+
+  <div class="centrado">
+    <div class="card text-center" style="border-radius: 15px; width: 380px;">
+        <h2 class="card-title" style="margin: 10px; font-family: Arial Rounded MT;">Iniciar sesión</h2>
+        <div class="card-body">
+            <svg class="bd-placeholder-img rounded-circle mb-3" width="180" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
+                <defs>
+                  <pattern id="bebidaImagen" width="100%" height="100%">
+                    <image x="0" y="0" width="100%" xlink:href="../assets/Usuario.png" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#bebidaImagen)"/>
+            </svg>
+
+            
+            <div class="input-group mb-3">
+                <span class="input-group-text"> <i class="fa-regular fa-envelope"></i> </span>
+                <div class="form-floating">
+                  <input type="email" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
+                  <label for="floatingInputGroup1">Correo electrónico</label>
+                </div>
+            </div>
+              
+
+              <div class="input-group mb-4">
+                <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingInputGroup1" placeholder="password123">
+                  <label for="floatingInputGroup1">Contraseña</label>
+                </div>
+              </div>
+
+            <a href="#" class="btn btn-primary btn-lg mb-3 col-12">Ingresar</a>
+
+            <a class="icon-link icon-link-hover" href="./forget password.html">
+                Recordar mi contraseña
+                <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg>
+              </a>
+        </div>
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <p>¿Primera vez aquí? <a href="./Registrarse.html" class="link-body-emphasis">Registrate ahora</a></p>
+  </div>
+
+</body>
+</html>

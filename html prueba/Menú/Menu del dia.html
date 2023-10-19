@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a856d5cc62.js" crossorigin="anonymous"></script>
+  
+    <title>Document</title>
+</head>
+<body>
+    <!--Esta cosa se quita luego-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./Home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="./Vistas de usuario/Login.html">Login</a>
+                </li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            </div>
+        </div>
+    </nav>
+    <!--Esta cosa se quita luego-->
+
+
+    <!--Pedidos-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="MostrarPedidos">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Pedido de: Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <p class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1">
+                <a class="btn-close"></a> Comida 1 (Aún no registrada)
+              </button>
+            </p>
+            <div id="flush-collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    Con papas fritas <button type="button" class="btn-close" style="padding-top: 15px;"></button>
+                  </li>
+                  <li class="list-group-item">
+                    Mostaza <button type="button" class="btn-close" style="padding-top: 15px;"></button>
+                  </li>
+                  <li class="list-group-item">
+                    AJI <button type="button" class="btn-close" style="padding-top: 15px;"></button>
+                  </li>
+                </ul> 
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapseOne">
+                <a class="btn-close"></a> <strong>Comida 2</strong>
+              </button>
+            </h2>
+            <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Con papas fritas</li>
+                  <li class="list-group-item">Mostaza</li>
+                  <li class="list-group-item">AJI</li>
+                </ul> 
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapseOne">
+                <a class="btn-close"></a> <strong>Salchipollo</strong>
+              </button>
+            </h2>
+            <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+                </ul> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>Total:</th>
+                  <td>S/.XX</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row container">
+          <button class="btn btn-success">Guardar cambios</button>
+        </div>
+        <br>
+        <div class="row container">
+          <a class="btn btn-primary" href="../Pedidos/Crear un pedido.html" >Realizar el pedido</a>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!--Body-->
+    <div class="container mt-3">
+        <h1>Menú del día</h1>
+        <div class="row container">
+            <div class="row mb-3">
+                <div class="col">
+                    <select class="form-select">
+                        <option selected>Todo</option>
+                        <option value="1">Estofados</option>
+                        <option value="2">Sopas</option>
+                        <option value="3">Frito</option>
+                    </select>
+                </div>
+                <div class="col input-group">
+                    <input type="text" class="form-control"  placeholder="Busqueda por nombre...">
+                    <button class="btn btn-light">Buscar</button>
+                </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-primary" data-bs-toggle="offcanvas" href="#MostrarPedidos">
+                Ver comidas registrados
+              </button>
+
+              <button class="btn btn-success" data-bs-toggle="offcanvas" href="#RegistrarComida">Agregar comida (adm)</button>
+              
+
+            </div>
+          </div>
+
+            <div class="col-sm-6 mt-3">
+              <div style="border-radius: 50px;" class="card">
+                <svg style="border-top-left-radius: 50px; border-top-right-radius: 50px;" class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <defs>
+                      <pattern id="imagen" width="100%" height="100%">
+                        <image x="0" y="-50" width="100%" xlink:href="https://cdn.aarp.net/content/dam/aarp/health/caregiving/2018/03/1140-nutrients-food-loved-ones-caregiving-esp.jpg" />
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#imagen)"/>
+                </svg>
+                
+                <div class="card-body">
+                  <h5 class="card-title">Título plato
+                    <i class="fa-solid fa-utensils"></i>
+                    <i class="fa-solid fa-whiskey-glass"></i>
+                    <i class="fa-solid fa-burger"></i>
+                    <i class="fa-solid fa-bowl-food"></i>
+                  </h5>
+                  <p class="card-text" style="text-align: justify;">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita cupiditate veritatis cumque repellendus 
+                    deserunt distinctio quidem voluptate pariatur, alias ipsam dicta culpa eius est. Asperiores esse eius aperiam 
+                    quia dicta?
+                  </p>
+                  <div class="row">
+                    <div class="col-9">
+                        <div class="input-group mb-3">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#elegirCaracteristicaComida">Pedir</button>
+                            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#RegistrarComida">Editar (adm)</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#EliminarComida">
+                              Eliminar (adm)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="alert alert-success" role="alert">
+                            <p style="text-align: center; height: 5px;">S/. 10</p>
+                        </div>                          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>              
+
+       
+          </div>    
+    </div>
+
+
+    <br>
+    <br>
+
+
+        <!--navi-->
+    <div class="container" style="width: 300px;">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--Eliminar comida-->
+    <div class="modal fade" id="EliminarComida" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Advertencia</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Deseas eliminar este elemento?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Editar caracteristicas de la comida-->
+    <div class="modal fade" id="elegirCaracteristicaComida" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Qué quisieras agregar?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="col input-group">
+              <select class="form-select">
+                  <option selected disabled>Característica comida</option>
+                  <option value="1">Con papas al hilo</option>
+                  <option value="2">Crema mayonesa</option>
+                  <option value="3">Salsa de tomate</option>
+                </select>
+                <button class="btn btn-secondary">Agregar</button>
+            </div>
+            <ul class="list-group mt-3">
+              <li class="list-group-item">An active item <button type="button" class="btn-close" style="padding-top: 15px;"></button> </li>
+              <li class="list-group-item">A second item <button type="button" class="btn-close" style="padding-top: 15px;"></button> </li>
+              <li class="list-group-item">A third item <button type="button" class="btn-close" style="padding-top: 15px;"></button> </li>
+              <li class="list-group-item">A fourth item</li>
+              <li class="list-group-item">And a fifth one</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Comida registro y edit-->      
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="RegistrarComida">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Editar/Agregar elemento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          <form>
+            <input type="text" class="form-control mb-3" placeholder="Nombre del plato">
+            <textarea type="text" class="form-control mb-3" placeholder="Descripción"></textarea>
+            <input type="number" class="form-control mb-3" placeholder="Precio">
+
+
+            <!--Checkbox-->
+            <div class="col">
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Menú del día
+                </label>
+              </div>
+
+            <div class="form-floating">
+              <select class="form-select mb-3">
+                <option selected disabled>No elegido</option>
+                <option value="1">Bebida</option>
+                <option value="2">Estofado</option>
+                <option value="3">otro...</option>
+              </select>
+              <label for="floatingInput">Tipo de comidas</label>
+            </div>
+
+            <div class="input-group mb-3">
+              <select class="form-select mb-3" style="height: 40px;">
+                <option selected disabled>Agregar posibles características</option>
+                <option value="1">Papas al hilo</option>
+                <option value="2">Papas nativas</option>
+                <option value="3">otro...</option>
+              </select>
+              <button class="btn btn-secondary" type="button" style="height: 40px;">Agregar</button>
+            </div>
+
+            <p class="form-text">Lista de posibles características</p>
+            <ul class="list-group mb-3 list-group-flush">
+              <li class="list-group-item">Papas nativas</li>
+              <li class="list-group-item">Mayonesa</li>
+              <li class="list-group-item">ensalada</li>
+            </ul>
+
+            <div class="row mb-3 container">
+              <button class="btn btn-outline-secondary">Agregar imagen</button>
+              <label class="form-label">Mi imagen.png</label>
+            </div>
+
+            <button type="submit" class="btn btn-success">Crear/editar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+        
+</body>
+</html>

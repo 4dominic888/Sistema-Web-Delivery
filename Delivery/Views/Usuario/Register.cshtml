@@ -1,5 +1,5 @@
 ﻿@using Delivery.Domain.User;
-@model Usuario;
+@model Cliente;
 @{
     var listaGeneros = Enum.GetValues(typeof(Sexo)).Cast<Sexo>().ToList();
     int i = -1;
@@ -16,7 +16,7 @@
     .tarjeta {
         border-radius: 15px;
         width: max-content;
-        height: 590px;
+        height: max-content; 
         display: flex;
         align-items: center;
     }
@@ -38,26 +38,40 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h2 class="card-title mb-3" style="margin: 10px; font-family: Arial Rounded MT;">Registrarse</h2>
-
+                    
+                    @if (@ViewBag.EmailRepetido != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.EmailRepetido
+                        </div>
+                    }
+                    @if (@ViewBag.PhoneRepetido != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.PhoneRepetido
+                        </div>
+                    }
                     <form id="formulario" asp-action="Register">
-
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        
+                        <div asp-validation-summary="ModelOnly" class="invalid-tooltip"></div>
                         <div class="form-group">
                             <div class="input-group mb-3">
-
                                 <!--Apellido-->
-                                <span class="input-group-text"> <i class="fa-solid fa-user"></i> </span>
+                                <span class="input-group-text"> <i class="fa-solid fa-user"></i></span>
                                 <div class="form-floating">
-                                    <input asp-for="Surname" type="text" class="form-control" id="floatingInputGroup1" placeholder="name">
-                                    <label for="floatingInputGroup1">Apellidos</label>
+                                    <input asp-for="Surname" id="insurname" type="text" class="form-control" placeholder="name">
+                                    <label>Apellidos</label>
+                                    <div class="invalid-tooltip">
+                                        <span asp-validation-for="Surname"></span>
+                                    </div>
                                 </div>
-
 
                                 <!--Nombre-->
                                 <div class="form-floating">
-                                    <input asp-for="Name" type="text" class="form-control" id="floatingInputGroup1" placeholder="name">
-                                    <label for="floatingInputGroup1">Nombre</label>
+                                    <input asp-for="Name" id="inname" type="text" class="form-control" placeholder="name">
+                                    <label>Nombre</label>
+                                    <div class="invalid-tooltip">
+                                        <span asp-validation-for="Name"></span>
+                                    </div>
                                 </div>
 
                             </div>
@@ -69,8 +83,11 @@
                                 <!--Telefono-->
                                 <span class="input-group-text"> <i class="fa-solid fa-phone"></i> </span>
                                 <div class="form-floating" style="width: 420px">
-                                    <input asp-for="Phone" type="tel" class="form-control" id="floatingInputGroup1" placeholder="telefono">
-                                    <label for="floatingInputGroup1">Telefono</label>
+                                    <input asp-for="Phone" id="inphone" type="tel" class="form-control" placeholder="telefono">
+                                    <label>Telefono</label>
+                                    <div class="invalid-tooltip">
+                                        <span asp-validation-for="Phone"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,8 +99,11 @@
                                 <!--Email-->
                                 <span class="input-group-text"> <i class="fa-regular fa-envelope"></i> </span>
                                 <div class="form-floating" style="width:420px">
-                                    <input asp-for="Email" type="email" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
-                                    <label for="floatingInputGroup1">Correo electrónico</label>
+                                    <input asp-for="Email" id="inemail" type="email" class="form-control" placeholder="example@email.com">
+                                    <label>Correo electrónico</label>
+                                    <div class="invalid-tooltip">
+                                        <span asp-validation-for="Email"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,12 +122,16 @@
                                         <option value="@i">@item</option>
                                     }
                                 </select>
-
-
+                                <div class="invalid-tooltip">
+                                    <span id="validarSexo"></span>
+                                </div>
                                 <!--Fecha de nacimiento-->
                                 <div class="form-floating" style="width:200px">
-                                    <input asp-for="DateBirth" type="date" class="form-control" id="floatingInputGroup1">
-                                    <label for="floatingInputGroup1">Fecha de nacimiento</label>
+                                    <input asp-for="DateBirth" id="inDateBirth" type="date" class="form-control">
+                                    <label>Fecha de nacimiento</label>
+                                    <div class="invalid-tooltip">
+                                        <span id="validarFechaNacimiento"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,8 +142,11 @@
                                 <!--Contraseña-->
                                 <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
                                 <div class="form-floating" style="width:420px">
-                                    <input asp-for="Password" type="password" class="form-control" id="floatingInputGroup1" placeholder="example@email.com">
-                                    <label for="floatingInputGroup1">Contraseña</label>
+                                    <input asp-for="Password" id="inpassword" type="password" class="form-control" placeholder="example@email.com">
+                                    <label>Contraseña</label>
+                                    <div class="invalid-tooltip">
+                                        <span asp-validation-for="Password"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +158,7 @@
 
                     </form>
 
-                    <a class="icon-link offset-3" href="./Login.html">
+                    <a class="icon-link offset-3" asp-action="Login">
                         ¿Ya tienes una cuenta?
                     </a>
                 </div>
@@ -143,15 +170,68 @@
 @section Scripts{
     <script>
 
-        $('#formulario').on('submit', function(evt){
+        //Función generica
+        function validarCampos(condicional, elemento){
+            if ((condicional === "") || condicional == 'false') elemento.removeClass('is-invalid');
+            else {
+                elemento.addClass('is-invalid');
+                setTimeout(function () {
+                    elemento.removeClass('is-invalid');
+                }, 4000);
+            }
+        }
+
+        //Validar inputs
+        $(document).ready(function () {
+            let condSurname = "@ViewBag.SurnameError".toLowerCase();
+            let condName = "@ViewBag.NameError".toLowerCase();
+            let condPhone = "@ViewBag.PhoneError".toLowerCase();
+            let condEmail = "@ViewBag.EmailError".toLowerCase();
+            let condPassword = "@ViewBag.PasswordError".toLowerCase();
+
+            validarCampos(condSurname, $('#insurname'))
+            validarCampos(condName, $('#inname'))
+            validarCampos(condPhone, $('#inphone'))
+            validarCampos(condEmail, $('#inemail'))
+            validarCampos(condPassword, $('#inpassword'))
+        });
+
+        //Genero y fecha de nacimiento
+        $('#formulario').on('submit', function (evt) {
 
             let num = $('#selectGenero').val();
 
             if (num == null) {
-                alert("Selecciona una opcion de genero");
+                $('#selectGenero').addClass('is-invalid');
+                setTimeout(function () {
+                    $('#selectGenero').removeClass('is-invalid');
+                }, 3000);
+                $('#validarSexo').text('Necesita marcar una de las opciones');
                 evt.preventDefault();
             }
+            else {
+                $('#selectGenero').removeClass('is-invalid');
+                $('#validarSexo').text('');
+            }
 
+            /////////////////////////////////////////////
+
+            let fechaNacimiento = new Date($('#inDateBirth').val());
+            let fechaActual = new Date();
+            let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+            if (edad < 18 || isNaN(edad)) {
+                $('#inDateBirth').addClass('is-invalid');
+                setTimeout(function () {
+                    $('#inDateBirth').removeClass('is-invalid');
+                }, 3000);
+                $('#validarFechaNacimiento').text('Necesita ser mayor a 18 años para poder registrarse');
+                evt.preventDefault();
+            }
+            else{
+                $('#validarFechaNacimiento').text('');
+                $('#inDateBirth').removeClass('is-invalid');
+            }
         });
 
     </script>

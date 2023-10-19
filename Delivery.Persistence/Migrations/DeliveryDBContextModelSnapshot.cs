@@ -48,7 +48,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdComida");
 
-                    b.ToTable("CaracteristicaComidas", (string)null);
+                    b.ToTable("CaracteristicaComidas");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.Comida", b =>
@@ -91,7 +91,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdPedido");
 
-                    b.ToTable("Comidas", (string)null);
+                    b.ToTable("Comidas");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Direccion", b =>
@@ -115,7 +115,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Direcciones", (string)null);
+                    b.ToTable("Direcciones");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.MetodoPago", b =>
@@ -145,7 +145,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MetodoPagos", (string)null);
+                    b.ToTable("MetodoPagos");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Pedido", b =>
@@ -197,7 +197,7 @@ namespace Delivery.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[IdRepartidor] IS NOT NULL");
 
-                    b.ToTable("Pedidos", (string)null);
+                    b.ToTable("Pedidos");
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Administrador", b =>
@@ -208,6 +208,9 @@ namespace Delivery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("ContenidoDestacado")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("DateBirth")
                         .HasColumnType("Date");
 
@@ -216,9 +219,6 @@ namespace Delivery.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("IdPreferenciaPagina")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -226,13 +226,16 @@ namespace Delivery.Persistence.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<bool>("Recomendaciones")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Rol")
                         .HasMaxLength(100)
@@ -248,9 +251,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdPreferenciaPagina");
-
-                    b.ToTable("Administradores", (string)null);
+                    b.ToTable("Administradores");
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>
@@ -261,6 +262,9 @@ namespace Delivery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("ContenidoDestacado")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("DateBirth")
                         .HasColumnType("Date");
 
@@ -269,12 +273,6 @@ namespace Delivery.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int?>("IdPreferenciaCategoria")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPreferenciaPagina")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -282,16 +280,19 @@ namespace Delivery.Persistence.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<int>("PreferenciaCategoria")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Recomendaciones")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Rol")
                         .HasMaxLength(100)
@@ -307,28 +308,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdPreferenciaPagina");
-
-                    b.ToTable("Clientes", (string)null);
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.PreferenciasPagina", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ContenidoDestacado")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Recomendaciones")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PreferenciasPaginas", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Repartidor", b =>
@@ -339,6 +319,9 @@ namespace Delivery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("ContenidoDestacado")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("DateBirth")
                         .HasColumnType("Date");
 
@@ -347,9 +330,6 @@ namespace Delivery.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("IdPreferenciaPagina")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -357,13 +337,16 @@ namespace Delivery.Persistence.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<bool>("Recomendaciones")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Rol")
                         .HasMaxLength(100)
@@ -382,9 +365,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdPreferenciaPagina");
-
-                    b.ToTable("Repartidores", (string)null);
+                    b.ToTable("Repartidores");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.CaracteristicaComida", b =>
@@ -436,39 +417,6 @@ namespace Delivery.Persistence.Migrations
                     b.Navigation("MetodoPago");
 
                     b.Navigation("Repartidor");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Administrador", b =>
-                {
-                    b.HasOne("Delivery.Domain.User.PreferenciasPagina", "PreferenciasPagina")
-                        .WithMany()
-                        .HasForeignKey("IdPreferenciaPagina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PreferenciasPagina");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>
-                {
-                    b.HasOne("Delivery.Domain.User.PreferenciasPagina", "PreferenciasPagina")
-                        .WithMany()
-                        .HasForeignKey("IdPreferenciaPagina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PreferenciasPagina");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Repartidor", b =>
-                {
-                    b.HasOne("Delivery.Domain.User.PreferenciasPagina", "PreferenciasPagina")
-                        .WithMany()
-                        .HasForeignKey("IdPreferenciaPagina")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PreferenciasPagina");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Direccion", b =>
