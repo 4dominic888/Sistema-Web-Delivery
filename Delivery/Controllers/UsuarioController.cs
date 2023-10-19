@@ -18,6 +18,11 @@ namespace Delivery.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+        public IActionResult EditarDatos()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public IActionResult Login()
         {
@@ -45,7 +50,12 @@ namespace Delivery.Controllers
             {
                 var claims = new List<Claim> {
                     new Claim(ClaimTypes.Name, _cliente.Name),
-                    new Claim("Correo", _cliente.Email)
+                    new Claim("Correo", _cliente.Email),
+                    new Claim("ID", _cliente.Id.ToString()),
+                    new Claim("CategoriaFav", _cliente.PreferenciaCategoria.ToString()),
+                    new Claim("Destacado", _cliente.ContenidoDestacado.ToString()),
+                    new Claim("Apellido", _cliente.Surname)
+                    
                 };
 
                 claims.Add(new Claim(ClaimTypes.Role, _cliente.Rol));
