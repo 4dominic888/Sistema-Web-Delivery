@@ -51,7 +51,7 @@ namespace Delivery.Domain.Food
         [ForeignKey(nameof(IdPedido))]
         public Pedido? Pedido { get; set; }
 
-        List<CaracteristicaComida> CaracteristicaComidas { get; set; }
+        public List<Comida_Caracteristica> comida_Caracteristicas { get; set; }
 
     }
 }

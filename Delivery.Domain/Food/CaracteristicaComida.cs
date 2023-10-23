@@ -12,7 +12,7 @@ namespace Delivery.Domain.Food
         public int Id { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es necesario")]
         [NotNull]
         [MinLength(3), MaxLength(200)]
         public string Nombre { get; set; }
@@ -23,16 +23,13 @@ namespace Delivery.Domain.Food
 
 
 
-        [Required]
-        [NotNull]
-        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "El campo no puede estar vacío")]
+        [Range(0.0, 30, ErrorMessage = "El precio no puede ser negativo ni mayor a 30")]
+        [DataType(DataType.Currency, ErrorMessage = "El precio es inválido")]
         public float Precio { get; set; }
 
+        
 
-
-        public int? IdComida { get; set; }
-
-        [ForeignKey(nameof(IdComida))]
-        public Comida? Comida { get; set; }
+        public List<Comida_Caracteristica>? comida_Caracteristicas { get; set; }
     }
 }

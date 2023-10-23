@@ -1,0 +1,244 @@
+﻿@using Delivery.Domain.User;
+@using Delivery.Domain.Auxiliares;
+@model ClienteAux;
+@*PENDIENTE*@
+@{
+    var listaGeneros = Enum.GetValues(typeof(Sexo)).Cast<Sexo>().ToList();
+    int i = -1;
+    ViewBag.selectValido = -1;
+}
+<div class="container mt-4">
+    <h1 style="font-family: Arial Rounded MT;">Configuración de cuenta</h1>
+    <p>Configure su cuenta, contraseña y preferencias del sitio</p>
+    <hr>
+        
+    <div class="accordion accordion-flush" id="accordionExample">
+            
+        @*Datos personales*@
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Editar datos principales
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form id="formulario" asp-action="EditarDatosCliente">
+                        <div asp-validation-summary="ModelOnly" class="invalid-tooltip"></div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"> <i class="fa-regular fa-envelope"></i> </span>
+                            <div class="form-floating">
+                                <input asp-for="Cliente.Email" type="email" id="inemail" class="form-control" placeholder="example@email.com" style="width:800px">
+                                <label>Correo electrónico</label>
+                                <div class="invalid-tooltip">
+                                    <span asp-validation-for="Cliente.Email"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"> <i class="fa-solid fa-id-card-clip"></i> </span>
+                            <div class="form-floating">
+                                <input asp-for="Cliente.Surname" id="insurname" type="text" class="form-control" placeholder="name" style="width:400px">
+                                <label>Apellidos</label>
+                                <div class="invalid-tooltip">
+                                    <span asp-validation-for="Cliente.Surname"></span>
+                                </div>
+                            </div>
+                            <span class="input-group-text"> <i class="fa-solid fa-image-portrait"></i> </span>
+                            <div class="form-floating">
+                                <input asp-for="Cliente.Name" type="text" id="inname" class="form-control" placeholder="name" style="width:360px">
+                                <label>Nombre</label>
+                                <div class="invalid-tooltip">
+                                    <span asp-validation-for="Cliente.Name"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"> <i class="fa-solid fa-phone"></i> </span>
+                            <div class="form-floating">
+                                <input asp-for="Cliente.Phone" type="tel" id="inphone" class="form-control" placeholder="example@email.com" style="width:800px">
+                                <label>Telefono</label>
+                                <div class="invalid-tooltip">
+                                    <span asp-validation-for="Cliente.Phone"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+
+                            <label class="input-group-text" for="inputGroupSelect01"> <i class="fa-solid fa-genderless"></i> </label>
+                            <select asp-for="Cliente.Sexo" class="form-select form-control" id="selectGenero" style="max-width:404px">
+                                <option selected disabled hidden value="">Indique su sexo</option>
+                                @foreach (Sexo item in listaGeneros)
+                                {
+                                    i++;
+                                    <option value="@i">@item</option>
+                                }
+                            </select>
+                            <div class="invalid-tooltip">
+                                <span id="validarSexo"></span>
+                            </div>
+
+                            <div class="form-floating">
+                                <input asp-for="Cliente.DateBirth" type="date" id="inDateBirth" class="form-control" placeholder="example@email.com" style="width:400px">
+                                <label>Fecha de nacimiento</label>
+                            </div>
+                            <div class="invalid-tooltip">
+                                <span id="validarFechaNacimiento"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-3">Actualizar datos</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Cambio de contraseña
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="floatingInputGroup1" placeholder="example@email.com" style="min-width:800px">
+                            <label for="floatingInputGroup1">Ingrese su contraseña</label>
+                        </div>
+
+                        <div class="input-group mb-3 mt-3">
+                            <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="floatingInputGroup1" placeholder="example@email.com" style="min-width:800px">
+                                <label for="floatingInputGroup1">Ingrese la nueva contraseña</label>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"> <i class="fa-solid fa-asterisk"></i> </span>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="floatingInputGroup1" placeholder="example@email.com" style="min-width:800px">
+                                <label for="floatingInputGroup1">Confirma la contraseña ingresada</label>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary mb-3">Actualizar contraseña</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Preferencias
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="form-floating">
+                        <select class="form-select" id="selectFloat" aria-label="Default select example">
+                            <option selected disabled>Selecciona tu categoría de comida preferida</option>
+                            <option value="1">Sopas</option>
+                            <option value="2">Platos a la carta</option>
+                            <option value="3">Estofados</option>
+                            <option value="4">Etc...</option>
+                        </select>
+                        <label for="selectFloat" class="form-label">Preferencia principal de categoría de comida</label>
+                    </div>
+
+                    <div class="form-check mt-3 mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Mostrar contenido destacado en la página principal
+                        </label>
+                    </div>
+
+                    <div class="form-check mt-3 mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Mostrar recomendaciones según datos recopilados
+                        </label>
+                    </div>
+                        
+                    <button type="button" class="btn btn-primary mb-3">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+
+    </div> <!--Accodion-->
+</div> <!--Container-->
+@section Scripts{
+    <script>
+        //Función generica
+        function validarCampos(condicional, elemento) {
+            if ((condicional === "") || condicional == 'false') elemento.removeClass('is-invalid');
+            else {
+                elemento.addClass('is-invalid');
+                setTimeout(function () {
+                    elemento.removeClass('is-invalid');
+                }, 4000);
+            }
+        }
+
+        //Validar inputs
+        $(document).ready(function () {
+            let condEmail = "@ViewBag.EmailError".toLowerCase();
+            let condSurname = "@ViewBag.SurnameError".toLowerCase();
+            let condName = "@ViewBag.NameError".toLowerCase();
+            let condPhone = "@ViewBag.PhoneError".toLowerCase();
+
+            validarCampos(condEmail, $('#inemail'))
+            validarCampos(condSurname, $('#insurname'))
+            validarCampos(condName, $('#inname'))
+            validarCampos(condPhone, $('#inphone'))
+        });
+
+        //Genero y fecha de nacimiento
+        $('#formulario').on('submit', function (evt) {
+
+            let num = $('#selectGenero').val();
+
+            if (num == null) {
+                $('#selectGenero').addClass('is-invalid');
+                setTimeout(function () {
+                    $('#selectGenero').removeClass('is-invalid');
+                }, 3000);
+                $('#validarSexo').text('Necesita marcar una de las opciones');
+                evt.preventDefault();
+            }
+            else {
+                $('#selectGenero').removeClass('is-invalid');
+                $('#validarSexo').text('');
+            }
+
+            /////////////////////////////////////////////
+
+            let fechaNacimiento = new Date($('#inDateBirth').val());
+            let fechaActual = new Date();
+            let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+            if (edad < 18 || isNaN(edad)) {
+                $('#inDateBirth').addClass('is-invalid');
+                setTimeout(function () {
+                    $('#inDateBirth').removeClass('is-invalid');
+                }, 3000);
+                $('#validarFechaNacimiento').text('Necesita ser mayor a 18 años para poder registrarse');
+                evt.preventDefault();
+            }
+            else {
+                $('#validarFechaNacimiento').text('');
+                $('#inDateBirth').removeClass('is-invalid');
+            }
+        });
+
+    </script>
+}

@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Comida/CaracteristicaComida.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXENhcmFjdGVyaXN0aWNhQ29taWRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Comida/EditarMenu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXEVkaXRhck1lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,8 +52,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Usuario/EditarDatos.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXJEYXRvcy5jc2h0bWw=
+[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Usuario/EditarDatosCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXJEYXRvc0NsaWVudGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Usuario/Login.cshtml]

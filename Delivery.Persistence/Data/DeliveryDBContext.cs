@@ -69,6 +69,19 @@ namespace Delivery.Persistence.Data
                 p.Property(e => e.Detalle).HasColumnType("text");
             });
 
+            modelBuilder.Entity<Comida_Caracteristica>().HasKey(am => new
+            {
+                am.IdComida,
+                am.IdCaracteristicaComida
+            });
+
+            modelBuilder.Entity<Comida_Caracteristica>().HasOne(c => c.Comida).
+                WithMany(am => am.comida_Caracteristicas).HasForeignKey(c => c.IdComida);
+
+            modelBuilder.Entity<Comida_Caracteristica>().HasOne(c => c.CaracteristicaComida).
+                WithMany(am => am.comida_Caracteristicas).HasForeignKey(c => c.IdCaracteristicaComida);
+
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -80,6 +93,7 @@ namespace Delivery.Persistence.Data
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Comida> Comidas { get; set; }
         public DbSet<CaracteristicaComida> CaracteristicaComidas { get; set; }
+        public DbSet<Comida_Caracteristica> Comida_Caracteristicas { get; set; }
 
     }
 }

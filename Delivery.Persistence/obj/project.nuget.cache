@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "mKumR8+7hp9M1DzCy0TS5VSJXdM+qs9hTKC+6+PNaq0T6PyraVpuDzzKEJCvR/Li3IRPBfFU6D4p7spZfiBlkw==",
+  "dgSpecHash": "cFYMIyymez0I+EJotWTYgX0D86m1bTMvoRFdcK4oT7RnlsxwNY+gBnf2w3qKfoQeF6F3s+5aXvOvA6uj+An5ug==",
   "success": true,
   "projectFilePath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\4dominic888\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\4dominic888\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\4dominic888\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\4dominic888\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\4dominic888\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\4dominic888\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\4dominic888\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\4dominic888\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",

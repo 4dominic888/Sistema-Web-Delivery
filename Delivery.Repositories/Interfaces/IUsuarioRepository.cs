@@ -6,8 +6,9 @@ namespace Delivery.Repositories.Interfaces
     {
         Task<bool> EmailRepetido(string correo);
         Task<bool> PhoneRepetido(string phone);
-        Task<Cliente> ValidarCliente(string correo, string password);
+        Task<Usuario> ValidarUsuario(string correo, string password);
         Task RegistrarCliente(Cliente cliente);
+        Task<Cliente> BuscarClienteID(int id);
         string EncriptarSHA256(string password);
     }
 }

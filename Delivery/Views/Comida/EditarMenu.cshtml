@@ -1,0 +1,184 @@
+﻿@using Delivery.Domain.Food;
+@model Comida
+@{
+    IEnumerable<Comida> lista = ViewBag.Comidas;
+}
+<!--Body-->
+<div class="container mt-3">
+    <h1>Menú del día</h1>
+    <div class="row container">
+        <div class="row mb-3">
+            <div class="col">
+                <select class="form-select">
+                    <option selected>Todo</option>
+                    <option value="1">Estofados</option>
+                    <option value="2">Sopas</option>
+                    <option value="3">Frito</option>
+                </select>
+            </div>
+            <div class="col input-group">
+                <input type="text" class="form-control" placeholder="Busqueda por nombre...">
+                <button class="btn btn-light">Buscar</button>
+            </div>
+        </div>
+
+        @*Agregar Característica de comida*@
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-success" data-bs-toggle="offcanvas" href="#RegistrarComida">Agregar comida</button>
+                <a class="btn btn-secondary" asp-action="CaracteristicaComida">Agregar Característica de comida</a>
+            </div>
+        </div>
+
+
+        @*Aplicar Foreach*@
+        @if (lista.Count() > 0){
+            @foreach (Comida item in lista){
+                <div class="col-sm-6 mt-3">
+                    <div style="border-radius: 50px;" class="card">
+                        <svg style="border-top-left-radius: 50px; border-top-right-radius: 50px;" class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
+                            <defs>
+                                <pattern id="imagen+@item.ID" width="100%" height="100%">
+                                    <image x="0" y="-50" width="100%" xlink:href="/imagenes/Comida/@item.Imagen" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#imagen+@item.ID)" />
+                        </svg>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @item.Nombre
+                            </h5>
+                            <p class="card-text" style="text-align: justify;">
+                                @item.Descripcion
+                            </p>
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="input-group mb-3">
+                                        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#RegistrarComida">
+                                            Editar
+                                        </a>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#EliminarComida">
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <div class="alert alert-success" role="alert">
+                                        <p style="text-align: center; height: 5px;">S/. @item.Precio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else{
+            <div class="alert alert-primary mt-5" role="alert">
+                No hay elementos a mostrar, ingrese nuevos datos ahora
+            </div>
+        }
+
+
+    </div>
+</div>
+
+
+<br>
+<br>
+
+
+<!--navi-->
+@if(lista == null){
+<div class="container" style="width: 300px;">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
+}
+
+<!--Eliminar comida-->
+<div class="modal fade" id="EliminarComida" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Advertencia</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Deseas eliminar este elemento?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Comida registro y edit-->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="RegistrarComida">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Editar/Agregar elemento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <form>
+                <input type="text" class="form-control mb-3" placeholder="Nombre del plato">
+                <textarea type="text" class="form-control mb-3" placeholder="Descripción"></textarea>
+                <input type="number" class="form-control mb-3" placeholder="Precio">
+
+
+                <!--Checkbox-->
+                <div class="col">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Menú del día
+                        </label>
+                    </div>
+
+                    <div class="form-floating">
+                        <select class="form-select mb-3">
+                            <option selected disabled>No elegido</option>
+                            <option value="1">Bebida</option>
+                            <option value="2">Estofado</option>
+                            <option value="3">otro...</option>
+                        </select>
+                        <label for="floatingInput">Tipo de comidas</label>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <select class="form-select mb-3" style="height: 40px;">
+                            <option selected disabled>Agregar posibles características</option>
+                            <option value="1">Papas al hilo</option>
+                            <option value="2">Papas nativas</option>
+                            <option value="3">otro...</option>
+                        </select>
+                        <button class="btn btn-secondary" type="button" style="height: 40px;">Agregar</button>
+                    </div>
+
+                    <p class="form-text">Lista de posibles características</p>
+                    <ul class="list-group mb-3 list-group-flush">
+                        <li class="list-group-item">Papas nativas</li>
+                        <li class="list-group-item">Mayonesa</li>
+                        <li class="list-group-item">ensalada</li>
+                    </ul>
+
+                    <div class="row mb-3 container">
+                        <button class="btn btn-outline-secondary">Agregar imagen</button>
+                        <label class="form-label">Mi imagen.png</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Crear/editar</button>
+            </form>
+        </div>
+    </div>
+</div>

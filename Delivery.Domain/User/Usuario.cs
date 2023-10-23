@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Delivery.Domain.User
 {
     [NotMapped]
-    public abstract class Usuario
+    public class Usuario
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -20,7 +20,9 @@ builder.Services.AddDbContext<DeliveryDBContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioBase>();
+builder.Services.AddScoped<IComidaRepository, ComidaBase>();
+
 
 var app = builder.Build();
 
@@ -40,6 +42,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+DeliveryDBInitializer.Seed(app);
 
 app.MapControllerRoute(
     name: "default",

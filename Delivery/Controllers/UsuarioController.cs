@@ -6,22 +6,44 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Delivery.Domain.Auxiliares;
 
 namespace Delivery.Controllers
 {
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepository;
-
         public UsuarioController(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
 
-        public IActionResult EditarDatos()
+
+        //Editar Datos pendiente
+        [Authorize(Roles = "Cliente")]
+        public async Task<IActionResult> EditarDatosCliente()
         {
+            int idUser = int.Parse(User.FindFirstValue("ID"));
+            Cliente cliente = await _usuarioRepository.BuscarClienteID(idUser);
+            return View(new ClienteAux(cliente));
+        }
+
+        [HttpPost]
+        public IActionResult EditarDatosCliente(
+            [Bind("Cliente.Email, Cliente.Surname, Cliente.Name, Cliente.Phone," +
+            "Cliente.Sexo, Cliente.DateBirth")] ClienteAux clienteAux)
+        {
+            Console.WriteLine(ModelState.IsValid);
+            Console.WriteLine(clienteAux.Cliente.Email);
+
+            ViewBag.EmailError = ModelState["Email"].Errors.Count > 0;
+            ViewBag.SurnameError = ModelState["Cliente.Surname"].Errors.Count > 0;
+            ViewBag.NameError = ModelState["Cliente.Name"].Errors.Count > 0;
+            ViewBag.PhoneError = ModelState["Cliente.Phone"].Errors.Count > 0;
+
             return View();
         }
+
 
         [AllowAnonymous]
         public IActionResult Login()
@@ -41,29 +63,32 @@ namespace Delivery.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Cliente cliente)
+        public async Task<IActionResult> Login(Usuario usuario)
         {
-            string contraseña = _usuarioRepository.EncriptarSHA256(cliente.Password);
-            Cliente _cliente = await _usuarioRepository.ValidarCliente(cliente.Email, contraseña);
+            string contraseña = _usuarioRepository.EncriptarSHA256(usuario.Password);
+            var _usuario = await _usuarioRepository.ValidarUsuario(usuario.Email, contraseña);
 
-            if(_cliente != null)
+            if(_usuario != null)
             {
                 var claims = new List<Claim> {
-                    new Claim(ClaimTypes.Name, _cliente.Name),
-                    new Claim("Correo", _cliente.Email),
-                    new Claim("ID", _cliente.Id.ToString()),
-                    new Claim("CategoriaFav", _cliente.PreferenciaCategoria.ToString()),
-                    new Claim("Destacado", _cliente.ContenidoDestacado.ToString()),
-                    new Claim("Apellido", _cliente.Surname)
+                    new Claim(ClaimTypes.Name, _usuario.Name),
+                    new Claim("Correo", _usuario.Email),
+                    new Claim("ID", _usuario.Id.ToString()),
+                    new Claim("Destacado", _usuario.ContenidoDestacado.ToString()),
+                    new Claim("Apellido", _usuario.Surname)
                     
                 };
 
-                claims.Add(new Claim(ClaimTypes.Role, _cliente.Rol));
+                claims.Add(new Claim(ClaimTypes.Role, _usuario.Rol));
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                return RedirectToAction("IndexCliente", "Home");
+                //variable
+                if(_usuario is Cliente) return RedirectToAction("IndexCliente", "Home");
+                if (_usuario is Repartidor) return RedirectToAction("IndexRepartidor", "Home");
+                if (_usuario is Administrador) return RedirectToAction("IndexAdministrador", "Home");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -93,7 +118,6 @@ namespace Delivery.Controllers
         public async Task<IActionResult> Register(
             [Bind("Surname, Name, Phone, Sexo, Email, Password, DateBirth")] Cliente cliente)
         {
-
             bool modelovalido = true;
 
             if (await _usuarioRepository.EmailRepetido(cliente.Email))
