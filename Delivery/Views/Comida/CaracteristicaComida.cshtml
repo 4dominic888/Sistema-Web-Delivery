@@ -41,7 +41,15 @@
 			<span class="alert-danger" asp-validation-for="Precio"></span>
 		</div>
 
-		<button type="submit" class="btn btn-success">Agregar</button>
+		@if (editable == "True")
+		{
+			<button type="submit" class="btn btn-info">Editar</button>
+		}
+		else
+		{
+			<button type="submit" class="btn btn-success">Agregar</button>
+		}
+
 		<button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#listadoCaracteristicas">Ver listado</button>
 
 	</form>	

@@ -33,7 +33,6 @@ namespace Delivery.Controllers
 			else return NotFound();
 
 		}
-
 		public async Task<IActionResult> EliminarCaracteristica(int id)
         {
             CaracteristicaComida cc = await _comidaRepository.ObtenerCaracteristicaPorID(id);
@@ -60,7 +59,7 @@ namespace Delivery.Controllers
 			}
 
 
-            if (cc.Id == 0) //No editable, solo dirije al formulario para registrar datos nuevos
+            if (cc.Nombre is null) //No editable, solo dirije al formulario para registrar datos nuevos
             {
                 ViewBag.editable = false;
                 return View();
@@ -77,14 +76,12 @@ namespace Delivery.Controllers
 		public async Task<IActionResult> CaracteristicaComida(
             [Bind("Nombre, Detalle, Precio")] CaracteristicaComida caracteristica, int idc=0, string edit = "False")
         {
-			ViewBag.editable = edit;
-			bool modeloValido = true;
-            if (idc != 0)
+			ViewBag.editable = edit; //Para que esté en un estado de editable o no editable
+			bool modeloValido = true; //Para comprobar si el nombre se repite o no
+            if (idc != 0) //Colocar id de manera auxiliar
             {
                 caracteristica.Id = idc;
             }
-
-            if(caracteristica.Nombre is null) return View();
 
 
             if(!(edit == "True"))
@@ -94,17 +91,20 @@ namespace Delivery.Controllers
 				if (!await _comidaRepository.CaracteristicaNombreUnico(caracteristica.Nombre))
 				{
 					modeloValido = false;
-					ViewBag.nombreCaracteristicaRepetido = "Esta caracteristica ya ha sido registrada";
+					ViewBag.nombreCaracteristicaRepetido = "El nombre debe ser único para cada característica";
 				}
 			}
 
-			if (ModelState.IsValid && modeloValido)
+
+
+			if (ModelState.IsValid && modeloValido) //Modelo completamente válido
             {
                 CookieOptions cookie = new CookieOptions();
                 if (!(edit == "True")) //No editable mode
                 {
                     //Agregar elemento
 					await _comidaRepository.AgregarCaracteristica(caracteristica);
+					ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
 					Response.Cookies.Append("mensaje", "La característica fue registrada correctamente", cookie);
 					return RedirectToAction("CaracteristicaComida");
 				}
@@ -113,15 +113,17 @@ namespace Delivery.Controllers
                     //Actualizar elemento
 					await _comidaRepository.ActualizarCategoria(caracteristica);
 					ViewBag.editable = false;
+					ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
 					Response.Cookies.Append("mensaje", "La característica fue editada correctamente", cookie);
-					return RedirectToAction("CaracteristicaComida", null);
+					return RedirectToAction("CaracteristicaComida");
 				}
 
 			}
 			ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
 
 
-			return View();
+            if (edit == "True") return View(caracteristica);
+            else return View();
         }
 
 		#endregion
