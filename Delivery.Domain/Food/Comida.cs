@@ -18,8 +18,7 @@ namespace Delivery.Domain.Food
         public string Nombre { get; set; }
 
 
-        [Required ,NotNull]
-        [Display(Name = "Descripción")]
+        [Required]
         [DataType(DataType.Text)]
         public string Descripcion { get; set; }
 
@@ -29,6 +28,7 @@ namespace Delivery.Domain.Food
 
         [Required, NotNull]
         [DataType(DataType.Currency)]
+        [Range(0, 100)]
         public float Precio { get; set; }
 
 
@@ -37,12 +37,11 @@ namespace Delivery.Domain.Food
 
 
         [Required, NotNull]
+        [Range(0, int.MaxValue)]
         public int Stock { get; set; }
 
 
-        [Required, NotNull]
-        [DataType(DataType.ImageUrl)]
-        public string Imagen { get; set; }
+        public string? Imagen { get; set; }
 
 
         public int? IdPedido { get; set; }
@@ -51,7 +50,7 @@ namespace Delivery.Domain.Food
         [ForeignKey(nameof(IdPedido))]
         public Pedido? Pedido { get; set; }
 
-        public List<Comida_Caracteristica> comida_Caracteristicas { get; set; }
+        public List<Comida_Caracteristica>? comida_Caracteristicas { get; set; }
 
     }
 }

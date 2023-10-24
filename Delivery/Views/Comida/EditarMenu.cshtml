@@ -2,18 +2,26 @@
 @model Comida
 @{
     IEnumerable<Comida> lista = ViewBag.Comidas;
+    var listaCategorias = Enum.GetValues(typeof(CategoriaComida)).Cast<CategoriaComida>().ToList();
+    IEnumerable<CaracteristicaComida> caracteristicasTotales = ViewBag.caracteristicas;
+
+    //Cambiar cuando se edite la comida
+    Dictionary<int, string> caracteristicas = new Dictionary<int, string>();
 }
 <!--Body-->
 <div class="container mt-3">
     <h1>Menú del día</h1>
     <div class="row container">
+
+        @*Cabecera*@
         <div class="row mb-3">
             <div class="col">
                 <select class="form-select">
-                    <option selected>Todo</option>
-                    <option value="1">Estofados</option>
-                    <option value="2">Sopas</option>
-                    <option value="3">Frito</option>
+                    <option disable selected hidden>Todo</option>
+                    @foreach(CategoriaComida item in listaCategorias)
+                    {
+                        <option value="@Convert.ToInt32(item)">@item.ToString()</option>
+                    }
                 </select>
             </div>
             <div class="col input-group">
@@ -125,60 +133,157 @@
 <!--Comida registro y edit-->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="RegistrarComida">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title">Editar/Agregar elemento</h5>
+        <h5 class="offcanvas-title">Agregar comida</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div>
-            <form>
-                <input type="text" class="form-control mb-3" placeholder="Nombre del plato">
-                <textarea type="text" class="form-control mb-3" placeholder="Descripción"></textarea>
-                <input type="number" class="form-control mb-3" placeholder="Precio">
+            <form asp-action="AgregarComida" id="formulario" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger alter alert-danger"></div>
+
+                <input type="hidden" name="listaIndicescarac" id="arrayids" value=""/>
+
+                <span class="alert-danger" asp-validation-for="Nombre"></span>
+                <input asp-for="Nombre" type="text" class="form-control mb-3" placeholder="Nombre del plato"/>
+
+                <span class="alert-danger" asp-validation-for="Descripcion"></span>
+                <textarea asp-for="Descripcion" class="form-control mb-3" placeholder="Descripción"></textarea>
+
+                <span class="alert-danger" asp-validation-for="Precio"></span>
+                <input asp-for="Precio" type="number" class="form-control mb-3" placeholder="Precio" />
+
+                <span class="alert-danger" asp-validation-for="Stock"></span>
+                <input asp-for="Stock" type="number" class="form-control mb-3" placeholder="Stock"/>
 
 
-                <!--Checkbox-->
                 <div class="col">
+
+                    <!--Checkbox-->
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <input asp-for="MenuDelDia" class="form-check-input" type="checkbox">
+                        <label class="form-check-label">
                             Menú del día
                         </label>
                     </div>
 
+                    <span id="valCategoria" class="alert-danger"></span>
                     <div class="form-floating">
-                        <select class="form-select mb-3">
-                            <option selected disabled>No elegido</option>
-                            <option value="1">Bebida</option>
-                            <option value="2">Estofado</option>
-                            <option value="3">otro...</option>
+                        <select asp-for="Categoria" id="selectCategoria" class="form-select mb-3">
+                            <option selected disabled hidden value="">No elegido</option>
+                                @foreach (CategoriaComida item in listaCategorias)
+                                {
+                                    <option value="@Convert.ToInt32(item)">@item.ToString()</option>
+                                }
                         </select>
+                        
                         <label for="floatingInput">Tipo de comidas</label>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <select class="form-select mb-3" style="height: 40px;">
-                            <option selected disabled>Agregar posibles características</option>
-                            <option value="1">Papas al hilo</option>
-                            <option value="2">Papas nativas</option>
-                            <option value="3">otro...</option>
-                        </select>
-                        <button class="btn btn-secondary" type="button" style="height: 40px;">Agregar</button>
-                    </div>
 
-                    <p class="form-text">Lista de posibles características</p>
-                    <ul class="list-group mb-3 list-group-flush">
-                        <li class="list-group-item">Papas nativas</li>
-                        <li class="list-group-item">Mayonesa</li>
-                        <li class="list-group-item">ensalada</li>
+                    @*Características comida*@
+                    <span id="valCaracteristicas" class="alert-danger"></span>
+                    <div class="input-group mb-1">
+                        <select class="form-select mb-1" id="selectCaracteristica" style="height: 40px;">
+                            <option selected disabled hidden value="">Agregar posibles características</option>
+                                @foreach (CaracteristicaComida item in caracteristicasTotales)
+                                {
+                                    <option value="@item.Id">@item.Nombre</option>
+                                }
+                        </select>
+                        <button class="btn btn-secondary" id="agregarCaracteristica" type="button" style="height: 40px;">Agregar</button>
+                    </div>
+                    <p class="form-text">Lista de posibles características:</p>
+                    <ul id="listaCaracteristicas" class="list-group mb-3 list-group-flush">
                     </ul>
 
-                    <div class="row mb-3 container">
-                        <button class="btn btn-outline-secondary">Agregar imagen</button>
-                        <label class="form-label">Mi imagen.png</label>
-                    </div>
 
-                    <button type="submit" class="btn btn-success">Crear/editar</button>
+                    <hr />
+                    @*Enviar imagen*@
+                    @if (ViewBag.imagenNula is not null)
+                    {
+                        <span class="alert-danger">@ViewBag.imagenNula</span>
+                    }
+                    <input asp-for="Imagen" type="file" class="form-control" name="files" accept="image/*" />
+                    
+                    <hr />
+
+                    <button type="submit" class="btn btn-success">Crear</button>
             </form>
         </div>
     </div>
 </div>
+
+
+@if (!ViewBag.modeloValido)
+{
+    <script>
+        document.getElementById("RegistrarComida").classList.add("show");
+    </script>
+}
+
+@section Scripts{
+    <script>
+        var listajax = []; //Lista de indices de las características
+
+        //Logica caracteristicas
+        $('#agregarCaracteristica').click(function () {
+            let numero = $('#selectCaracteristica').val();
+            if(numero == null){
+                $('#valCaracteristicas').text('Necesita marcar una de las opciones');
+                setTimeout(function () {
+                    $("#valCaracteristicas").fadeOut();
+                }, 1500);
+                setTimeout(function () {
+                    // Mostrar el elemento nuevamente
+                    $('#valCaracteristicas').text('');
+                    $("#valCaracteristicas").fadeIn();
+                }, 1500);
+            }
+            else{
+                let elementos = $("#listaCaracteristicas").find("li");
+
+                $('#valCaracteristicas').text('');
+                let valor = $('#selectCaracteristica').find("option:selected").html();
+                let valorRepetido = false;
+
+                elementos.each(function () {
+                    if ($(this).text() == valor) valorRepetido = true
+                });
+
+                if (!valorRepetido) {
+                    let li = $('<li class="list-group-item">' + valor + '</li>');
+                    $('#listaCaracteristicas').append(li);
+                    listajax.push(parseInt(numero));
+                }
+                else{
+                    $('#valCaracteristicas').text('Esta característica ya ha sido registrada');
+                    setTimeout(function () {
+                        $("#valCaracteristicas").fadeOut();
+                    }, 1500);
+                    setTimeout(function () {
+                        $('#valCaracteristicas').text('');
+                        $("#valCaracteristicas").fadeIn();
+                    }, 1500);
+                }
+               
+            }
+        });
+
+        //submit
+        $('#formulario').on('submit', function (evt) {
+
+            //Validar categoria
+            let num = $('#selectCategoria').val();
+            if(num == null){
+                $('#valCategoria').text('Necesita marcar una de las opciones');
+                evt.preventDefault();
+            }
+            else{
+                $('#valCategoria').text('');
+                $('#arrayids').val(JSON.stringify(listajax)) //Pasar sin ajax
+            }
+
+
+        });
+    </script>
+}

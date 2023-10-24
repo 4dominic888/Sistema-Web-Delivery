@@ -199,3 +199,4 @@ D:\Delivery borrar\Sistema-Web-Delivery\Delivery\obj\Debug\net7.0\Delivery.pdb
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery\obj\Debug\net7.0\Delivery.genruntimeconfig.cache
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery\obj\Debug\net7.0\ref\Delivery.dll
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery\bin\Debug\net7.0\RestSharp.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery\bin\Debug\net7.0\Newtonsoft.Json.dll

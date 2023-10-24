@@ -2,7 +2,6 @@
 {
     public enum CategoriaComida
     {
-        Nada,
         Sopa,
         Caldo,
         Estofado,

@@ -1,23 +1,79 @@
 ﻿using Delivery.Domain.Food;
 using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
-using System.Net;
-using System.Web;
+using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
 
 namespace Delivery.Controllers
 {
     public class ComidaController : Controller
     {
         private readonly IComidaRepository _comidaRepository;
-        public ComidaController(IComidaRepository comidaRepository)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ComidaController(
+            IComidaRepository comidaRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             _comidaRepository = comidaRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> EditarMenu()
         {
             ViewBag.Comidas = await _comidaRepository.ObtenerComidas();
+            ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
+            ViewBag.modeloValido = true;
             return View();
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AgregarComida(
+            [Bind("Nombre", "Descripcion", "Categoria", "Precio",
+            "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "")
+        {
+            
+            ViewBag.Comidas = await _comidaRepository.ObtenerComidas(); //Obtiene el listado general de comidas
+            ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas(); //Obtiene el listado general de caracteristicas, para los select
+            ViewBag.modeloValido = true; //Para hacer aparecer automaticamente el offcanvas
+            bool modeloValido = true;
+
+
+            //El modelo es valido
+            if (ModelState.IsValid && modeloValido)
+            {
+                try //Para cuando la imagen no se manda
+                {
+                    comida.Imagen = _comidaRepository.CargarImagen(HttpContext, _webHostEnvironment);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    comida.Imagen = null;
+                    modeloValido = false;
+                    ViewBag.imagenNula = "Debes subir un archivo";
+                    ViewBag.modeloValido = false;
+                }
+
+                await _comidaRepository.Agregar(comida);
+                await _comidaRepository.Guardar();
+
+                //Agregar la relación de características de comidas con Comidas
+                //No se agrega nada si no hay nada en la lista
+                List<int> listaIndices = JsonConvert.DeserializeObject<List<int>>(listaIndicescarac);
+                foreach(int i in listaIndices)
+                {
+                    await _comidaRepository.AgregarRelacionCaracteristicaComida(comida.ID, i);
+                }
+                await _comidaRepository.Guardar();
+
+
+                ViewBag.modeloValido = true;
+                return RedirectToAction("EditarMenu");
+            }
+            ViewBag.modeloValido = false;
+
+            return View("EditarMenu");
         }
 
 
@@ -88,11 +144,18 @@ namespace Delivery.Controllers
             {
                 //Evitar que se repita el mismo nombre de caracteristica
                 //Esto no aplica cuando el elemento va a ser editado
-				if (!await _comidaRepository.CaracteristicaNombreUnico(caracteristica.Nombre))
-				{
-					modeloValido = false;
-					ViewBag.nombreCaracteristicaRepetido = "El nombre debe ser único para cada característica";
-				}
+                try
+                {
+                    if (!await _comidaRepository.CaracteristicaNombreUnico(caracteristica.Nombre))
+                    {
+                        modeloValido = false;
+                        ViewBag.nombreCaracteristicaRepetido = "El nombre debe ser único para cada característica";
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
 			}
 
 
