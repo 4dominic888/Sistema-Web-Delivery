@@ -4,6 +4,7 @@ using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Delivery.Repositories.Implementations
 {
@@ -17,12 +18,12 @@ namespace Delivery.Repositories.Implementations
 
 
         #region Caracteristicas Comida
+
         public async Task AgregarCaracteristica(CaracteristicaComida caracteristica)
 		{
 			await _context.CaracteristicaComidas.AddAsync(caracteristica);
 			await _context.SaveChangesAsync();
 		}
-
 		public async Task<bool> CaracteristicaNombreUnico(string nombre)
 		{
 
@@ -30,37 +31,74 @@ namespace Delivery.Repositories.Implementations
 			if (comprobar == null) return true;
 			else return false;
 		}
-
-		public async Task ActualizarCategoria(CaracteristicaComida categoriaComida)
+		public async Task ActualizarCaracteristica(CaracteristicaComida categoriaComida)
 		{
 			_Comidacontext.CaracteristicaComidas.Update(categoriaComida);
 			await _context.SaveChangesAsync();
 		}
-
 		public async Task EliminarCaracteristica(CaracteristicaComida caracteristicaComida)
 		{
-			_Comidacontext.CaracteristicaComidas.Remove(caracteristicaComida);
+            int id = caracteristicaComida.Id;
+
+            var listado = await _context.Comida_Caracteristicas.Where(x => x.IdCaracteristicaComida == id).ToListAsync();
+            _context.Comida_Caracteristicas.RemoveRange(listado);
+
+            _Comidacontext.CaracteristicaComidas.Remove(caracteristicaComida);
 			await _Comidacontext.SaveChangesAsync();
 		}
-
 		public async Task<CaracteristicaComida> ObtenerCaracteristicaPorID(int id)
 		{
 			return await _Comidacontext.CaracteristicaComidas.Where(c => c.Id == id).FirstOrDefaultAsync();
 		}
-
 		public async Task<IEnumerable<CaracteristicaComida>> ObtenerCaracteristicasComidas()
 		{
 			return await _Comidacontext.CaracteristicaComidas.ToListAsync();
 		}
+        public async Task<IEnumerable<CaracteristicaComida>> ObtenerCaracteristicasPorComidaID(int id)
+        {
+            List<CaracteristicaComida> listaIndices = new List<CaracteristicaComida>();
+            var listado = await _context.Comida_Caracteristicas.Where(x => x.IdComida == id).ToListAsync();
+            listado.ForEach(x =>
+            {
+                listaIndices.Add(x.CaracteristicaComida);
+            });
+            return listaIndices;
+        }
+        public async Task AgregarRelacionCaracteristicaComida(int idComida, int idCaracteristica)
+        {
+            await _context.Comida_Caracteristicas.AddAsync(new Comida_Caracteristica(idComida, idCaracteristica));
+        }
 
         #endregion
 
-        
-		public async Task<IEnumerable<Comida>> ObtenerComidas()
+
+        public async Task AgregarComida(Comida comida, string listaIndicescarac)
+        {
+            await Agregar(comida);
+            //Agregar la relación de características de comidas con Comidas
+            //No se agrega nada si no hay nada en la lista
+            List<int> listaIndices = JsonConvert.DeserializeObject<List<int>>(listaIndicescarac);
+            foreach (int i in listaIndices)
+            {
+                await AgregarRelacionCaracteristicaComida(comida.ID, i);
+            }
+        }
+        public async Task EditarComida(Comida comida, string listaIndicescara)
+        {
+            _context.Comidas.Update(comida);
+            var listaIndices = JsonConvert.DeserializeObject<List<int>>(listaIndicescara);
+            var listaIndicesBorrar = await _context.Comida_Caracteristicas.Where(x => x.IdComida == comida.ID).ToListAsync();
+
+            _context.Comida_Caracteristicas.RemoveRange(listaIndicesBorrar); //Borrar registros previos
+            foreach(var item in listaIndices)
+            {
+                await AgregarRelacionCaracteristicaComida(comida.ID, item);
+            }
+        }
+        public async Task<IEnumerable<Comida>> ObtenerComidas()
         {
             return await _Comidacontext.Comidas.ToListAsync();
         }
-
         public string CargarImagen(HttpContext httpContext, IWebHostEnvironment _webHostEnvironment)
         {
             //Verificar la imagen enviada
@@ -78,10 +116,14 @@ namespace Delivery.Repositories.Implementations
             }
             return fileName + extension;
         }
-
-        public async Task AgregarRelacionCaracteristicaComida(int idComida, int idCaracteristica)
+        public void EliminarImagen(string productURL, IWebHostEnvironment _webHostEnvironment)
         {
-			await _context.Comida_Caracteristicas.AddAsync(new Comida_Caracteristica(idComida, idCaracteristica));
+            string webRootPath = _webHostEnvironment.WebRootPath;
+            string upload = webRootPath + @"\imagenes\Comida\";
+            string ruta = upload + productURL;
+            Console.WriteLine(ruta);
+            System.IO.File.Delete(ruta);
         }
+
     }
 }

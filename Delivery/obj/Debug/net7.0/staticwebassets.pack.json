@@ -61,6 +61,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\0c7b1036-7da9-4689-ae6a-319ad7c12c4a.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\0c7b1036-7da9-4689-ae6a-319ad7c12c4a.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\ce0fc5bd-1c3f-4a13-822f-09568a4d323b.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\ce0fc5bd-1c3f-4a13-822f-09568a4d323b.jpg"
+    },
+    {
       "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

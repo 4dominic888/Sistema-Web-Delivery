@@ -8,7 +8,6 @@ namespace Delivery.Domain.User
     {
         [DataType(DataType.Currency)]
         public float? Sueldo { get; set; }
-
         public Pedido? PedidoEnCurso { get; set; }
     }
 }

@@ -65,7 +65,6 @@ namespace Delivery.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("MenuDelDia")

@@ -1,12 +1,9 @@
 ﻿@using Delivery.Domain.Food;
-@model Comida
+@model IEnumerable<Comida>
 @{
-    IEnumerable<Comida> lista = ViewBag.Comidas;
-    var listaCategorias = Enum.GetValues(typeof(CategoriaComida)).Cast<CategoriaComida>().ToList();
-    IEnumerable<CaracteristicaComida> caracteristicasTotales = ViewBag.caracteristicas;
-
+    ViewBag.CaracteristicasComida = Enum.GetValues(typeof(CategoriaComida)).Cast<CategoriaComida>().ToList();
+    var listaCategorias = ViewBag.CaracteristicasComida;
     //Cambiar cuando se edite la comida
-    Dictionary<int, string> caracteristicas = new Dictionary<int, string>();
 }
 <!--Body-->
 <div class="container mt-3">
@@ -33,17 +30,17 @@
         @*Agregar Característica de comida*@
         <div class="row">
             <div class="col">
-                <button class="btn btn-success" data-bs-toggle="offcanvas" href="#RegistrarComida">Agregar comida</button>
+                <button id="Create" class="btn btn-success">Agregar comida</button>
                 <a class="btn btn-secondary" asp-action="CaracteristicaComida">Agregar Característica de comida</a>
             </div>
         </div>
 
-
         @*Aplicar Foreach*@
-        @if (lista.Count() > 0){
-            @foreach (Comida item in lista){
+        @if (Model.Count() > 0){
+            <div id="listacomidas" class="row">
+            @foreach (Comida item in Model){
                 <div class="col-sm-6 mt-3">
-                    <div style="border-radius: 50px;" class="card">
+                    <div style="border-radius: 50px" class="card">
                         <svg style="border-top-left-radius: 50px; border-top-right-radius: 50px;" class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
                             <defs>
                                 <pattern id="imagen+@item.ID" width="100%" height="100%">
@@ -52,21 +49,29 @@
                             </defs>
                             <rect width="100%" height="100%" fill="url(#imagen+@item.ID)" />
                         </svg>
-                        <div class="card-body">
+                        <div class="card-body overflow-y-auto">
                             <h5 class="card-title">
                                 @item.Nombre
                             </h5>
-                            <p class="card-text" style="text-align: justify;">
-                                @item.Descripcion
-                            </p>
+
+                            <div class="mb-4 overflow-auto" style="height:90px">
+                                <p class="card-text" style="text-align: justify">
+                                    @item.Descripcion
+                                </p>
+                            </div>
                             <div class="row">
                                 <div class="col-9">
                                     <div class="input-group mb-3">
-                                        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#RegistrarComida">
+                                        <a class="btn btn-primary" data-id="@item.ID">
                                             Editar
                                         </a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#EliminarComida">
                                             Eliminar
+                                        </button>
+
+                                        <input type="number" value="@item.Stock" class="form-control" style="max-width:100px">
+                                        <button class="btn btn-secondary">
+                                            <i class="fa-solid fa-floppy-disk"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -80,6 +85,7 @@
                     </div>
                 </div>
             }
+            </div>
         }
         else{
             <div class="alert alert-primary mt-5" role="alert">
@@ -97,7 +103,7 @@
 
 
 <!--navi-->
-@if(lista == null){
+@if( !(Model.Count() > 0) ){
 <div class="container" style="width: 300px;">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -131,86 +137,8 @@
 </div>
 
 <!--Comida registro y edit-->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="RegistrarComida">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title">Agregar comida</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div>
-            <form asp-action="AgregarComida" id="formulario" method="post" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger alter alert-danger"></div>
-
-                <input type="hidden" name="listaIndicescarac" id="arrayids" value=""/>
-
-                <span class="alert-danger" asp-validation-for="Nombre"></span>
-                <input asp-for="Nombre" type="text" class="form-control mb-3" placeholder="Nombre del plato"/>
-
-                <span class="alert-danger" asp-validation-for="Descripcion"></span>
-                <textarea asp-for="Descripcion" class="form-control mb-3" placeholder="Descripción"></textarea>
-
-                <span class="alert-danger" asp-validation-for="Precio"></span>
-                <input asp-for="Precio" type="number" class="form-control mb-3" placeholder="Precio" />
-
-                <span class="alert-danger" asp-validation-for="Stock"></span>
-                <input asp-for="Stock" type="number" class="form-control mb-3" placeholder="Stock"/>
-
-
-                <div class="col">
-
-                    <!--Checkbox-->
-                    <div class="form-check mb-3">
-                        <input asp-for="MenuDelDia" class="form-check-input" type="checkbox">
-                        <label class="form-check-label">
-                            Menú del día
-                        </label>
-                    </div>
-
-                    <span id="valCategoria" class="alert-danger"></span>
-                    <div class="form-floating">
-                        <select asp-for="Categoria" id="selectCategoria" class="form-select mb-3">
-                            <option selected disabled hidden value="">No elegido</option>
-                                @foreach (CategoriaComida item in listaCategorias)
-                                {
-                                    <option value="@Convert.ToInt32(item)">@item.ToString()</option>
-                                }
-                        </select>
-                        
-                        <label for="floatingInput">Tipo de comidas</label>
-                    </div>
-
-
-                    @*Características comida*@
-                    <span id="valCaracteristicas" class="alert-danger"></span>
-                    <div class="input-group mb-1">
-                        <select class="form-select mb-1" id="selectCaracteristica" style="height: 40px;">
-                            <option selected disabled hidden value="">Agregar posibles características</option>
-                                @foreach (CaracteristicaComida item in caracteristicasTotales)
-                                {
-                                    <option value="@item.Id">@item.Nombre</option>
-                                }
-                        </select>
-                        <button class="btn btn-secondary" id="agregarCaracteristica" type="button" style="height: 40px;">Agregar</button>
-                    </div>
-                    <p class="form-text">Lista de posibles características:</p>
-                    <ul id="listaCaracteristicas" class="list-group mb-3 list-group-flush">
-                    </ul>
-
-
-                    <hr />
-                    @*Enviar imagen*@
-                    @if (ViewBag.imagenNula is not null)
-                    {
-                        <span class="alert-danger">@ViewBag.imagenNula</span>
-                    }
-                    <input asp-for="Imagen" type="file" class="form-control" name="files" accept="image/*" />
-                    
-                    <hr />
-
-                    <button type="submit" class="btn btn-success">Crear</button>
-            </form>
-        </div>
-    </div>
+<div id="ComidaRegistro">
+    @await Html.PartialAsync("_ModificarComida", new Comida());
 </div>
 
 
@@ -225,10 +153,72 @@
     <script>
         var listajax = []; //Lista de indices de las características
 
-        //Logica caracteristicas
-        $('#agregarCaracteristica').click(function () {
+        $(document).ready(function () {
+            if(@ViewBag.modo == "Crear"){
+                
+            }
+        });
+
+        //Edit
+        $('.btn.btn-primary').click(function () {
+            let idcomida = $(this).data("id");
+
+            $.ajax({
+                type: 'GET',
+                url: '/Comida/_ModificarComida',
+                data: { id: idcomida },
+                dataType: 'html',
+                async: true,
+                success: function (result) {
+                    $('#ComidaRegistro').html(result);
+                    $('#RegistrarComida').offcanvas('show');
+
+                    $('#tituloCanvas').text('Editar comida');
+                    $('#Modificar').text('Editar');
+                    $('#Modificar').removeClass('btn-success');
+                    $('#Modificar').addClass('btn-info');
+
+                    $('#agregarCaracteristica').click(AgregarCaracteristicas);
+                    $('#formulario').on('submit', submitFormEdit);
+
+                    //concatenar
+                    let antlistajax = JSON.parse($('#arrayids').val());
+                    listajax = listajax.concat(antlistajax);
+
+                    $("#RegistrarComida").on("hidden.bs.offcanvas", function () {
+                        listajax = []
+                    });
+                }
+            });
+        });
+
+        //Create
+        $('#Create').click(function () {
+
+            $.ajax({
+                type: 'GET',
+                url: '/Comida/_ModificarComida',
+                data: { id: 0 },
+                dataType: 'html',
+                async: true,
+                success: function (result) {
+                    $('#ComidaRegistro').html(result);
+                    $('#RegistrarComida').offcanvas('show');
+
+                    $('#tituloCanvas').text('Agregar comida');
+                    $('#Modificar').text('Crear');
+                    $('#Modificar').removeClass('btn-info');
+                    $('#Modificar').addClass('btn-success');
+
+                    $('#agregarCaracteristica').click(AgregarCaracteristicas);
+                    $('#formulario').on('submit', submitFormAdd);
+                }
+            });
+        });
+
+        function AgregarCaracteristicas(){
             let numero = $('#selectCaracteristica').val();
-            if(numero == null){
+            if (numero == null) {
                 $('#valCaracteristicas').text('Necesita marcar una de las opciones');
                 setTimeout(function () {
                     $("#valCaracteristicas").fadeOut();
@@ -239,23 +229,30 @@
                     $("#valCaracteristicas").fadeIn();
                 }, 1500);
             }
-            else{
+            else {
                 let elementos = $("#listaCaracteristicas").find("li");
 
                 $('#valCaracteristicas').text('');
                 let valor = $('#selectCaracteristica').find("option:selected").html();
                 let valorRepetido = false;
-
+                /*
                 elementos.each(function () {
-                    if ($(this).text() == valor) valorRepetido = true
+                    if ($(this).find("p").text() == valor) valorRepetido = true
+                });
+                */
+                listajax.forEach((x) => {
+                    if (x == numero) valorRepetido = true
                 });
 
                 if (!valorRepetido) {
-                    let li = $('<li class="list-group-item">' + valor + '</li>');
+                    let li = $('<li class="list-group-item d-flex"> <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p>  <a type="button" class="btn-close"></a>   </li>');
                     $('#listaCaracteristicas').append(li);
                     listajax.push(parseInt(numero));
+
+                    //pruebas
+                    console.log(listajax);
                 }
-                else{
+                else {
                     $('#valCaracteristicas').text('Esta característica ya ha sido registrada');
                     setTimeout(function () {
                         $("#valCaracteristicas").fadeOut();
@@ -265,25 +262,39 @@
                         $("#valCaracteristicas").fadeIn();
                     }, 1500);
                 }
-               
+
             }
-        });
 
-        //submit
-        $('#formulario').on('submit', function (evt) {
+        }
 
+        function submitFormAdd(evt) {
             //Validar categoria
             let num = $('#selectCategoria').val();
-            if(num == null){
+            if (num == null) {
                 $('#valCategoria').text('Necesita marcar una de las opciones');
                 evt.preventDefault();
             }
-            else{
+            else {
                 $('#valCategoria').text('');
                 $('#arrayids').val(JSON.stringify(listajax)) //Pasar sin ajax
             }
 
+        }
+        
+        function submitFormEdit(evt){
+            //Validar categoria
+            let num = $('#selectCategoria').val();
+            if (num == null) {
+                $('#valCategoria').text('Necesita marcar una de las opciones');
+                evt.preventDefault();
+            }
+            else {
+                $('#valCategoria').text('');
+                $('#arrayids').val(JSON.stringify(listajax)) //Pasar sin ajax
+                window.location.href = '/Comida/EditarComida';
+            }
 
-        });
+        }
+
     </script>
 }

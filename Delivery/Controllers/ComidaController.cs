@@ -17,14 +17,74 @@ namespace Delivery.Controllers
             _comidaRepository = comidaRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+        
         public async Task<IActionResult> EditarMenu()
         {
-            ViewBag.Comidas = await _comidaRepository.ObtenerComidas();
+            var comidas = await _comidaRepository.ObtenerComidas();
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
             ViewBag.modeloValido = true;
-            return View();
+            ViewBag.modo = "None"; //Para la vista parcial
+            return View(comidas);
         }
 
+        //Vista parcial offcanvas
+        public async Task<IActionResult> _ModificarComida(int id = 0)
+        {
+            ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
+
+            if (id is 0) return PartialView();
+            else
+            {
+                Comida comida = await _comidaRepository.ObtenerPorId(id);
+
+                ViewBag.comidaCarac = await _comidaRepository.ObtenerCaracteristicasPorComidaID(id);
+
+
+                if (comida != null) return PartialView(comida);
+                else return NotFound();
+            }
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarComida(
+            [Bind("ID, Nombre", "Descripcion", "Categoria", "Precio",
+            "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "", string urlant = "")
+        {
+            var comidas = await _comidaRepository.ObtenerComidas();
+            ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas(); //Obtiene el listado general de caracteristicas, para los select
+            ViewBag.modeloValido = true; //Para hacer aparecer automaticamente el offcanvas
+            ViewBag.modo = "Crear"; //Para la vista parcial
+
+
+            //El modelo es valido
+            if (ModelState.IsValid)
+            {
+                try //Para cuando la imagen no se manda
+                {
+                    comida.Imagen = _comidaRepository.CargarImagen(HttpContext, _webHostEnvironment);
+                    _comidaRepository.EliminarImagen(urlant, _webHostEnvironment);
+                    await _comidaRepository.EditarComida(comida, listaIndicescarac);
+                    await _comidaRepository.Guardar();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    comida.Imagen = null;
+                    ViewBag.imagenNula = "Debes subir un archivo";
+                    ViewBag.modeloValido = false;
+                }
+
+
+                ViewBag.modeloValido = true;
+                return RedirectToAction("EditarMenu");
+            }
+            ViewBag.modeloValido = false;
+
+            return View("EditarMenu", comidas);
+
+        }
 
 
         [HttpPost]
@@ -33,39 +93,27 @@ namespace Delivery.Controllers
             [Bind("Nombre", "Descripcion", "Categoria", "Precio",
             "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "")
         {
-            
-            ViewBag.Comidas = await _comidaRepository.ObtenerComidas(); //Obtiene el listado general de comidas
+            var comidas = await _comidaRepository.ObtenerComidas();
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas(); //Obtiene el listado general de caracteristicas, para los select
             ViewBag.modeloValido = true; //Para hacer aparecer automaticamente el offcanvas
-            bool modeloValido = true;
+            ViewBag.modo = "Crear"; //Para la vista parcial
 
 
             //El modelo es valido
-            if (ModelState.IsValid && modeloValido)
+            if (ModelState.IsValid)
             {
                 try //Para cuando la imagen no se manda
                 {
                     comida.Imagen = _comidaRepository.CargarImagen(HttpContext, _webHostEnvironment);
+                    await _comidaRepository.AgregarComida(comida, listaIndicescarac);
+                    await _comidaRepository.Guardar();
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     comida.Imagen = null;
-                    modeloValido = false;
                     ViewBag.imagenNula = "Debes subir un archivo";
                     ViewBag.modeloValido = false;
                 }
-
-                await _comidaRepository.Agregar(comida);
-                await _comidaRepository.Guardar();
-
-                //Agregar la relación de características de comidas con Comidas
-                //No se agrega nada si no hay nada en la lista
-                List<int> listaIndices = JsonConvert.DeserializeObject<List<int>>(listaIndicescarac);
-                foreach(int i in listaIndices)
-                {
-                    await _comidaRepository.AgregarRelacionCaracteristicaComida(comida.ID, i);
-                }
-                await _comidaRepository.Guardar();
 
 
                 ViewBag.modeloValido = true;
@@ -73,7 +121,7 @@ namespace Delivery.Controllers
             }
             ViewBag.modeloValido = false;
 
-            return View("EditarMenu");
+            return View("EditarMenu", comidas);
         }
 
 
@@ -101,7 +149,6 @@ namespace Delivery.Controllers
             }
             else return NotFound();
         }
-
 
         //GET
 		public async Task<IActionResult> CaracteristicaComida(CaracteristicaComida cc = null)
@@ -174,7 +221,7 @@ namespace Delivery.Controllers
                 else
                 {
                     //Actualizar elemento
-					await _comidaRepository.ActualizarCategoria(caracteristica);
+					await _comidaRepository.ActualizarCaracteristica(caracteristica);
 					ViewBag.editable = false;
 					ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
 					Response.Cookies.Append("mensaje", "La característica fue editada correctamente", cookie);

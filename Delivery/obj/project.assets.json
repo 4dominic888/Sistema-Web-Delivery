@@ -1439,7 +1439,8 @@
           "Delivery.Persistence": "1.0.0",
           "Microsoft.AspNetCore.Hosting": "2.2.7",
           "Microsoft.EntityFrameworkCore": "7.0.12",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
+          "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
           "bin/placeholder/Delivery.Repositories.dll": {}

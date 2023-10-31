@@ -89,6 +89,7 @@ namespace Delivery.Persistence.Data
         public DbSet<MetodoPago> MetodoPagos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
+        public DbSet<Chef> Chefs { get; set; }
         public DbSet<Repartidor> Repartidores { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Comida> Comidas { get; set; }

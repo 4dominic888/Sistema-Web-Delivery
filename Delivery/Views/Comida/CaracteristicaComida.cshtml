@@ -69,10 +69,13 @@
 					<ul class="list-group list-group-flush">
 						@foreach (CaracteristicaComida item in lista)
 						{
-							<li class="list-group-item">
-								@item.Nombre
-								<a asp-action="EliminarCaracteristica" asp-route-id="@item.Id" type="button" class="btn-close" style="padding-top: 15px;"></a>
-								<a asp-action="EditarCaracteristica" asp-route-id="@item.Id" type="button" class="btn-outline-success">Edit</a>
+							<li class="list-group-item d-flex">
+
+								<p class="p-0 m-0 flex-grow-1 overflow-auto">
+									@item.Nombre
+								</p>
+								<a asp-action="EditarCaracteristica" asp-route-id="@item.Id" type="button" class="btn-outline-success">Editar</a>
+								<a asp-action="EliminarCaracteristica" asp-route-id="@item.Id" type="button" class="btn-close"></a>							
 							</li>
 						}
 					</ul>

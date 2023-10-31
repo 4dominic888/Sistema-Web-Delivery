@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LFD9TrTjEVtBIh459ZFzjX4k0Mkgqnb7PrCBW+9T0uU=",
+  "Hash": "QxPBOfQ4S+3y96D7+Lqk5Q4d9nwMFW2EhrxGx7bd05I=",
   "Source": "Delivery",
   "BasePath": "_content/Delivery",
   "Mode": "Default",
@@ -287,6 +287,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\0c7b1036-7da9-4689-ae6a-319ad7c12c4a.jpeg",
+      "SourceId": "Delivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\",
+      "BasePath": "_content/Delivery",
+      "RelativePath": "imagenes/Comida/0c7b1036-7da9-4689-ae6a-319ad7c12c4a.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\0c7b1036-7da9-4689-ae6a-319ad7c12c4a.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\ce0fc5bd-1c3f-4a13-822f-09568a4d323b.jpg",
+      "SourceId": "Delivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\",
+      "BasePath": "_content/Delivery",
+      "RelativePath": "imagenes/Comida/ce0fc5bd-1c3f-4a13-822f-09568a4d323b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\ce0fc5bd-1c3f-4a13-822f-09568a4d323b.jpg"
     },
     {
       "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\js\\site.js",
