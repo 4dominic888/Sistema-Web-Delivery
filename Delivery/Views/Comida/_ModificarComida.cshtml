@@ -6,29 +6,36 @@
 
     IEnumerable<CaracteristicaComida> caracteristicas = Enumerable.Empty<CaracteristicaComida>();
     string strlistaIndices = "[]";
-
     string imagenAnterior = "";
-    try
-    {
-        imagenAnterior = Model.Imagen;
-    }
-    catch (NullReferenceException)
-    {
-        
-    }
 
-
-    //Formatear caracteristicas de la comida seleccionada
-    if (ViewBag.comidaCarac is not null)
-    {
-        strlistaIndices = "[";
+    if (!ViewBag.modeloValido) {
+        imagenAnterior = ViewBag.anteriorImagen;
+        strlistaIndices = ViewBag.listcaract;
         caracteristicas = ViewBag.comidaCarac;
-        foreach (var item in caracteristicas)
+    }
+    else
+    {
+        try
         {
-            strlistaIndices += $"{item.Id},";
+            imagenAnterior = Model.Imagen;
         }
-        strlistaIndices = strlistaIndices.Remove(strlistaIndices.Count()-1);
-        strlistaIndices += "]";
+        catch (NullReferenceException)
+        {
+
+        }
+
+        //Formatear caracteristicas de la comida seleccionada
+        if (ViewBag.comidaCarac is not null)
+        {
+            strlistaIndices = "[";
+            caracteristicas = ViewBag.comidaCarac;
+            foreach (var item in caracteristicas)
+            {
+                strlistaIndices += $"{item.Id},";
+            }
+            strlistaIndices = strlistaIndices.Remove(strlistaIndices.Count() - 1);
+            strlistaIndices += "]";
+        }
     }
 }
 
@@ -116,7 +123,7 @@
                                     @item.Nombre
                                 </p>
 
-                            <a type="button" class="btn-close"></a>
+                            <a type="button" class="btn btn-close" data-id="@item.Id" ></a>
                             </li>
                         }
 

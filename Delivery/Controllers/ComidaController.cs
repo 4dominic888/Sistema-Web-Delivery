@@ -32,11 +32,15 @@ namespace Delivery.Controllers
         public async Task<IActionResult> _ModificarComida(int id = 0)
         {
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
+            ViewBag.modeloValido = true;
+            ViewBag.anteriorImagen = "";
+            ViewBag.listcaract = "[]";
 
             if (id is 0) return PartialView();
             else
             {
                 Comida comida = await _comidaRepository.ObtenerPorId(id);
+
 
                 ViewBag.comidaCarac = await _comidaRepository.ObtenerCaracteristicasPorComidaID(id);
 
@@ -55,10 +59,9 @@ namespace Delivery.Controllers
             "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "", 
             string urlant = "", string ChangeImage = "si")
         {
-            var comidas = await _comidaRepository.ObtenerComidas();
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas(); //Obtiene el listado general de caracteristicas, para los select
             ViewBag.modeloValido = true; //Para hacer aparecer automaticamente el offcanvas
-            ViewBag.modo = "Crear"; //Para la vista parcial
+            ViewBag.modo = "Editar"; //Para la vista parcial
 
 
             //El modelo es valido
@@ -80,6 +83,10 @@ namespace Delivery.Controllers
                 return RedirectToAction("EditarMenu");
             }
             ViewBag.modeloValido = false;
+            ViewBag.anteriorImagen = urlant;
+            ViewBag.listcaract = listaIndicescarac;
+            ViewBag.comidaCarac = await _comidaRepository.ObtenerCaracteristicasPorComidaID(comida.ID);
+            var comidas = await _comidaRepository.ObtenerComidas();
 
             return View("EditarMenu", comidas);
 
@@ -119,7 +126,8 @@ namespace Delivery.Controllers
                 return RedirectToAction("EditarMenu");
             }
             ViewBag.modeloValido = false;
-
+            ViewBag.listcaract = listaIndicescarac;
+            ViewBag.anteriorImagen = String.Empty;
             return View("EditarMenu", comidas);
         }
 

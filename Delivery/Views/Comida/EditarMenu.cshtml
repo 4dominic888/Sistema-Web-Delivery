@@ -70,7 +70,7 @@
                                             Eliminar
                                         </button>
 
-                                        <input type="number" value="@item.Stock" class="form-control" style="max-width:100px">
+                                        <input type="number" value="@item.Stock" title="Stock" class="form-control" style="max-width:100px">
                                         <button class="btn btn-secondary">
                                             <i class="fa-solid fa-floppy-disk"></i>
                                         </button>
@@ -205,6 +205,7 @@
                     $('#Modificar').addClass('btn-info');
 
                     $('#agregarCaracteristica').click(AgregarCaracteristicas);
+                    $('.btn.btn-close').on("click", EliminarCaracteristica);
                     $('#formulario').on('submit', submitFormEdit);
 
                     //concatenar
@@ -238,10 +239,19 @@
                     $('#Modificar').addClass('btn-success');
 
                     $('#agregarCaracteristica').click(AgregarCaracteristicas);
+                    $('.btn.btn-close').on("click", EliminarCaracteristica);
+
                     $('#formulario').on('submit', submitFormAdd);
                 }
             });
         });
+
+        function EliminarCaracteristica(){
+            let borrar = $(this).closest("li").find('a').data('id');
+            listajax = listajax.filter(num => num != borrar);
+            $(this).closest("li").remove();
+            console.log(listajax);
+        }
 
         function AgregarCaracteristicas(){
             let numero = $('#selectCaracteristica').val();
@@ -262,22 +272,37 @@
                 $('#valCaracteristicas').text('');
                 let valor = $('#selectCaracteristica').find("option:selected").html();
                 let valorRepetido = false;
-                /*
-                elementos.each(function () {
-                    if ($(this).find("p").text() == valor) valorRepetido = true
-                });
-                */
+
                 listajax.forEach((x) => {
                     if (x == numero) valorRepetido = true
                 });
 
-                if (!valorRepetido) {
-                    let li = $('<li class="list-group-item d-flex"> <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p>  <a type="button" class="btn-close"></a>   </li>');
-                    $('#listaCaracteristicas').append(li);
-                    listajax.push(parseInt(numero));
 
-                    //pruebas
-                    console.log(listajax);
+                if (!valorRepetido) {
+
+                    if ($('#listaCaracteristicas').find("li").length < 5) {
+                        let li = $('<li class="list-group-item border d-flex"> <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p>');
+                        let buttonclose = $('<a type="button" class="btn btn-close" data-id="' + numero + '"></a>');
+                        buttonclose.on("click", EliminarCaracteristica);
+
+                        li.append(buttonclose);
+                        $('#listaCaracteristicas').append(li);
+
+                        listajax.push(parseInt(numero));
+
+                        //pruebas
+                        console.log(listajax);
+                    }
+                    else{
+                        $('#valCaracteristicas').text('Solo puedes registrar un máximo de 5 características');
+                        setTimeout(function () {
+                            $("#valCaracteristicas").fadeOut();
+                        }, 1500);
+                        setTimeout(function () {
+                            $('#valCaracteristicas').text('');
+                            $("#valCaracteristicas").fadeIn();
+                        }, 1500);
+                    }
                 }
                 else {
                     $('#valCaracteristicas').text('Esta característica ya ha sido registrada');
