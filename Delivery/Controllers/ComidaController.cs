@@ -3,6 +3,7 @@ using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Delivery.Controllers
 {
@@ -23,7 +24,7 @@ namespace Delivery.Controllers
             var comidas = await _comidaRepository.ObtenerComidas();
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
             ViewBag.modeloValido = true;
-            ViewBag.modo = "None"; //Para la vista parcial
+            ViewBag.modo = "Nada"; //Para la vista parcial
             return View(comidas);
         }
 
@@ -51,7 +52,8 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarComida(
             [Bind("ID, Nombre", "Descripcion", "Categoria", "Precio",
-            "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "", string urlant = "")
+            "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "", 
+            string urlant = "", string ChangeImage = "si")
         {
             var comidas = await _comidaRepository.ObtenerComidas();
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas(); //Obtiene el listado general de caracteristicas, para los select
@@ -62,20 +64,17 @@ namespace Delivery.Controllers
             //El modelo es valido
             if (ModelState.IsValid)
             {
-                try //Para cuando la imagen no se manda
+                if (ChangeImage == "si")
                 {
                     comida.Imagen = _comidaRepository.CargarImagen(HttpContext, _webHostEnvironment);
                     _comidaRepository.EliminarImagen(urlant, _webHostEnvironment);
-                    await _comidaRepository.EditarComida(comida, listaIndicescarac);
-                    await _comidaRepository.Guardar();
                 }
-                catch (ArgumentOutOfRangeException)
-                {
-                    comida.Imagen = null;
-                    ViewBag.imagenNula = "Debes subir un archivo";
-                    ViewBag.modeloValido = false;
-                }
+                else comida.Imagen = urlant;
+                
 
+                await _comidaRepository.EditarComida(comida, listaIndicescarac);
+                await _comidaRepository.Guardar();
+                
 
                 ViewBag.modeloValido = true;
                 return RedirectToAction("EditarMenu");

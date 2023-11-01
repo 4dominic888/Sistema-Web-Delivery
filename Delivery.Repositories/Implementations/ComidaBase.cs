@@ -75,6 +75,7 @@ namespace Delivery.Repositories.Implementations
         public async Task AgregarComida(Comida comida, string listaIndicescarac)
         {
             await Agregar(comida);
+            await Guardar(); //Para que se genere su id o algo asi
             //Agregar la relación de características de comidas con Comidas
             //No se agrega nada si no hay nada en la lista
             List<int> listaIndices = JsonConvert.DeserializeObject<List<int>>(listaIndicescarac);

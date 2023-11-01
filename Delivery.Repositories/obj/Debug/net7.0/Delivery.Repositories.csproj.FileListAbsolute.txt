@@ -42,3 +42,22 @@ C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delive
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Persistence.pdb
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Domain.pdb
 C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CopyComplete
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.deps.json
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.runtimeconfig.json
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.dll
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Repositories.pdb
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Domain.dll
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Persistence.dll
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Domain.pdb
+D:\Sistema-Web-Delivery\Delivery.Repositories\bin\Debug\net7.0\Delivery.Persistence.pdb
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.AssemblyReference.cache
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfoInputs.cache
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.AssemblyInfo.cs
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CoreCompileInputs.cache
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.csproj.CopyComplete
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.dll
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\refint\Delivery.Repositories.dll
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.pdb
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\Delivery.Repositories.genruntimeconfig.cache
+D:\Sistema-Web-Delivery\Delivery.Repositories\obj\Debug\net7.0\ref\Delivery.Repositories.dll

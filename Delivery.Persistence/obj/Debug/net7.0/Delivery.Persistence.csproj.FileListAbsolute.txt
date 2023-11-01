@@ -47,3 +47,20 @@ D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\re
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.pdb
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.genruntimeconfig.cache
 D:\Delivery borrar\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\ref\Delivery.Persistence.dll
+D:\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.deps.json
+D:\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.runtimeconfig.json
+D:\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.dll
+D:\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Persistence.pdb
+D:\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.dll
+D:\Sistema-Web-Delivery\Delivery.Persistence\bin\Debug\net7.0\Delivery.Domain.pdb
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.AssemblyReference.cache
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfoInputs.cache
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.AssemblyInfo.cs
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CoreCompileInputs.cache
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.csproj.CopyComplete
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.dll
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\refint\Delivery.Persistence.dll
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.pdb
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\Delivery.Persistence.genruntimeconfig.cache
+D:\Sistema-Web-Delivery\Delivery.Persistence\obj\Debug\net7.0\ref\Delivery.Persistence.dll

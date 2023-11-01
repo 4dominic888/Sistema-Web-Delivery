@@ -40,7 +40,7 @@
     </div>
     <div class="offcanvas-body">
         <div>
-            <form asp-action="AgregarComida" id="formulario" method="post" enctype="multipart/form-data">
+            <form action="" id="formulario" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger alter alert-danger"></div>
 
                 @*Pasar las características de la comida*@
@@ -51,6 +51,9 @@
 
                 @*Imagen anterior para el edit*@
                 <input type="hidden" name="urlant" value="@imagenAnterior" />
+
+                @*Cambiar imagen o no*@
+                <input type="hidden" name="ChangeImage" value="si" id="changeImageval"/>
 
                 <span class="alert-danger" asp-validation-for="Nombre"></span>
                 <input asp-for="Nombre" type="text" class="form-control mb-3" placeholder="Nombre del plato" title="Nombre del plato" />
@@ -126,11 +129,12 @@
                     {
                         <span class="alert-danger">@ViewBag.imagenNula</span>
                     }
-                    <input asp-for="Imagen" type="file" class="form-control" name="files" accept="image/*" />
+                    <span class="alert-danger" id="valImagen"></span>
+                    <input asp-for="Imagen" id="fileimage" type="file" class="form-control" name="files" accept="image/*" />
 
                     <hr />
 
-                    <button id="Modificar" type="submit" class="btn">default</button>
+                    <button id="Modificar" type="submit" class="btn" >default</button>
             </form>
         </div>
     </div>

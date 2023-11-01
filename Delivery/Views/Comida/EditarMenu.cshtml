@@ -5,6 +5,7 @@
     var listaCategorias = ViewBag.CaracteristicasComida;
     //Cambiar cuando se edite la comida
 }
+
 <!--Body-->
 <div class="container mt-3">
     <h1>Menú del día</h1>
@@ -154,8 +155,32 @@
         var listajax = []; //Lista de indices de las características
 
         $(document).ready(function () {
-            if(@ViewBag.modo == "Crear"){
-                
+            if("@ViewBag.modo" == "Crear"){
+
+                $('#tituloCanvas').text('Agregar comida');
+                $('#Modificar').text('Crear');
+                $('#Modificar').removeClass('btn-info');
+                $('#Modificar').addClass('btn-success');
+
+                $('#agregarCaracteristica').click(AgregarCaracteristicas);
+                $('#formulario').on('submit', submitFormAdd);
+            }
+            else if ("@ViewBag.modo" == "Editar"){
+                $('#tituloCanvas').text('Editar comida');
+                $('#Modificar').text('Editar');
+                $('#Modificar').removeClass('btn-success');
+                $('#Modificar').addClass('btn-info');
+
+                $('#agregarCaracteristica').click(AgregarCaracteristicas);
+                $('#formulario').on('submit', submitFormEdit);
+
+                //concatenar
+                let antlistajax = JSON.parse($('#arrayids').val());
+                listajax = listajax.concat(antlistajax);
+
+                $("#RegistrarComida").on("hidden.bs.offcanvas", function () {
+                    listajax = []
+                });
             }
         });
 
@@ -171,6 +196,7 @@
                 async: true,
                 success: function (result) {
                     $('#ComidaRegistro').html(result);
+                    $('#formulario').attr("action", "/Comida/EditarComida");
                     $('#RegistrarComida').offcanvas('show');
 
                     $('#tituloCanvas').text('Editar comida');
@@ -203,6 +229,7 @@
                 async: true,
                 success: function (result) {
                     $('#ComidaRegistro').html(result);
+                    $('#formulario').attr("action", "/Comida/AgregarComida");
                     $('#RegistrarComida').offcanvas('show');
 
                     $('#tituloCanvas').text('Agregar comida');
@@ -270,6 +297,15 @@
         function submitFormAdd(evt) {
             //Validar categoria
             let num = $('#selectCategoria').val();
+
+            if ($('#fileimage').val() === "") {
+                $('#valImagen').text('No ha seleccionado una imagen');
+                evt.preventDefault();
+            }
+            else{
+                $('#valImagen').text('');
+            }
+
             if (num == null) {
                 $('#valCategoria').text('Necesita marcar una de las opciones');
                 evt.preventDefault();
@@ -284,6 +320,11 @@
         function submitFormEdit(evt){
             //Validar categoria
             let num = $('#selectCategoria').val();
+
+            if ($('#fileimage').val() === "") {
+                $('#changeImageval').val('no')
+            }
+
             if (num == null) {
                 $('#valCategoria').text('Necesita marcar una de las opciones');
                 evt.preventDefault();
@@ -291,7 +332,7 @@
             else {
                 $('#valCategoria').text('');
                 $('#arrayids').val(JSON.stringify(listajax)) //Pasar sin ajax
-                window.location.href = '/Comida/EditarComida';
+
             }
 
         }
