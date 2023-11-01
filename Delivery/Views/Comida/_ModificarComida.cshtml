@@ -11,7 +11,21 @@
     if (!ViewBag.modeloValido) {
         imagenAnterior = ViewBag.anteriorImagen;
         strlistaIndices = ViewBag.listcaract;
-        caracteristicas = ViewBag.comidaCarac;
+        if (ViewBag.modo == "Editar") caracteristicas = ViewBag.comidaCarac;
+        else
+        {
+            if (ViewBag.comidaCarac is not null)
+            {
+                strlistaIndices = "[";
+                caracteristicas = ViewBag.comidaCarac;
+                foreach (var item in caracteristicas)
+                {
+                    strlistaIndices += $"{item.Id},";
+                }
+                strlistaIndices = strlistaIndices.Remove(strlistaIndices.Count() - 1);
+                strlistaIndices += "]";
+            }
+        }
     }
     else
     {

@@ -126,8 +126,6 @@ namespace Delivery.Controllers
                 return RedirectToAction("EditarMenu");
             }
             ViewBag.modeloValido = false;
-            ViewBag.listcaract = listaIndicescarac;
-            ViewBag.anteriorImagen = String.Empty;
             return View("EditarMenu", comidas);
         }
 
