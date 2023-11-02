@@ -69,9 +69,11 @@
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#EliminarComida">
                                             Eliminar
                                         </button>
-
-                                        <input type="number" value="@item.Stock" title="Stock" class="form-control" style="max-width:100px">
-                                        <button class="btn btn-secondary">
+                                        <form class="formstock">
+                                            <input type="hidden", name="idc" value="@item.ID">
+                                            <input type="number" name="nuevoStock" value="@item.Stock" title="Stock" class="form-control" style="max-width:100px">
+                                        </form>
+                                        <button class="btn btn-secondary stock" data-dataid="@item.ID">
                                             <i class="fa-solid fa-floppy-disk"></i>
                                         </button>
                                     </div>
@@ -104,7 +106,7 @@
 
 
 <!--navi-->
-@if( !(Model.Count() > 0) ){
+@if( (Model.Count() > 0) ){
 <div class="container" style="width: 300px;">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -141,6 +143,19 @@
 <div id="ComidaRegistro">
     @await Html.PartialAsync("_ModificarComida", new Comida());
 </div>
+
+<div id="toastContainer" data-delay="1500" style="position: absolute; top: 0; right: 0;">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            El stock no puede ser negativo ni un número muy grande
+        </div>
+    </div>
+</div>
+
 
 
 @if (!ViewBag.modeloValido)
@@ -182,6 +197,24 @@
                     listajax = []
                 });
             }
+        });
+
+        $('.btn.btn-secondary.stock').click(function () {
+            let id = $(this).data("dataid");
+            let form = $(this).prev(".formstock");
+            let valStock = form.find('input[name = "nuevoStock"]').val();
+            if (valStock < 0) {
+
+
+                let toast = new bootstrap.Toast($('#toastContainer .toast:last'));
+                toast.show();
+
+            }
+            else console.log(valStock);
+            
+
+            //form.attr("action", "/Comida/EditarStockComida");
+            //form.submit();
         });
 
         //Edit

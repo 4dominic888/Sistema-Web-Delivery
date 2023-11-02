@@ -28,6 +28,8 @@ namespace Delivery.Controllers
             return View(comidas);
         }
 
+
+
         //Vista parcial offcanvas
         public async Task<IActionResult> _ModificarComida(int id = 0)
         {
@@ -51,6 +53,11 @@ namespace Delivery.Controllers
         }
 
 
+        public async Task<IActionResult> EditarStockComida(int idc, int nuevoStock)
+        {
+            Console.WriteLine($"id: {idc} \nNuevo Stock: {nuevoStock}");
+            return RedirectToAction("EditarMenu");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

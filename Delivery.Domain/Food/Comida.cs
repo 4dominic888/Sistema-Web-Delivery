@@ -37,7 +37,7 @@ namespace Delivery.Domain.Food
 
 
         [Required, NotNull]
-        [Range(0, int.MaxValue)]
+        [Range(0, 900)]
         public int Stock { get; set; }
 
 
