@@ -85,10 +85,21 @@ namespace Delivery.Repositories.Interfaces
         public Task EditarComida(Comida comida, string listaIndicescara);
 
         /// <summary>
+        /// Editar la comida de la base de datos
+        /// </summary>
+        /// <param name="comida"></param>
+        /// <returns></returns>
+        public Task EditarComida(Comida comida);
+
+        /// <summary>
         /// Obtener todo el listado de comidas
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Comida>> ObtenerComidas();
+        public Task<IEnumerable<Comida>> ObtenerComidas();
+
+
+        public Task EliminarComida(Comida comida);
+        
 
         /// <summary>
         /// Cargar una imagen al servidor, solo válido

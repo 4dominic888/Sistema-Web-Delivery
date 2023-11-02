@@ -55,7 +55,17 @@ namespace Delivery.Controllers
 
         public async Task<IActionResult> EditarStockComida(int idc, int nuevoStock)
         {
-            Console.WriteLine($"id: {idc} \nNuevo Stock: {nuevoStock}");
+            Comida comida = await _comidaRepository.ObtenerPorId(idc);
+            comida.Stock = nuevoStock;
+            await _comidaRepository.EditarComida(comida);
+            return RedirectToAction("EditarMenu");
+        }
+
+
+        public async Task<IActionResult> EliminarComida(int idcomida)
+        {
+            Comida comida = await _comidaRepository.ObtenerPorId(idcomida);
+            await _comidaRepository.EliminarComida(comida);
             return RedirectToAction("EditarMenu");
         }
 

@@ -96,6 +96,22 @@ namespace Delivery.Repositories.Implementations
                 await AgregarRelacionCaracteristicaComida(comida.ID, item);
             }
         }
+
+        public async Task EditarComida(Comida comida)
+        {
+            _context.Comidas.Update(comida);
+            await Guardar();
+        }
+
+        public async Task EliminarComida(Comida comida)
+        {
+            var listaIndicesBorrar = await _context.Comida_Caracteristicas.Where(x => x.IdComida == comida.ID).ToListAsync();
+            _context.Comida_Caracteristicas.RemoveRange(listaIndicesBorrar);
+
+            _context.Comidas.Remove(comida);
+            await Guardar();
+        }
+
         public async Task<IEnumerable<Comida>> ObtenerComidas()
         {
             return await _Comidacontext.Comidas.ToListAsync();
@@ -125,6 +141,5 @@ namespace Delivery.Repositories.Implementations
             Console.WriteLine(ruta);
             System.IO.File.Delete(ruta);
         }
-
     }
 }

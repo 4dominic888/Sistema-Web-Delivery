@@ -66,7 +66,7 @@
                                         <a class="btn btn-primary" data-id="@item.ID">
                                             Editar
                                         </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#EliminarComida">
+                                        <button type="button" class="btn btn-danger cerrar" data-id="@item.ID" data-bs-toggle="modal" data-bs-target="#EliminarComida">
                                             Eliminar
                                         </button>
                                         <form class="formstock">
@@ -104,6 +104,17 @@
 <br>
 <br>
 
+<div id="toastContainer" data-delay="500" style="position: absolute; top: 0; right: 0;">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            El stock no puede ser negativo ni un número muy grande
+        </div>
+    </div>
+</div>
 
 <!--navi-->
 @if( (Model.Count() > 0) ){
@@ -133,7 +144,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Eliminar</button>
+                <form asp-action="EliminarComida">
+                    <input type="hidden" name="idcomida" id="eliminarComida" />
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
             </div>
         </div>
     </div>
@@ -144,17 +158,6 @@
     @await Html.PartialAsync("_ModificarComida", new Comida());
 </div>
 
-<div id="toastContainer" data-delay="1500" style="position: absolute; top: 0; right: 0;">
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto">Error</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            El stock no puede ser negativo ni un número muy grande
-        </div>
-    </div>
-</div>
 
 
 
@@ -197,24 +200,26 @@
                     listajax = []
                 });
             }
+
+            $('.btn.btn-secondary.stock').click(function () {
+                let id = $(this).data("dataid");
+                let form = $(this).prev(".formstock");
+                let valStock = form.find('input[name = "nuevoStock"]').val();
+                if ((valStock < 0) || (valStock > 1000)) {
+                    let toast = new bootstrap.Toast($('#toastContainer .toast:last'));
+                    toast.show();
+                }
+                else {
+                    form.attr("action", "/Comida/EditarStockComida");
+                    form.submit();
+                }
+            });
         });
 
-        $('.btn.btn-secondary.stock').click(function () {
-            let id = $(this).data("dataid");
-            let form = $(this).prev(".formstock");
-            let valStock = form.find('input[name = "nuevoStock"]').val();
-            if (valStock < 0) {
-
-
-                let toast = new bootstrap.Toast($('#toastContainer .toast:last'));
-                toast.show();
-
-            }
-            else console.log(valStock);
-            
-
-            //form.attr("action", "/Comida/EditarStockComida");
-            //form.submit();
+        //Delete
+        $('.btn.btn-danger.cerrar').click(function(){
+            let idcomida = $(this).data("id");
+            $('#eliminarComida').attr('value', idcomida);
         });
 
         //Edit
