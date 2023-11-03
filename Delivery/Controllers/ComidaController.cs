@@ -22,9 +22,14 @@ namespace Delivery.Controllers
 
         public async Task<IActionResult> _ElegirCaracComida(int id = 0)
         {
-            Comida comida = await _comidaRepository.ObtenerPorId(id);
-            ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasPorComidaID(id);
-            return PartialView(comida);
+            ViewBag.a = await _comidaRepository.ObtenerCaracteristicasComidas();
+            if (id is 0) return PartialView();
+            else
+            {
+                Comida comida = await _comidaRepository.ObtenerPorId(id);
+                ViewBag.caracteristicas2 = await _comidaRepository.ObtenerCaracteristicasPorComidaID(id);
+                return PartialView(comida);
+            }
         }
 
 

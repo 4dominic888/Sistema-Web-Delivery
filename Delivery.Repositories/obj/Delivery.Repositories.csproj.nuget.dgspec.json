@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
         "projectName": "Delivery.Domain",
         "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
-        "packagesPath": "C:\\Users\\UCLAB309\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
         "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB309\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -87,11 +87,11 @@
         "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
         "projectName": "Delivery.Persistence",
         "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
-        "packagesPath": "C:\\Users\\UCLAB309\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
         "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB309\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -172,11 +172,11 @@
         "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj",
         "projectName": "Delivery.Repositories",
         "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj",
-        "packagesPath": "C:\\Users\\UCLAB309\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
         "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB309\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

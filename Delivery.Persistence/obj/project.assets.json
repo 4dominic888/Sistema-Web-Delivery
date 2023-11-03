@@ -2966,7 +2966,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\UCLAB309\\.nuget\\packages\\": {}
+    "C:\\Users\\UCLAB804\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2974,11 +2974,11 @@
       "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
       "projectName": "Delivery.Persistence",
       "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
-      "packagesPath": "C:\\Users\\UCLAB309\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
       "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\UCLAB309\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

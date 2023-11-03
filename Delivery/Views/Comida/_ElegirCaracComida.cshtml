@@ -1,11 +1,11 @@
-﻿@using Delivery.Domain.Food
-@model Comida
+﻿@using Delivery.Domain.Food;
+@model Comida;
 
 @{
     IEnumerable<CaracteristicaComida> comidaCaracteristicas = Enumerable.Empty<CaracteristicaComida>();
-    if (ViewBag.caracteristicas is not null)
+    if (ViewBag.caracteristicas2 is not null)
     {
-        comidaCaracteristicas = ViewBag.caracteristicas;
+        comidaCaracteristicas = ViewBag.caracteristicas2;
     }
 
 }

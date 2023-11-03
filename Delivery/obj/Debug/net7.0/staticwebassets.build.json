@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zwamXj26z8kHxqVUuijN7lB25cg8+PH8wLTQO3igwwg=",
+  "Hash": "3WeZeIYp3v9JCI4CY3i2zCU3iWTCA93b1BzSYtW9D3g=",
   "Source": "Delivery",
   "BasePath": "_content/Delivery",
   "Mode": "Default",
@@ -304,6 +304,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\12208bc5-b0ae-4fc1-87c0-f769583886d4.jpg"
+    },
+    {
+      "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\762bf33d-14c2-42c7-b2ac-0c0047e0a581.jpg",
+      "SourceId": "Delivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\",
+      "BasePath": "_content/Delivery",
+      "RelativePath": "imagenes/Comida/762bf33d-14c2-42c7-b2ac-0c0047e0a581.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\762bf33d-14c2-42c7-b2ac-0c0047e0a581.jpg"
     },
     {
       "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\b1bdef6b-dcd4-4d75-b94c-c44e87b331cf.jpg",

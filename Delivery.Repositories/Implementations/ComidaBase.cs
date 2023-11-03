@@ -57,7 +57,7 @@ namespace Delivery.Repositories.Implementations
         public async Task<IEnumerable<CaracteristicaComida>> ObtenerCaracteristicasPorComidaID(int id)
         {
             List<CaracteristicaComida> listaIndices = new List<CaracteristicaComida>();
-            var listado = await _context.Comida_Caracteristicas.Where(x => x.IdComida == id).ToListAsync();
+            List<Comida_Caracteristica> listado = await _context.Comida_Caracteristicas.Where(x => x.IdComida == id).ToListAsync();
             listado.ForEach(x =>
             {
                 listaIndices.Add(x.CaracteristicaComida);
