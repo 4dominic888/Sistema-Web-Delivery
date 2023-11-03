@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cuYU7E2e411w6QfiPj5Cm341LP5dNG9RdAfqIpKRy/U=",
+  "Hash": "zwamXj26z8kHxqVUuijN7lB25cg8+PH8wLTQO3igwwg=",
   "Source": "Delivery",
   "BasePath": "_content/Delivery",
   "Mode": "Default",
@@ -289,23 +289,6 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\0543b1e8-9875-42aa-9b18-f84c36574100.jpg",
-      "SourceId": "Delivery",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\",
-      "BasePath": "_content/Delivery",
-      "RelativePath": "imagenes/Comida/0543b1e8-9875-42aa-9b18-f84c36574100.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\0543b1e8-9875-42aa-9b18-f84c36574100.jpg"
-    },
-    {
       "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\12208bc5-b0ae-4fc1-87c0-f769583886d4.jpg",
       "SourceId": "Delivery",
       "SourceType": "Discovered",
@@ -323,12 +306,12 @@
       "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\12208bc5-b0ae-4fc1-87c0-f769583886d4.jpg"
     },
     {
-      "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\6716bcd2-fd62-4b1b-9bd3-4c82fe618f1b.jpg",
+      "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\b1bdef6b-dcd4-4d75-b94c-c44e87b331cf.jpg",
       "SourceId": "Delivery",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\",
       "BasePath": "_content/Delivery",
-      "RelativePath": "imagenes/Comida/6716bcd2-fd62-4b1b-9bd3-4c82fe618f1b.jpg",
+      "RelativePath": "imagenes/Comida/b1bdef6b-dcd4-4d75-b94c-c44e87b331cf.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,7 +320,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\6716bcd2-fd62-4b1b-9bd3-4c82fe618f1b.jpg"
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\b1bdef6b-dcd4-4d75-b94c-c44e87b331cf.jpg"
     },
     {
       "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\ce0fc5bd-1c3f-4a13-822f-09568a4d323b.jpg",
@@ -372,6 +355,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\d1e70e62-b63b-45db-b60b-b3d4c3578321.jpeg"
+    },
+    {
+      "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\ec448dae-b3f6-46d2-b7cc-d6df6635a574.png",
+      "SourceId": "Delivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\",
+      "BasePath": "_content/Delivery",
+      "RelativePath": "imagenes/Comida/ec448dae-b3f6-46d2-b7cc-d6df6635a574.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\ec448dae-b3f6-46d2-b7cc-d6df6635a574.png"
     },
     {
       "Identity": "D:\\Sistema-Web-Delivery\\Delivery\\wwwroot\\js\\site.js",

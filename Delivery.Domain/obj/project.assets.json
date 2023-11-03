@@ -2886,8 +2886,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\UCLAB409\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\UCLAB309\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2895,15 +2894,11 @@
       "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
       "projectName": "Delivery.Domain",
       "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
-      "packagesPath": "C:\\Users\\UCLAB409\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\UCLAB309\\.nuget\\packages\\",
       "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\UCLAB409\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\UCLAB309\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

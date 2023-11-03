@@ -1,0 +1,235 @@
+﻿@using Delivery.Domain.Food
+@model IEnumerable<Comida>
+@{
+    var listaCategoria = Enum.GetValues(typeof(CategoriaComida)).Cast<CategoriaComida>().ToList();
+}
+<body>
+
+    <!--Pedidos-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="MostrarPedidos">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Pedido de: Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <p class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1">
+                            <a class="btn-close"></a> Comida 1 (Aún no registrada)
+                        </button>
+                    </p>
+                    <div id="flush-collapse1" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Con papas fritas <button type="button" class="btn-close" style="padding-top: 15px;"></button>
+                                </li>
+                                <li class="list-group-item">
+                                    Mostaza <button type="button" class="btn-close" style="padding-top: 15px;"></button>
+                                </li>
+                                <li class="list-group-item">
+                                    AJI <button type="button" class="btn-close" style="padding-top: 15px;"></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <a class="btn-close"></a> <strong>Comida 2</strong>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Con papas fritas</li>
+                                <li class="list-group-item">Mostaza</li>
+                                <li class="list-group-item">AJI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <a class="btn-close"></a> <strong>Salchipollo</strong>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Total:</th>
+                                <td>S/.XX</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row container">
+                <button class="btn btn-success">Guardar cambios</button>
+            </div>
+            <br>
+            <div class="row container">
+                <a class="btn btn-primary" href="../Pedidos/Crear un pedido.html">Realizar el pedido</a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--Body-->
+    <div class="container mt-3">
+        <h1>Menú del día</h1>
+        <div class="row container">
+            <div class="row mb-3">
+                <div class="col">
+                    <select class="form-select">
+                        <option disable selected hidden>Todo</option>
+                        @foreach (CategoriaComida item in listaCategoria)
+                        {
+                            <option value="@Convert.ToInt32(item)">@item.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <div class="col input-group">
+                    <input type="text" class="form-control" placeholder="Busqueda por nombre...">
+                    <button class="btn btn-light">Buscar</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+
+                    <button class="btn btn-primary" data-bs-toggle="offcanvas" href="#MostrarPedidos">
+                        Ver comidas registrados
+                    </button>
+
+                </div>
+            </div>
+
+            @if (Model.Count() > 0)
+            {
+                <div class="row">
+                    @foreach (Comida item in Model)
+                    {
+                        <div class="col-sm-6 mt-3">
+                            <div style="border-radius: 50px;" class="card">
+                                <svg style="border-top-left-radius: 50px; border-top-right-radius: 50px;" class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                    <defs>
+                                        <pattern id="imagen+@item.ID" width="100%" height="100%">
+                                            <image x="0" y="-50" width="100%" xlink:href="/imagenes/Comida/@item.Imagen" />
+                                        </pattern>
+                                    </defs>
+                                    <rect width="100%" height="100%" fill="url(#imagen+@item.ID)" />
+                                </svg>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        @item.Nombre
+                                    </h5>
+
+                                    <div class="mb-4 overflow-auto" style="height:90px">
+                                        <p class="card-text" style="text-align: justify">
+                                            @item.Descripcion
+                                        </p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <div class="input-group mb-3">
+                                                @*Pedir*@
+                                                <button type="button" data-id="@item.ID" class="btn btn-success pedir">Pedir</button>
+                                            </div>
+                                            <p class="form-text">Solo quedan @item.Stock platos disponibles</p>
+                                        </div>
+                                        <div class="col mb-3">
+                                            <div class="alert alert-success" role="alert">
+                                                <p style="text-align: center; height: 5px;">S/. @item.Precio</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-primary mt-5" role="alert">
+                    No se encontraron platos disponibles
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+
+    <!--navi-->
+    <div class="container" style="width: 300px;">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div id="contenedorElegirCaracteristica">
+        @await Html.PartialAsync("_ElegirCaracComida", new Comida());
+    </div>
+
+</body>
+
+@section Scripts{
+    <script>
+        $('.btn.btn-success.pedir').click(function(){
+            let idcomida = $(this).data("id");
+            console.log(idcomida);
+
+            $.ajax({
+                type: 'GET',
+                url: '/Comida/_ElegirCaracComida',
+                data: { id: idcomida },
+                dataType: 'html',
+                async: true,
+                success: function (result) {
+
+                    $('#contenedorElegirCaracteristica').html(result);
+                    $('#elegirCaracteristicaComida').modal('show');
+                }
+            });
+            
+            
+        });
+    </script>
+}

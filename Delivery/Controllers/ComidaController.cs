@@ -18,7 +18,28 @@ namespace Delivery.Controllers
             _comidaRepository = comidaRepository;
             _webHostEnvironment = webHostEnvironment;
         }
-        
+
+
+        public async Task<IActionResult> _ElegirCaracComida(int id = 0)
+        {
+            Comida comida = await _comidaRepository.ObtenerPorId(id);
+            ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasPorComidaID(id);
+            return PartialView(comida);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> VerMenu()
+        {
+            var listaComidas = await _comidaRepository.ObtenerComidas();
+            return View("VerMenu", listaComidas);
+        }
+
+
+        #region Editar Menú
+
+        //Vista de modificar el menú en general
+        //TODO: Agregar restricciones de roles
         public async Task<IActionResult> EditarMenu()
         {
             var comidas = await _comidaRepository.ObtenerComidas();
@@ -30,7 +51,7 @@ namespace Delivery.Controllers
 
 
 
-        //Vista parcial offcanvas
+        //Vista parcial offcanvas del editar menú
         public async Task<IActionResult> _ModificarComida(int id = 0)
         {
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
@@ -53,6 +74,8 @@ namespace Delivery.Controllers
         }
 
 
+
+        //Para editar el stock de la comida seleccionada
         public async Task<IActionResult> EditarStockComida(int idc, int nuevoStock)
         {
             Comida comida = await _comidaRepository.ObtenerPorId(idc);
@@ -62,6 +85,7 @@ namespace Delivery.Controllers
         }
 
 
+        //Para eliminar la comida seleccionada
         public async Task<IActionResult> EliminarComida(int idcomida)
         {
             Comida comida = await _comidaRepository.ObtenerPorId(idcomida);
@@ -69,6 +93,8 @@ namespace Delivery.Controllers
             return RedirectToAction("EditarMenu");
         }
 
+
+        //Para la acción de editar la comida seleccionada
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarComida(
@@ -110,6 +136,8 @@ namespace Delivery.Controllers
         }
 
 
+
+        //Para agregar la comida a la base de datos
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AgregarComida(
@@ -146,10 +174,11 @@ namespace Delivery.Controllers
             return View("EditarMenu", comidas);
         }
 
+        #endregion
 
-		#region CaracteristicasComida
+        #region CaracteristicasComida
 
-		public async Task<IActionResult> EditarCaracteristica(int id)
+        public async Task<IActionResult> EditarCaracteristica(int id)
         {
 			CaracteristicaComida cc = await _comidaRepository.ObtenerCaracteristicaPorID(id);
 			if (cc is not null) //Se encontró el elemento

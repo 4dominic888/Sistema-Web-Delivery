@@ -60,6 +60,8 @@
                                     @item.Descripcion
                                 </p>
                             </div>
+
+
                             <div class="row">
                                 <div class="col-9">
                                     <div class="input-group mb-3">
@@ -170,8 +172,9 @@
 
 @section Scripts{
     <script>
-        var listajax = []; //Lista de indices de las características
+        var listajax = []; //Lista de indices de las características por comida
 
+        //OnInit
         $(document).ready(function () {
             if("@ViewBag.modo" == "Crear"){
 
@@ -201,11 +204,13 @@
                 });
             }
 
+
+            //Actualizar stock
             $('.btn.btn-secondary.stock').click(function () {
                 let id = $(this).data("dataid");
                 let form = $(this).prev(".formstock");
                 let valStock = form.find('input[name = "nuevoStock"]').val();
-                if ((valStock < 0) || (valStock > 1000)) {
+                if ((valStock < 0) || (valStock > 899)) {
                     let toast = new bootstrap.Toast($('#toastContainer .toast:last'));
                     toast.show();
                 }
@@ -216,13 +221,14 @@
             });
         });
 
-        //Delete
+
+        //Delete jquery
         $('.btn.btn-danger.cerrar').click(function(){
             let idcomida = $(this).data("id");
             $('#eliminarComida').attr('value', idcomida);
         });
 
-        //Edit
+        //Edit jquery
         $('.btn.btn-primary').click(function () {
             let idcomida = $(this).data("id");
 
@@ -257,7 +263,7 @@
             });
         });
 
-        //Create
+        //Create jquery
         $('#Create').click(function () {
 
             $.ajax({
@@ -284,6 +290,9 @@
             });
         });
 
+
+
+        //Eliminar comida
         function EliminarCaracteristica(){
             let borrar = $(this).closest("li").find('a').data('id');
             listajax = listajax.filter(num => num != borrar);
@@ -291,6 +300,7 @@
             console.log(listajax);
         }
 
+        //Agregar caracteristicas dentro del off canvas
         function AgregarCaracteristicas(){
             let numero = $('#selectCaracteristica').val();
             if (numero == null) {
@@ -357,6 +367,7 @@
 
         }
 
+        //Agregar comida
         function submitFormAdd(evt) {
             //Validar categoria
             let num = $('#selectCategoria').val();
@@ -380,6 +391,7 @@
 
         }
         
+        //Editar comida
         function submitFormEdit(evt){
             //Validar categoria
             let num = $('#selectCategoria').val();

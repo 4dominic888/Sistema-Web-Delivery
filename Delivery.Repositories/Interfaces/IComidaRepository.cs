@@ -67,6 +67,8 @@ namespace Delivery.Repositories.Interfaces
 
         #endregion
 
+        #region Comida
+
 
         /// <summary>
         /// Agregar una comida a la base de datos
@@ -98,6 +100,11 @@ namespace Delivery.Repositories.Interfaces
         public Task<IEnumerable<Comida>> ObtenerComidas();
 
 
+        /// <summary>
+        /// Se elimina la comida en cascada
+        /// </summary>
+        /// <param name="comida"></param>
+        /// <returns></returns>
         public Task EliminarComida(Comida comida);
         
 
@@ -119,5 +126,7 @@ namespace Delivery.Repositories.Interfaces
         /// <param name="productURL">URL de la imagen a borrar</param>
         /// <param name="_webHostEnvironment"></param>
         public void EliminarImagen(string productURL, IWebHostEnvironment _webHostEnvironment);
+
+        #endregion
     }
 }

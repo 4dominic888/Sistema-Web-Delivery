@@ -24,6 +24,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXEVkaXRhck1lbnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Sistema-Web-Delivery/Delivery/Views/Comida/VerMenu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXFZlck1lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Sistema-Web-Delivery/Delivery/Views/Comida/_ElegirCaracComida.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXF9FbGVnaXJDYXJhY0NvbWlkYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Sistema-Web-Delivery/Delivery/Views/Comida/_ModificarComida.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXF9Nb2RpZmljYXJDb21pZGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

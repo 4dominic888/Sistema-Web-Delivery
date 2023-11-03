@@ -37,7 +37,7 @@ namespace Delivery.Domain.Food
 
 
         [Required, NotNull]
-        [Range(0, 900)]
+        [Range(0, 900, ErrorMessage = "El stock debe ser mayor a 0 y menor a 900")]
         public int Stock { get; set; }
 
 
