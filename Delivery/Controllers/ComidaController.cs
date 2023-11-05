@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Delivery.Controllers
 {
@@ -19,10 +20,17 @@ namespace Delivery.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        //Vista parcial para ver las comidas pedidas antes de hacer el envio
+        public async Task<IActionResult> _VerComidasPedido()
+        {   //Usar despues
+            //var lista = await _comidaRepository.DeserealizarJSONPedidoCliente(listaComidasPedido);
+            return PartialView();
+        }
 
+        //Vista parcial para elegir alguna característica de una comida
         public async Task<IActionResult> _ElegirCaracComida(int id = 0)
         {
-            ViewBag.a = await _comidaRepository.ObtenerCaracteristicasComidas();
+            await _comidaRepository.ObtenerCaracteristicasComidas();
             if (id is 0) return PartialView();
             else
             {
@@ -94,6 +102,7 @@ namespace Delivery.Controllers
         public async Task<IActionResult> EliminarComida(int idcomida)
         {
             Comida comida = await _comidaRepository.ObtenerPorId(idcomida);
+            _comidaRepository.EliminarImagen(comida.Imagen, _webHostEnvironment);
             await _comidaRepository.EliminarComida(comida);
             return RedirectToAction("EditarMenu");
         }

@@ -6,97 +6,8 @@
 <body>
 
     <!--Pedidos-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="MostrarPedidos">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Pedido de: Cliente</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-
-
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <p class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1">
-                            <a class="btn-close"></a> Comida 1 (Aún no registrada)
-                        </button>
-                    </p>
-                    <div id="flush-collapse1" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    Con papas fritas <button type="button" class="btn-close" style="padding-top: 15px;"></button>
-                                </li>
-                                <li class="list-group-item">
-                                    Mostaza <button type="button" class="btn-close" style="padding-top: 15px;"></button>
-                                </li>
-                                <li class="list-group-item">
-                                    AJI <button type="button" class="btn-close" style="padding-top: 15px;"></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapseOne">
-                            <a class="btn-close"></a> <strong>Comida 2</strong>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Con papas fritas</li>
-                                <li class="list-group-item">Mostaza</li>
-                                <li class="list-group-item">AJI</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapseOne">
-                            <a class="btn-close"></a> <strong>Salchipollo</strong>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>Total:</th>
-                                <td>S/.XX</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="row container">
-                <button class="btn btn-success">Guardar cambios</button>
-            </div>
-            <br>
-            <div class="row container">
-                <a class="btn btn-primary" href="../Pedidos/Crear un pedido.html">Realizar el pedido</a>
-            </div>
-
-
-        </div>
+    <div id="contenedorPedidosCliente">
+        @await Html.PartialAsync("_VerComidasPedido", Enumerable.Empty<Comida_CaracteristicaPedido>());
     </div>
 
     <!--Body-->
@@ -123,7 +34,7 @@
                 <div class="col">
 
 
-                    <button class="btn btn-primary" data-bs-toggle="offcanvas" href="#MostrarPedidos">
+                    <button class="btn btn-primary" id="VerComidasDelPedido" data-bs-toggle="offcanvas" href="#MostrarPedidos">
                         Ver comidas registrados
                     </button>
 
@@ -212,9 +123,13 @@
 
 @section Scripts{
     <script>
+
+        var listadoComidasPedir = {};
+
+        //Vista parcial para elegir caracteristicas
         $('.btn.btn-success.pedir').click(function(){
             let idcomida = $(this).data("id");
-            console.log(idcomida);
+            let listacaracteristicas = [];
 
             $.ajax({
                 type: 'GET',
@@ -226,14 +141,119 @@
 
                     $('#contenedorElegirCaracteristica').html(result);
                     $('#elegirCaracteristicaComida').modal('show');
+
+                    //Agregar caracteristica
+                    $('#Agregarcaracteristica').on('click', function () {
+
+                        let seleccion = $('#SeleccionarCaracteristicas').val();
+                        if (seleccion == null) {
+                            $('#validacionCaracteristicas').text('Necesita marcar una de las opciones');
+                            setTimeout(function () {
+                                $("#validacionCaracteristicas").fadeOut();
+                            }, 1500);
+                            setTimeout(function () {
+                                // Mostrar el elemento nuevamente
+                                $('#validacionCaracteristicas').text('');
+                                $("#validacionCaracteristicas").fadeIn();
+                            }, 1500);
+                        }
+                        else {
+                            let listado = $('#listadoCaracteristicas').find("li");
+                            $('#validacionCaracteristicas').text('');
+
+                            let valor = $('#SeleccionarCaracteristicas').find("option:selected").html();
+                            let valorRepetido = false;
+
+                            listacaracteristicas.forEach((x) => {
+                                if (x == seleccion) valorRepetido = true;
+                            });
+
+                            if (!valorRepetido) {
+                                let li = $('<li class="list-group-item border d-flex">  <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p> </li>');
+                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" ></button>');
+
+                                //Close button action
+                                buttonclose.on('click', function () {
+                                    let borrar = $(this).closest('li').find('button').data('id');
+                                    listacaracteristicas = listacaracteristicas.filter(x => x != borrar);
+                                    $(this).closest('li').remove();
+
+                                });
+
+                                li.append(buttonclose);
+                                $('#listadoCaracteristicas').append(li);
+
+                                listacaracteristicas.push(parseInt(seleccion));
+
+                            }
+                            else {
+                                $('#validacionCaracteristicas').text('Esta característica ya ha sido registrada');
+                                setTimeout(function () {
+                                    $("#validacionCaracteristicas").fadeOut();
+                                }, 1500);
+                                setTimeout(function () {
+                                    // Mostrar el elemento nuevamente
+                                    $('#validacionCaracteristicas').text('');
+                                    $("#validacionCaracteristicas").fadeIn();
+                                }, 1500);
+                            }
+                        }
+                    });
+
+                    $('#guardarpedido').on('click', function () {
+
+                        if (!listadoComidasPedir[idcomida]) {
+                            listadoComidasPedir[idcomida] = [listacaracteristicas];
+                        }
+                        else{
+                            listadoComidasPedir[idcomida].push(listacaracteristicas)
+                        }
+                        console.log(listadoComidasPedir);
+                    });
                 }
             });
-            
-            
         });
 
 
+        //Vista parcial para ver el estado del pedido
+        $('#VerComidasDelPedido').click(function () {
 
+            //let listadoJSON = JSON.stringify(listadoComidasPedir)
+
+            $.ajax({
+                type: 'GET',
+                url: '/Comida/_VerComidasPedido',
+                dataType: 'html',
+                async: true,
+                success: function (result) {
+                    let contenedor = $('#divpedidosregistrados');
+
+                    if (!(Object.keys(listadoComidasPedir).length === 0)) {
+                        let accordioninit = $(`
+                            <div class="accordion accordion-flush"> 
+                                <div class="accordion-item overflow-auto"></div>
+                            </div>
+                        `);
+
+                        let tituloAccordion = "";
+                        let contenedorCaracteristicas = "";
+                        let accordeonUL = "";
+                        let accordeonLI = "";
+                    }
+                    //No se ha pedido nada
+                    else{
+                        contenedor.html($(
+                            `<div class="alert alert-primary" role="alert">
+                                Aún no ha pedido platos por el momento
+                            </div>`
+                        ));
+                    }
+                    
+                }
+
+            });
+        });
+       
 
     </script>
 }

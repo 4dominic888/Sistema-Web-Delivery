@@ -7,6 +7,13 @@ namespace Delivery.Repositories.Interfaces
 {
 	public interface IComidaRepository : IRepositoryBase<Comida>
 	{
+        /// <summary>
+        /// Para convertir el JSON pasado de la vista al modelo establecido
+        /// </summary>
+        /// <param name="JSON">String JSON</param>
+        /// <returns></returns>
+        public Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON);
+
         #region Caracteristicas Comida
 
         /// <summary>

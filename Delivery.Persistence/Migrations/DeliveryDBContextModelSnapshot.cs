@@ -61,9 +61,6 @@ namespace Delivery.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("IdPedido")
-                        .HasColumnType("int");
-
                     b.Property<string>("Imagen")
                         .HasColumnType("nvarchar(max)");
 
@@ -83,12 +80,10 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("IdPedido");
-
                     b.ToTable("Comidas");
                 });
 
-            modelBuilder.Entity("Delivery.Domain.Food.Comida_Caracteristica", b =>
+            modelBuilder.Entity("Delivery.Domain.Food.Comida_CaracteristicaMenu", b =>
                 {
                     b.Property<int>("IdComida")
                         .HasColumnType("int");
@@ -100,7 +95,36 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasIndex("IdCaracteristicaComida");
 
-                    b.ToTable("Comida_Caracteristicas");
+                    b.ToTable("Comida_CaracteristicasMenu");
+                });
+
+            modelBuilder.Entity("Delivery.Domain.Food.Comida_CaracteristicaPedido", b =>
+                {
+                    b.Property<int>("IdComida")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdCaracteristicaComida")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdPedido")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PedidoCodigo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("agrupamiento")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdComida", "IdCaracteristicaComida");
+
+                    b.HasIndex("IdCaracteristicaComida");
+
+                    b.HasIndex("PedidoCodigo");
+
+                    b.ToTable("Comida_CaracteristicasPedido");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Direccion", b =>
@@ -263,6 +287,63 @@ namespace Delivery.Persistence.Migrations
                     b.ToTable("Administradores");
                 });
 
+            modelBuilder.Entity("Delivery.Domain.User.Chef", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ContenidoDestacado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DateBirth")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<bool>("Recomendaciones")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Rol")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Sexo")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Sueldo")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chefs");
+                });
+
             modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -377,25 +458,16 @@ namespace Delivery.Persistence.Migrations
                     b.ToTable("Repartidores");
                 });
 
-            modelBuilder.Entity("Delivery.Domain.Food.Comida", b =>
-                {
-                    b.HasOne("Delivery.Domain.Order.Pedido", "Pedido")
-                        .WithMany()
-                        .HasForeignKey("IdPedido");
-
-                    b.Navigation("Pedido");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.Food.Comida_Caracteristica", b =>
+            modelBuilder.Entity("Delivery.Domain.Food.Comida_CaracteristicaMenu", b =>
                 {
                     b.HasOne("Delivery.Domain.Food.CaracteristicaComida", "CaracteristicaComida")
-                        .WithMany("comida_Caracteristicas")
+                        .WithMany("comida_CaracteristicasMenu")
                         .HasForeignKey("IdCaracteristicaComida")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Delivery.Domain.Food.Comida", "Comida")
-                        .WithMany("comida_Caracteristicas")
+                        .WithMany("comida_CaracteristicasMenu")
                         .HasForeignKey("IdComida")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -403,6 +475,31 @@ namespace Delivery.Persistence.Migrations
                     b.Navigation("CaracteristicaComida");
 
                     b.Navigation("Comida");
+                });
+
+            modelBuilder.Entity("Delivery.Domain.Food.Comida_CaracteristicaPedido", b =>
+                {
+                    b.HasOne("Delivery.Domain.Food.CaracteristicaComida", "CaracteristicaComida")
+                        .WithMany("Comida_CaracteristicasPedido")
+                        .HasForeignKey("IdCaracteristicaComida")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Delivery.Domain.Food.Comida", "Comida")
+                        .WithMany("Comida_CaracteristicasPedido")
+                        .HasForeignKey("IdComida")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Delivery.Domain.Order.Pedido", "Pedido")
+                        .WithMany("Comida_CaracteristicasPedido")
+                        .HasForeignKey("PedidoCodigo");
+
+                    b.Navigation("CaracteristicaComida");
+
+                    b.Navigation("Comida");
+
+                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Pedido", b =>
@@ -440,12 +537,16 @@ namespace Delivery.Persistence.Migrations
 
             modelBuilder.Entity("Delivery.Domain.Food.CaracteristicaComida", b =>
                 {
-                    b.Navigation("comida_Caracteristicas");
+                    b.Navigation("Comida_CaracteristicasPedido");
+
+                    b.Navigation("comida_CaracteristicasMenu");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.Comida", b =>
                 {
-                    b.Navigation("comida_Caracteristicas");
+                    b.Navigation("Comida_CaracteristicasPedido");
+
+                    b.Navigation("comida_CaracteristicasMenu");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Direccion", b =>
@@ -456,6 +557,11 @@ namespace Delivery.Persistence.Migrations
             modelBuilder.Entity("Delivery.Domain.Order.MetodoPago", b =>
                 {
                     b.Navigation("Pedido");
+                });
+
+            modelBuilder.Entity("Delivery.Domain.Order.Pedido", b =>
+                {
+                    b.Navigation("Comida_CaracteristicasPedido");
                 });
 
             modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>

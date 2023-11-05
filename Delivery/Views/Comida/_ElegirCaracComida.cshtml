@@ -19,27 +19,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <span id="validacionCaracteristicas" class="alert-danger mb-2"></span>
                 <div class="col input-group">
-                    <select class="form-select">
+                    <select class="form-select" id="SeleccionarCaracteristicas">
                         <option class="overflow-auto" selected disabled hidden value="">Agrega características</option>
                         @foreach (var item in comidaCaracteristicas)
                         {
                             <option value="@item.Id" title="@item.Detalle">@item.Nombre</option>
                         }
                     </select>
-                    <button class="btn btn-secondary">Agregar</button>
+                    <button class="btn btn-secondary" id="Agregarcaracteristica">Agregar</button>
                 </div>
-                <ul class="list-group mt-3">
-                    <li class="list-group-item">An active item <button type="button" class="btn-close" style="padding-top: 15px;"></button> </li>
-                    <li class="list-group-item">A second item <button type="button" class="btn-close" style="padding-top: 15px;"></button> </li>
-                    <li class="list-group-item">A third item <button type="button" class="btn-close" style="padding-top: 15px;"></button> </li>
-                    <li class="list-group-item">A fourth item</li>
-                    <li class="list-group-item">And a fifth one</li>
+                <ul class="list-group mt-3 overflow-auto" id="listadoCaracteristicas">
+                    @* 
+                    <li class="list-group-item border d-flex">
+                        <p class="p-0 m-0 flex-grow-1 overflow-auto">
+                            An active item
+                        </p>
+                        <button type="button" class="btn-close quitar" data-id="num" ></button>
+                    </li>
+                    *@
                 </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="guardarpedido">Guardar</button>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@ namespace Delivery.Domain.Food
 
         [Required, NotNull]
         [DataType(DataType.Currency)]
-        [Range(0, 100)]
+        [Range(5, 100, ErrorMessage = "El precio no debe ser menor a S/. 5 ni mayor a S/. 100")]
         public float Precio { get; set; }
 
 
@@ -44,13 +44,7 @@ namespace Delivery.Domain.Food
         public string? Imagen { get; set; }
 
 
-        public int? IdPedido { get; set; }
-
-
-        [ForeignKey(nameof(IdPedido))]
-        public Pedido? Pedido { get; set; }
-
-        public List<Comida_Caracteristica>? comida_Caracteristicas { get; set; }
-
+        public List<Comida_CaracteristicaMenu>? comida_CaracteristicasMenu { get; set; }
+        public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
     }
 }

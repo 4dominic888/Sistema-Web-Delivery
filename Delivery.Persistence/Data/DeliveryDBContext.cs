@@ -10,7 +10,7 @@ namespace Delivery.Persistence.Data
     {
         public DeliveryDBContext(DbContextOptions<DeliveryDBContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +41,13 @@ namespace Delivery.Persistence.Data
                 a.Property(e => e.Phone).HasMaxLength(9);
             });
 
+            modelBuilder.Entity<Chef>(c =>
+            {
+                c.Property(e => e.DateBirth).HasColumnType("Date");
+                c.Property(e => e.Phone).HasMaxLength(9);
+            });
+
+
             modelBuilder.Entity<Comida>(c =>
             {
                 c.Property(e => e.Descripcion).HasColumnType("text");
@@ -69,18 +76,31 @@ namespace Delivery.Persistence.Data
                 p.Property(e => e.Detalle).HasColumnType("text");
             });
 
-            modelBuilder.Entity<Comida_Caracteristica>().HasKey(am => new
+
+            modelBuilder.Entity<Comida_CaracteristicaMenu>().HasKey(am => new
             {
                 am.IdComida,
                 am.IdCaracteristicaComida
             });
 
-            modelBuilder.Entity<Comida_Caracteristica>().HasOne(c => c.Comida).
-                WithMany(am => am.comida_Caracteristicas).HasForeignKey(c => c.IdComida);
+            modelBuilder.Entity<Comida_CaracteristicaMenu>().HasOne(c => c.Comida).
+                WithMany(am => am.comida_CaracteristicasMenu).HasForeignKey(c => c.IdComida);
 
-            modelBuilder.Entity<Comida_Caracteristica>().HasOne(c => c.CaracteristicaComida).
-                WithMany(am => am.comida_Caracteristicas).HasForeignKey(c => c.IdCaracteristicaComida);
+            modelBuilder.Entity<Comida_CaracteristicaMenu>().HasOne(c => c.CaracteristicaComida).
+                WithMany(am => am.comida_CaracteristicasMenu).HasForeignKey(c => c.IdCaracteristicaComida);
 
+
+            modelBuilder.Entity<Comida_CaracteristicaPedido>().HasKey(am => new
+            {
+                am.IdComida,
+                am.IdCaracteristicaComida,
+            });
+
+            modelBuilder.Entity<Comida_CaracteristicaPedido>().HasOne(c => c.Comida).
+                WithMany(am => am.Comida_CaracteristicasPedido).HasForeignKey(c => c.IdComida);
+
+            modelBuilder.Entity<Comida_CaracteristicaPedido>().HasOne(c => c.CaracteristicaComida).
+                WithMany(am => am.Comida_CaracteristicasPedido).HasForeignKey(c => c.IdCaracteristicaComida);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -94,7 +114,8 @@ namespace Delivery.Persistence.Data
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Comida> Comidas { get; set; }
         public DbSet<CaracteristicaComida> CaracteristicaComidas { get; set; }
-        public DbSet<Comida_Caracteristica> Comida_Caracteristicas { get; set; }
+        public DbSet<Comida_CaracteristicaMenu> Comida_CaracteristicasMenu { get; set; }
+        public DbSet<Comida_CaracteristicaPedido> Comida_CaracteristicasPedido { get; set; }
 
     }
 }

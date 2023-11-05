@@ -57,6 +57,6 @@ namespace Delivery.Domain.Order
         public MetodoPago MetodoPago { get; set; }
 
 
-        List<Comida> Comidas { get; set; }
+        public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
     }
 }

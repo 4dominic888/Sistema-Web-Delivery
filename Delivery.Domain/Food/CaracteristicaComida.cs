@@ -28,8 +28,8 @@ namespace Delivery.Domain.Food
         [DataType(DataType.Currency, ErrorMessage = "El precio es inválido")]
         public float Precio { get; set; }
 
-        
+        public List<Comida_CaracteristicaMenu>? comida_CaracteristicasMenu { get; set; }
 
-        public List<Comida_Caracteristica>? comida_Caracteristicas { get; set; }
+        public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
     }
 }

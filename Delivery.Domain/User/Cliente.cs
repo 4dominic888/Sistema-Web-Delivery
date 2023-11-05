@@ -8,6 +8,5 @@ namespace Delivery.Domain.User
     {
         public CategoriaComida PreferenciaCategoria { get; set;}
         public List<Pedido>? Pedidos { get; set; } = new List<Pedido>();
-
     }
 }

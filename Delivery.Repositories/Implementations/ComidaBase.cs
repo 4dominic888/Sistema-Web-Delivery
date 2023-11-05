@@ -4,6 +4,7 @@ using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace Delivery.Repositories.Implementations
@@ -14,6 +15,74 @@ namespace Delivery.Repositories.Implementations
         public ComidaBase(DeliveryDBContext context) : base(context)
         {
 			_Comidacontext = context;
+        }
+
+        public async Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON)
+        {
+            //Deserealizar el dato JSON
+            var listado = JsonConvert.DeserializeObject<Dictionary<int, List<int[]>>>(JSON);
+
+            if (listado.IsNullOrEmpty()) return new List<Comida_CaracteristicaPedido>();
+
+            //Inicializar el retorno
+            var retorno = new List<Comida_CaracteristicaPedido>();
+
+
+            //Inicialización de variables
+            int idComida = 0;
+            List<int[]> valores;
+            Comida comidaAux = new Comida();
+            CaracteristicaComida caracAux = new CaracteristicaComida();
+            Comida_CaracteristicaPedido comida_caractAux = new Comida_CaracteristicaPedido();
+
+            //Variable creada para separar comidas iguales con distintas caracteristicas
+            int idAgrupamiento = 1;
+
+            //Recorrer cada comida pedida
+            foreach(var kvp in listado)
+            {
+                idComida = kvp.Key;
+                valores = kvp.Value;
+
+                comidaAux = await _context.Comidas.Where(x => x.ID == idComida).FirstOrDefaultAsync();
+
+                //Recorrer listado de caracteristicas de comidas repetidas
+                foreach (int[] v in valores)
+                {
+                    //Si la comida elegida no tiene características
+                    if (v.IsNullOrEmpty())
+                    {
+                        comida_caractAux.IdComida = idComida;
+                        comida_caractAux.Comida = comidaAux;
+                        //TODO: Agregar id del cliente
+                        comida_caractAux.agrupamiento = idAgrupamiento;
+
+                        retorno.Add(comida_caractAux);
+                        comida_caractAux = new Comida_CaracteristicaPedido();
+                        idAgrupamiento++;
+                        continue;
+                    }
+
+                    //Agrega las caracteristicas una por una
+                    foreach (int idCaracteristica in v)
+                    {
+                        comida_caractAux.IdComida = idComida;
+                        comida_caractAux.Comida = comidaAux;
+                        comida_caractAux.IdCaracteristicaComida = idCaracteristica;
+                        comida_caractAux.CaracteristicaComida =
+                            await _context.CaracteristicaComidas.Where(x => x.Id == idCaracteristica).FirstOrDefaultAsync();
+                        //TODO: Agregar id del cliente
+                        comida_caractAux.agrupamiento = idAgrupamiento;
+
+                        retorno.Add(comida_caractAux);
+                        comida_caractAux = new Comida_CaracteristicaPedido();
+                    }
+
+                    idAgrupamiento++;
+                }
+            }
+
+            return retorno;
         }
 
 
@@ -40,8 +109,8 @@ namespace Delivery.Repositories.Implementations
 		{
             int id = caracteristicaComida.Id;
 
-            var listado = await _context.Comida_Caracteristicas.Where(x => x.IdCaracteristicaComida == id).ToListAsync();
-            _context.Comida_Caracteristicas.RemoveRange(listado);
+            var listado = await _context.Comida_CaracteristicasMenu.Where(x => x.IdCaracteristicaComida == id).ToListAsync();
+            _context.Comida_CaracteristicasMenu.RemoveRange(listado);
 
             _Comidacontext.CaracteristicaComidas.Remove(caracteristicaComida);
 			await _Comidacontext.SaveChangesAsync();
@@ -57,7 +126,7 @@ namespace Delivery.Repositories.Implementations
         public async Task<IEnumerable<CaracteristicaComida>> ObtenerCaracteristicasPorComidaID(int id)
         {
             List<CaracteristicaComida> listaIndices = new List<CaracteristicaComida>();
-            List<Comida_Caracteristica> listado = await _context.Comida_Caracteristicas.Where(x => x.IdComida == id).ToListAsync();
+            List<Comida_CaracteristicaMenu> listado = await _context.Comida_CaracteristicasMenu.Where(x => x.IdComida == id).ToListAsync();
             listado.ForEach(x =>
             {
                 listaIndices.Add(x.CaracteristicaComida);
@@ -66,7 +135,7 @@ namespace Delivery.Repositories.Implementations
         }
         public async Task AgregarRelacionCaracteristicaComida(int idComida, int idCaracteristica)
         {
-            await _context.Comida_Caracteristicas.AddAsync(new Comida_Caracteristica(idComida, idCaracteristica));
+            await _context.Comida_CaracteristicasMenu.AddAsync(new Comida_CaracteristicaMenu(idComida, idCaracteristica));
         }
 
         #endregion
@@ -89,9 +158,9 @@ namespace Delivery.Repositories.Implementations
         {
             _context.Comidas.Update(comida);
             var listaIndices = JsonConvert.DeserializeObject<List<int>>(listaIndicescara);
-            var listaIndicesBorrar = await _context.Comida_Caracteristicas.Where(x => x.IdComida == comida.ID).ToListAsync();
+            var listaIndicesBorrar = await _context.Comida_CaracteristicasMenu.Where(x => x.IdComida == comida.ID).ToListAsync();
 
-            _context.Comida_Caracteristicas.RemoveRange(listaIndicesBorrar); //Borrar registros previos
+            _context.Comida_CaracteristicasMenu.RemoveRange(listaIndicesBorrar); //Borrar registros previos
             foreach(var item in listaIndices)
             {
                 await AgregarRelacionCaracteristicaComida(comida.ID, item);
@@ -104,8 +173,8 @@ namespace Delivery.Repositories.Implementations
         }
         public async Task EliminarComida(Comida comida)
         {
-            var listaIndicesBorrar = await _context.Comida_Caracteristicas.Where(x => x.IdComida == comida.ID).ToListAsync();
-            _context.Comida_Caracteristicas.RemoveRange(listaIndicesBorrar);
+            var listaIndicesBorrar = await _context.Comida_CaracteristicasMenu.Where(x => x.IdComida == comida.ID).ToListAsync();
+            _context.Comida_CaracteristicasMenu.RemoveRange(listaIndicesBorrar);
 
             _context.Comidas.Remove(comida);
             await Guardar();

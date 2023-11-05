@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sistema-Web-Delivery\\Delivery\\Delivery.csproj": {}
+    "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\Delivery.csproj": {}
   },
   "projects": {
-    "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
+    "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
         "projectName": "Delivery.Domain",
-        "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
-        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
-        "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\obj\\",
+        "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj",
+        "packagesPath": "C:\\Users\\4dominic888\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\4dominic888\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,21 +77,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
+    "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
         "projectName": "Delivery.Persistence",
-        "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
-        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
-        "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\obj\\",
+        "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj",
+        "packagesPath": "C:\\Users\\4dominic888\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\4dominic888\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -105,8 +105,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
-                "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
+              "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
+                "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
               }
             }
           }
@@ -162,21 +162,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj": {
+    "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj",
         "projectName": "Delivery.Repositories",
-        "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj",
-        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
-        "outputPath": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\obj\\",
+        "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj",
+        "packagesPath": "C:\\Users\\4dominic888\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\4dominic888\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -190,11 +190,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
-                "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
+              "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
+                "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
               },
-              "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
-                "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj"
+              "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
+                "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj"
               }
             }
           }
@@ -257,21 +257,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Sistema-Web-Delivery\\Delivery\\Delivery.csproj": {
+    "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\Delivery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sistema-Web-Delivery\\Delivery\\Delivery.csproj",
+        "projectUniqueName": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\Delivery.csproj",
         "projectName": "Delivery",
-        "projectPath": "D:\\Sistema-Web-Delivery\\Delivery\\Delivery.csproj",
-        "packagesPath": "C:\\Users\\UCLAB804\\.nuget\\packages\\",
-        "outputPath": "D:\\Sistema-Web-Delivery\\Delivery\\obj\\",
+        "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\Delivery.csproj",
+        "packagesPath": "C:\\Users\\4dominic888\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UCLAB804\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\4dominic888\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -279,21 +279,20 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
-                "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
+              "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj": {
+                "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Domain\\Delivery.Domain.csproj"
               },
-              "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
-                "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj"
+              "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj": {
+                "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Persistence\\Delivery.Persistence.csproj"
               },
-              "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj": {
-                "projectPath": "D:\\Sistema-Web-Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj"
+              "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj": {
+                "projectPath": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery.Repositories\\Delivery.Repositories.csproj"
               }
             }
           }
@@ -360,7 +359,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
