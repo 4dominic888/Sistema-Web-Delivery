@@ -22,7 +22,7 @@ namespace Delivery.Controllers
 
         //Vista parcial para ver las comidas pedidas antes de hacer el envio
         public async Task<IActionResult> _VerComidasPedido()
-        {   //Usar despues
+        {   //Usar despues o en otro lado
             //var lista = await _comidaRepository.DeserealizarJSONPedidoCliente(listaComidasPedido);
             return PartialView();
         }

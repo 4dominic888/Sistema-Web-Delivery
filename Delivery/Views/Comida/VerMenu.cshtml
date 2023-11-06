@@ -7,7 +7,7 @@
 
     <!--Pedidos-->
     <div id="contenedorPedidosCliente">
-        @await Html.PartialAsync("_VerComidasPedido", Enumerable.Empty<Comida_CaracteristicaPedido>());
+        @await Html.PartialAsync("_VerComidasPedido");
     </div>
 
     <!--Body-->
@@ -72,7 +72,7 @@
                                         <div class="col-9">
                                             <div class="input-group mb-3">
                                                 @*Pedir*@
-                                                <button type="button" data-id="@item.ID" class="btn btn-success pedir">Pedir</button>
+                                                <button type="button" data-id="@item.ID" data-name="@item.Nombre" class="btn btn-success pedir">Pedir</button>
                                             </div>
                                             <p class="form-text">Solo quedan @item.Stock platos disponibles</p>
                                         </div>
@@ -125,11 +125,15 @@
     <script>
 
         var listadoComidasPedir = {};
+        var agrupacion = 1;
+        let contenedor = $('#divpedidosregistrados');
 
         //Vista parcial para elegir caracteristicas
         $('.btn.btn-success.pedir').click(function(){
             let idcomida = $(this).data("id");
+            let comidaName = $(this).data("name");
             let listacaracteristicas = [];
+            let listacaracteristicasNombre = [];
 
             $.ajax({
                 type: 'GET',
@@ -170,12 +174,14 @@
 
                             if (!valorRepetido) {
                                 let li = $('<li class="list-group-item border d-flex">  <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p> </li>');
-                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" ></button>');
+                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" data-name="'+ valor +'" ></button>');
 
                                 //Close button action
                                 buttonclose.on('click', function () {
                                     let borrar = $(this).closest('li').find('button').data('id');
+                                    let borrarNombre = $(this).closest('li').find('button').data('name');
                                     listacaracteristicas = listacaracteristicas.filter(x => x != borrar);
+                                    listacaracteristicasNombre = listacaracteristicasNombre.filter(x => x != a);
                                     $(this).closest('li').remove();
 
                                 });
@@ -184,6 +190,7 @@
                                 $('#listadoCaracteristicas').append(li);
 
                                 listacaracteristicas.push(parseInt(seleccion));
+                                listacaracteristicasNombre.push(valor);
 
                             }
                             else {
@@ -201,14 +208,79 @@
                     });
 
                     $('#guardarpedido').on('click', function () {
+                        //Quitar alert de no tener elementos
+                        if (Object.keys(listadoComidasPedir).length === 0) {
+                            $('#quitarAlert').remove();
+                        }
 
-                        if (!listadoComidasPedir[idcomida]) {
-                            listadoComidasPedir[idcomida] = [listacaracteristicas];
-                        }
-                        else{
-                            listadoComidasPedir[idcomida].push(listacaracteristicas)
-                        }
+                        listadoComidasPedir[agrupacion] = {};
+                        listadoComidasPedir[agrupacion][idcomida] = listacaracteristicas;
+
+                        let accordeonItem = $(`
+                        <div class="accordion">
+                            <div class="accordion-item overflow-auto"> </div>
+                        </div>`);
+
+                        let accordeonHeader = $(`
+                        <p class="accordion-header p-0 m-0 flex-grow-1 overflow-auto">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${agrupacion}">
+                                ${comidaName}
+                            </button>
+                        </p>`);
+
+                        let accordeonBody = $(`
+                        <div id="flush-collapse${agrupacion}" class="accordion-collapse collapse">
+                            <div class="accordion-body"> </div>
+                        </div>
+                        `);
+
+                        let accordeonList = $(`
+                            <ul class="list-group overflow-auto"> </ul>
+                        `);
+
+                        let accordeonListItem = "";
+
+                        let accordeonButtondelete = $(`
+                        <br>
+                        <div class="row">
+                            <button data-id="${agrupacion}" class="btn btn-danger borrarComida">
+                                Eliminar elemento
+                            </button>
+                        </div>
+                            
+                        `);
+
+                        accordeonButtondelete.find('.btn.btn-danger.borrarComida').on('click', function () {
+                            let numeroAgrupacionBorrar = $(this).data('id');
+                            delete listadoComidasPedir[numeroAgrupacionBorrar];
+                            accordeonItem.remove();
+                            console.log(listadoComidasPedir);
+                        });
+
+                        //Agregación
+                        //Para tener los items
+                        listacaracteristicasNombre.forEach((item) => {
+                            accordeonListItem = $(`
+                                <li class="list-group-item d-flex">
+                                    <p class="p-0 m-0 flex-grow-1 overflow-auto elementoLista">
+                                        ${item}
+                                    </p>
+                                </li>
+                            `);
+
+                            accordeonList.append(accordeonListItem);
+                        });
+
+                        accordeonBody.find('.accordion-body').append(accordeonList);
+                        accordeonBody.find('.accordion-body').append(accordeonButtondelete);
+
+                        accordeonItem.find('.accordion-item.overflow-auto').append(accordeonHeader);
+                        accordeonItem.find('.accordion-item.overflow-auto').append(accordeonBody);
+
+                        contenedor.append(accordeonItem);
+
                         console.log(listadoComidasPedir);
+                        agrupacion++;
                     });
                 }
             });
@@ -226,29 +298,7 @@
                 dataType: 'html',
                 async: true,
                 success: function (result) {
-                    let contenedor = $('#divpedidosregistrados');
-
-                    if (!(Object.keys(listadoComidasPedir).length === 0)) {
-                        let accordioninit = $(`
-                            <div class="accordion accordion-flush"> 
-                                <div class="accordion-item overflow-auto"></div>
-                            </div>
-                        `);
-
-                        let tituloAccordion = "";
-                        let contenedorCaracteristicas = "";
-                        let accordeonUL = "";
-                        let accordeonLI = "";
-                    }
-                    //No se ha pedido nada
-                    else{
-                        contenedor.html($(
-                            `<div class="alert alert-primary" role="alert">
-                                Aún no ha pedido platos por el momento
-                            </div>`
-                        ));
-                    }
-                    
+                    //Agregar boton 
                 }
 
             });

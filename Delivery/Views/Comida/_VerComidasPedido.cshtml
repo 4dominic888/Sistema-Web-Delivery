@@ -1,11 +1,4 @@
-﻿@using Delivery.Domain.Food;
-@model IEnumerable<Comida_CaracteristicaPedido>;
-
-@{
-
-}
-
-
+﻿
 <div class="offcanvas offcanvas-end" tabindex="-1" id="MostrarPedidos">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title">Pedido de: Cliente</h5>
@@ -13,7 +6,15 @@
     </div>
     <div class="offcanvas-body">
 
-        <div id="divpedidosregistrados"></div>
+        <div id="divpedidosregistrados">
+            <div class="alert alert-primary" role="alert" id="quitarAlert">
+                Aún no ha pedido platos por el momento
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
 
         @*
 
@@ -59,7 +60,7 @@
                     </div>
                 </div>
 
-
+            </div>
         </div>
 
         *@
