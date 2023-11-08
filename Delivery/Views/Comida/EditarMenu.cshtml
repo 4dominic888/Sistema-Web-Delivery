@@ -73,7 +73,7 @@
                                         </button>
                                         <form class="formstock">
                                             <input type="hidden", name="idc" value="@item.ID">
-                                            <input type="number" name="nuevoStock" value="@item.Stock" title="Stock" class="form-control" style="max-width:100px">
+                                            <input min="0" type="number" name="nuevoStock" value="@item.Stock" title="Stock" class="form-control" style="max-width:100px">
                                         </form>
                                         <button class="btn btn-secondary stock" data-dataid="@item.ID">
                                             <i class="fa-solid fa-floppy-disk"></i>

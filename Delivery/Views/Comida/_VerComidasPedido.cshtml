@@ -1,7 +1,23 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
+
+@{
+    string nombre = "No registrado";
+    string apellido = "_";
+    try
+    {
+        nombre = User.FindFirst("Nombre").Value;
+        apellido = User.FindFirst("Apellido").Value;
+    }
+    catch(NullReferenceException)
+    {
+        
+    }
+}
+
 <div class="offcanvas offcanvas-end" tabindex="-1" id="MostrarPedidos">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title">Pedido de: Cliente</h5>
+        <h5 class="offcanvas-title">Pedido de: @nombre @apellido</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -11,13 +27,7 @@
                 Aún no ha pedido platos por el momento
             </div>
         </div>
-
-        <div class="row">
-
-        </div>
-
         @*
-
         EJEMPLO ESTRUCTURA
 
         <div class="accordion accordion-flush">
@@ -73,7 +83,7 @@
                     <tbody>
                         <tr>
                             <th>Total:</th>
-                            <td>S/.XX</td>
+                            <td>S/. <p id="precioTotal" style="display:inline">0</p></td>
                         </tr>
                     </tbody>
                 </table>
@@ -82,7 +92,9 @@
 
         <br>
         <div class="row container">
-            <a class="btn btn-primary" href="#">Realizar el pedido</a>
+            <form id="formPedido">
+                <button class="btn btn-primary" href="#">Realizar el pedido</button>
+            </form>
         </div>
 
 

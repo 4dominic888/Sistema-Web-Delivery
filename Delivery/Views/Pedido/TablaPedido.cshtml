@@ -1,0 +1,153 @@
+﻿
+<div class="container mt-4">
+    <h3>Pedidos</h3>
+    <br>
+
+    <div class="row container">
+        <div class="row mb-3">
+            <div class="col">
+                <select class="form-select">
+                    <option selected>Pedidos recientes</option>
+                    <option value="1">Pedidos habilitados</option>
+                    <option value="2">Pedidos con mayor costo</option>
+                </select>
+            </div>
+            <div class="col input-group">
+                <input type="text" class="form-control" placeholder="Busqueda por cliente...">
+                <button class="btn btn-light">Buscar</button>
+            </div>
+        </div>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Código VC</th>
+                    <th scope="col">Detalle VC</th>
+                    <th scope="col">Estado VC</th>
+                    <th scope="col">Repartidor asignado VC</th>
+                    <th scope="col">Recibir pedido VA VR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <button class="btn btn-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Ver detalle</button>
+                    </td>
+                    <td>En curso...</td>
+                    <td>Nombre repartidor</td>
+                    <td>
+                        <button class="btn btn-primary">Acepta pedido</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container" style="width: 300px;">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--Mas info-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Pedidos de: Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Comida 1
+                        </button>
+                    </h2>
+                    <div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Con papas fritas</li>
+                                <li class="list-group-item">Mostaza</li>
+                                <li class="list-group-item">AJI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Comida 1
+                        </button>
+                    </h2>
+                    <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Con papas fritas</li>
+                                <li class="list-group-item">Mostaza</li>
+                                <li class="list-group-item">AJI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Comida 1
+                        </button>
+                    </h2>
+                    <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Con papas fritas</li>
+                                <li class="list-group-item">Mostaza</li>
+                                <li class="list-group-item">AJI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Dirección:</th>
+                                <td>Av cccccc N° 888</td>
+                            </tr>
+                            <tr>
+                                <th>Detalle:</th>
+                                <td>por la casa verde de 9 pisos</td>
+                            </tr>
+                            <tr>
+                                <th>Método de pago:</th>
+                                <td>Paypal</td>
+                            </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td>S/.XX</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

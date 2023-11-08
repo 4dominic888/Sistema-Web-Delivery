@@ -1,13 +1,28 @@
 ﻿@using Delivery.Domain.Food
+@using Microsoft.AspNetCore.Identity
 @model IEnumerable<Comida>
 @{
     var listaCategoria = Enum.GetValues(typeof(CategoriaComida)).Cast<CategoriaComida>().ToList();
 }
 <body>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <!--Pedidos-->
+        <div id="contenedorPedidosCliente">
+            @await Html.PartialAsync("_VerComidasPedido");
+        </div>
+    }
 
-    <!--Pedidos-->
-    <div id="contenedorPedidosCliente">
-        @await Html.PartialAsync("_VerComidasPedido");
+    <div id="pedidoRealizado" data-delay="500" style="position: absolute; top: 0; right: 0;">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Plato registrado</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                El plato ha sido registrado
+            </div>
+        </div>
     </div>
 
     <!--Body-->
@@ -33,10 +48,12 @@
             <div class="row">
                 <div class="col">
 
-
-                    <button class="btn btn-primary" id="VerComidasDelPedido" data-bs-toggle="offcanvas" href="#MostrarPedidos">
-                        Ver comidas registrados
-                    </button>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="btn btn-primary" id="VerComidasDelPedido" data-bs-toggle="offcanvas" href="#MostrarPedidos">
+                            Ver comidas registrados
+                        </button>
+                    }
 
                 </div>
             </div>
@@ -72,7 +89,14 @@
                                         <div class="col-9">
                                             <div class="input-group mb-3">
                                                 @*Pedir*@
-                                                <button type="button" data-id="@item.ID" data-name="@item.Nombre" class="btn btn-success pedir">Pedir</button>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <button type="button" data-id="@item.ID" data-name="@item.Nombre" data-price="@item.Precio" class="btn btn-success pedir">Pedir</button>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-success" asp-controller="Usuario" asp-action="Login">Pedir</a>
+                                                }
                                             </div>
                                             <p class="form-text">Solo quedan @item.Stock platos disponibles</p>
                                         </div>
@@ -132,8 +156,10 @@
         $('.btn.btn-success.pedir').click(function(){
             let idcomida = $(this).data("id");
             let comidaName = $(this).data("name");
+            let comidaPrice = $(this).data("price");
             let listacaracteristicas = [];
             let listacaracteristicasNombre = [];
+            let listacaracteristicasPrecio = [];
 
             $.ajax({
                 type: 'GET',
@@ -150,6 +176,7 @@
                     $('#Agregarcaracteristica').on('click', function () {
 
                         let seleccion = $('#SeleccionarCaracteristicas').val();
+                        //No se elige una caracteristica
                         if (seleccion == null) {
                             $('#validacionCaracteristicas').text('Necesita marcar una de las opciones');
                             setTimeout(function () {
@@ -161,27 +188,32 @@
                                 $("#validacionCaracteristicas").fadeIn();
                             }, 1500);
                         }
+                        //Se agrega la caracteristica correctamente
                         else {
                             let listado = $('#listadoCaracteristicas').find("li");
                             $('#validacionCaracteristicas').text('');
 
                             let valor = $('#SeleccionarCaracteristicas').find("option:selected").html();
+                            let precioCarac = $('#SeleccionarCaracteristicas').find("option:selected").data("price");
                             let valorRepetido = false;
 
                             listacaracteristicas.forEach((x) => {
                                 if (x == seleccion) valorRepetido = true;
                             });
 
+                            //Si se agrega un valor no repetido
                             if (!valorRepetido) {
-                                let li = $('<li class="list-group-item border d-flex">  <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p> </li>');
-                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" data-name="'+ valor +'" ></button>');
+                                let li = $('<li class="list-group-item border d-flex">  <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p>  <div class="form-text" style="display:inline">S/. ' + precioCarac + '</div>  </li>');
+                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" data-name="' + valor + '" data-price="' + precioCarac + '" ></button>');
 
                                 //Close button action
                                 buttonclose.on('click', function () {
                                     let borrar = $(this).closest('li').find('button').data('id');
                                     let borrarNombre = $(this).closest('li').find('button').data('name');
+                                    let borrarPrecio = $(this).closest('li').find('button').data('price');
                                     listacaracteristicas = listacaracteristicas.filter(x => x != borrar);
-                                    listacaracteristicasNombre = listacaracteristicasNombre.filter(x => x != a);
+                                    listacaracteristicasNombre = listacaracteristicasNombre.filter(x => x != borrarNombre);
+                                    listacaracteristicasPrecio = listacaracteristicasPrecio.filter(x => x != borrarPrecio);
                                     $(this).closest('li').remove();
 
                                 });
@@ -191,6 +223,7 @@
 
                                 listacaracteristicas.push(parseInt(seleccion));
                                 listacaracteristicasNombre.push(valor);
+                                listacaracteristicasPrecio.push(parseFloat(precioCarac));
 
                             }
                             else {
@@ -216,15 +249,30 @@
                         listadoComidasPedir[agrupacion] = {};
                         listadoComidasPedir[agrupacion][idcomida] = listacaracteristicas;
 
+                        //Sumar precios dinamicamente
+                        let anteriorPrecio = parseFloat($('#precioTotal').text());
+
+                        let precioComida = 0;
+                        listacaracteristicasPrecio.forEach((item) => {
+                            precioComida += item;
+                        });
+                        precioComida += parseFloat(comidaPrice);
+                        anteriorPrecio += precioComida;
+
+                        $('#precioTotal').text(anteriorPrecio);
+
                         let accordeonItem = $(`
-                        <div class="accordion">
+                        <div class="accordion" data-price="${precioComida}">
                             <div class="accordion-item overflow-auto"> </div>
                         </div>`);
+
+                        anteriorPrecio = 0;
 
                         let accordeonHeader = $(`
                         <p class="accordion-header p-0 m-0 flex-grow-1 overflow-auto">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${agrupacion}">
-                                ${comidaName}
+                                <p class="p-0 m-0 flex-grow-1 overflow-auto">${comidaName}</p>
+                                <div style="display:inline">S/. ${comidaPrice}</div>
                             </button>
                         </p>`);
 
@@ -253,23 +301,31 @@
                         accordeonButtondelete.find('.btn.btn-danger.borrarComida').on('click', function () {
                             let numeroAgrupacionBorrar = $(this).data('id');
                             delete listadoComidasPedir[numeroAgrupacionBorrar];
+                            let precioEliminar = parseFloat(accordeonItem.data("price"));
+                            let precioActual = parseFloat($('#precioTotal').text());
+                            console.log({ precioEliminar, precioActual });
+                            $('#precioTotal').text(precioActual - precioEliminar);
                             accordeonItem.remove();
                             console.log(listadoComidasPedir);
                         });
 
                         //Agregación
                         //Para tener los items
+                        let temp = 0;
                         listacaracteristicasNombre.forEach((item) => {
                             accordeonListItem = $(`
                                 <li class="list-group-item d-flex">
                                     <p class="p-0 m-0 flex-grow-1 overflow-auto elementoLista">
                                         ${item}
                                     </p>
+                                    <div class="form-text" style="display:inline">S/. ${listacaracteristicasPrecio[temp]}</div>
                                 </li>
                             `);
-
+                            temp++;
                             accordeonList.append(accordeonListItem);
                         });
+
+                        listacaracteristicasPrecio = [];
 
                         accordeonBody.find('.accordion-body').append(accordeonList);
                         accordeonBody.find('.accordion-body').append(accordeonButtondelete);
@@ -279,7 +335,9 @@
 
                         contenedor.append(accordeonItem);
 
-                        console.log(listadoComidasPedir);
+                        let toastPlato = new bootstrap.Toast($('#pedidoRealizado .toast:last'));
+                        toastPlato.show();
+
                         agrupacion++;
                     });
                 }

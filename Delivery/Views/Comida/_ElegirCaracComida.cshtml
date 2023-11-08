@@ -19,13 +19,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                @if (comidaCaracteristicas.Count() == 0)
+                {
+                    <div class="alert alert-primary" role="alert">
+                        @Model.Nombre no tiene características para agregar
+                    </div>
+                }
+                else{
                 <span id="validacionCaracteristicas" class="alert-danger mb-2"></span>
                 <div class="col input-group">
                     <select class="form-select" id="SeleccionarCaracteristicas">
                         <option class="overflow-auto" selected disabled hidden value="">Agrega características</option>
                         @foreach (var item in comidaCaracteristicas)
                         {
-                            <option value="@item.Id" title="@item.Detalle">@item.Nombre</option>
+                            <option value="@item.Id" title="@item.Detalle S/. @item.Precio" data-price="@item.Precio">@item.Nombre</option>
                         }
                     </select>
                     <button class="btn btn-secondary" id="Agregarcaracteristica">Agregar</button>
@@ -40,10 +47,11 @@
                     </li>
                     *@
                 </ul>
+                }
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="guardarpedido">Guardar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="guardarpedido">Pedir</button>
             </div>
         </div>
     </div>

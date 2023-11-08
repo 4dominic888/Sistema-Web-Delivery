@@ -4,7 +4,6 @@ using System.Diagnostics;
 
 
 using Microsoft.AspNetCore.Authorization;
-using Delivery.Domain.User;
 
 namespace Delivery.Controllers
 {

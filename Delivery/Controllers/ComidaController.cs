@@ -1,10 +1,7 @@
 ﻿using Delivery.Domain.Food;
 using Delivery.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting;
-using Newtonsoft.Json;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Delivery.Controllers
 {
@@ -20,14 +17,20 @@ namespace Delivery.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        public async Task<IActionResult> RealizarPedido(string listaComidasPedido, int idcliente)
+        {
+            var lista = await _comidaRepository.DeserealizarJSONPedidoCliente(listaComidasPedido, idcliente);
+            return RedirectToAction("Pedido", "CrearPedido", lista);
+        }
+
         //Vista parcial para ver las comidas pedidas antes de hacer el envio
         public async Task<IActionResult> _VerComidasPedido()
-        {   //Usar despues o en otro lado
-            //var lista = await _comidaRepository.DeserealizarJSONPedidoCliente(listaComidasPedido);
+        {   
             return PartialView();
         }
 
         //Vista parcial para elegir alguna característica de una comida
+        [Authorize(Roles = "Cliente")]
         public async Task<IActionResult> _ElegirCaracComida(int id = 0)
         {
             await _comidaRepository.ObtenerCaracteristicasComidas();
@@ -53,6 +56,7 @@ namespace Delivery.Controllers
 
         //Vista de modificar el menú en general
         //TODO: Agregar restricciones de roles
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> EditarMenu()
         {
             var comidas = await _comidaRepository.ObtenerComidas();
@@ -65,6 +69,7 @@ namespace Delivery.Controllers
 
 
         //Vista parcial offcanvas del editar menú
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> _ModificarComida(int id = 0)
         {
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
@@ -89,6 +94,7 @@ namespace Delivery.Controllers
 
 
         //Para editar el stock de la comida seleccionada
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> EditarStockComida(int idc, int nuevoStock)
         {
             Comida comida = await _comidaRepository.ObtenerPorId(idc);
@@ -99,6 +105,7 @@ namespace Delivery.Controllers
 
 
         //Para eliminar la comida seleccionada
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> EliminarComida(int idcomida)
         {
             Comida comida = await _comidaRepository.ObtenerPorId(idcomida);
@@ -111,6 +118,7 @@ namespace Delivery.Controllers
         //Para la acción de editar la comida seleccionada
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> EditarComida(
             [Bind("ID, Nombre", "Descripcion", "Categoria", "Precio",
             "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "", 
@@ -154,6 +162,7 @@ namespace Delivery.Controllers
         //Para agregar la comida a la base de datos
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> AgregarComida(
             [Bind("Nombre", "Descripcion", "Categoria", "Precio",
             "MenuDelDia", "Stock")] Comida comida, string listaIndicescarac = "")
@@ -191,7 +200,7 @@ namespace Delivery.Controllers
         #endregion
 
         #region CaracteristicasComida
-
+        [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> EditarCaracteristica(int id)
         {
 			CaracteristicaComida cc = await _comidaRepository.ObtenerCaracteristicaPorID(id);
@@ -202,7 +211,9 @@ namespace Delivery.Controllers
 			else return NotFound();
 
 		}
-		public async Task<IActionResult> EliminarCaracteristica(int id)
+
+        [Authorize(Roles = "Chef, Administrador")]
+        public async Task<IActionResult> EliminarCaracteristica(int id)
         {
             CaracteristicaComida cc = await _comidaRepository.ObtenerCaracteristicaPorID(id);
             if (cc is not null) //Se encontró el elemento
@@ -216,7 +227,8 @@ namespace Delivery.Controllers
         }
 
         //GET
-		public async Task<IActionResult> CaracteristicaComida(CaracteristicaComida cc = null)
+        [Authorize(Roles = "Chef, Administrador")]
+        public async Task<IActionResult> CaracteristicaComida(CaracteristicaComida cc = null)
         {
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
 			string estado = Request.Cookies["mensaje"];
@@ -241,7 +253,8 @@ namespace Delivery.Controllers
 
 
         [HttpPost]
-		public async Task<IActionResult> CaracteristicaComida(
+        [Authorize(Roles = "Chef, Administrador")]
+        public async Task<IActionResult> CaracteristicaComida(
             [Bind("Nombre, Detalle, Precio")] CaracteristicaComida caracteristica, int idc=0, string edit = "False")
         {
 			ViewBag.editable = edit; //Para que esté en un estado de editable o no editable

@@ -83,7 +83,7 @@
                                 <!--Telefono-->
                                 <span class="input-group-text"> <i class="fa-solid fa-phone"></i> </span>
                                 <div class="form-floating" style="width: 420px">
-                                    <input asp-for="Phone" id="inphone" type="tel" class="form-control" placeholder="telefono">
+                                    <input asp-for="Phone" id="inphone" type="tel" class="form-control" placeholder="telefono" maxlength="9">
                                     <label>Telefono</label>
                                     <div class="invalid-tooltip">
                                         <span asp-validation-for="Phone"></span>

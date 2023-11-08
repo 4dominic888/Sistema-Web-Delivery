@@ -22,6 +22,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioBase>();
 builder.Services.AddScoped<IComidaRepository, ComidaBase>();
+builder.Services.AddScoped<IPedidoRepository, PedidoBase>();
 
 
 var app = builder.Build();

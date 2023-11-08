@@ -17,69 +17,44 @@ namespace Delivery.Repositories.Implementations
 			_Comidacontext = context;
         }
 
-        public async Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON)
+        public async Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON, int IDCliente)
         {
             //Deserealizar el dato JSON
-            var listado = JsonConvert.DeserializeObject<Dictionary<int, List<int[]>>>(JSON);
+            var listado = JsonConvert.DeserializeObject< Dictionary<int, Dictionary<int, int[]>> >(JSON);
 
             if (listado.IsNullOrEmpty()) return new List<Comida_CaracteristicaPedido>();
 
             //Inicializar el retorno
             var retorno = new List<Comida_CaracteristicaPedido>();
 
-
-            //Inicialización de variables
-            int idComida = 0;
-            List<int[]> valores;
-            Comida comidaAux = new Comida();
-            CaracteristicaComida caracAux = new CaracteristicaComida();
-            Comida_CaracteristicaPedido comida_caractAux = new Comida_CaracteristicaPedido();
-
-            //Variable creada para separar comidas iguales con distintas caracteristicas
-            int idAgrupamiento = 1;
-
-            //Recorrer cada comida pedida
-            foreach(var kvp in listado)
+            //Variables auxiliares
+            var aux = new Comida_CaracteristicaPedido();
+            //Recorrer cada comida pedida agrupacion
+            foreach (var kvp in listado)
             {
-                idComida = kvp.Key;
-                valores = kvp.Value;
+                aux.agrupamiento = kvp.Key;
+                aux.IdCliente = IDCliente;
 
-                comidaAux = await _context.Comidas.Where(x => x.ID == idComida).FirstOrDefaultAsync();
-
-                //Recorrer listado de caracteristicas de comidas repetidas
-                foreach (int[] v in valores)
+                //Recorrer cada comida pedida idcomida
+                foreach(var item in kvp.Value)
                 {
-                    //Si la comida elegida no tiene características
-                    if (v.IsNullOrEmpty())
+                    aux.IdComida = item.Key;
+                    if(item.Value.Count() == 0)
                     {
-                        comida_caractAux.IdComida = idComida;
-                        comida_caractAux.Comida = comidaAux;
-                        //TODO: Agregar id del cliente
-                        comida_caractAux.agrupamiento = idAgrupamiento;
-
-                        retorno.Add(comida_caractAux);
-                        comida_caractAux = new Comida_CaracteristicaPedido();
-                        idAgrupamiento++;
-                        continue;
+                        aux.IdCaracteristicaComida = 0;
+                        retorno.Add(aux);
                     }
-
-                    //Agrega las caracteristicas una por una
-                    foreach (int idCaracteristica in v)
+                    else
                     {
-                        comida_caractAux.IdComida = idComida;
-                        comida_caractAux.Comida = comidaAux;
-                        comida_caractAux.IdCaracteristicaComida = idCaracteristica;
-                        comida_caractAux.CaracteristicaComida =
-                            await _context.CaracteristicaComidas.Where(x => x.Id == idCaracteristica).FirstOrDefaultAsync();
-                        //TODO: Agregar id del cliente
-                        comida_caractAux.agrupamiento = idAgrupamiento;
-
-                        retorno.Add(comida_caractAux);
-                        comida_caractAux = new Comida_CaracteristicaPedido();
+                        //Recorrer cada caracteristica de comida
+                        foreach (int carac in item.Value)
+                        {
+                            aux.IdCaracteristicaComida = carac;
+                            retorno.Add(aux);
+                        }
                     }
-
-                    idAgrupamiento++;
                 }
+                aux = new Comida_CaracteristicaPedido();
             }
 
             return retorno;

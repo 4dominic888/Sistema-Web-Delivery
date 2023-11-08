@@ -12,7 +12,7 @@ namespace Delivery.Repositories.Interfaces
         /// </summary>
         /// <param name="JSON">String JSON</param>
         /// <returns></returns>
-        public Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON);
+        public Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON, int IDCliente);
 
         #region Caracteristicas Comida
 

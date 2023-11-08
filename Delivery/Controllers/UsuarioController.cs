@@ -71,7 +71,7 @@ namespace Delivery.Controllers
             if(_usuario != null)
             {
                 var claims = new List<Claim> {
-                    new Claim(ClaimTypes.Name, _usuario.Name),
+                    new Claim("Nombre", _usuario.Name),
                     new Claim("Correo", _usuario.Email),
                     new Claim("ID", _usuario.Id.ToString()),
                     new Claim("Destacado", _usuario.ContenidoDestacado.ToString()),

@@ -1,0 +1,66 @@
+﻿<div class="container">
+
+    <form>
+    <div class="row">
+        <div class="container centrado mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mt-2">Registrar pedido</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h6>Ubicación</h6>
+                        <div class="col mt-2 mb-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Nombre de la calle" style="width: 500px;">
+                                <input min="0" type="number" class="form-control" placeholder="Número calle" style="width: 150px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-2">
+                            <textarea class="form-control" placeholder="Detalle" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row container">
+                    <h6>Método de pago</h6>
+                    <div class="col mb-3">
+                        <select class="form-select">
+                            <option selected disabled>Elegir método de pago</option>
+                            <option value="1">Tarjeta de crédito</option>
+                            <option value="2">Tarjeta de débito</option>
+                            <option value="3">Efectivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row container">
+                    <div class="col mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre de la tarjeta">
+                    </div>
+                    <div class="col mb-3">
+                        <input type="tel" maxlength="16" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" class="form-control" placeholder="Número de la tarjeta">
+                    </div>
+                </div>
+                <div class="row container">
+                    <div class="form-floating col col-5 mb-3">
+                        <input type="date" class="form-control" placeholder="Expiración">
+                        <label class="form-label">Fecha de expiración</label>
+                    </div>
+                    <div class="form-floating col col-2 mb-3">
+                        <input type="text" class="form-control" placeholder="CVV" maxlength="3" >
+                        <label>CVV</label>
+                    </div>
+                </div>
+
+                <div class="row container mb-3">
+                    <button type="submit" class="btn btn-success">Realizar el pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+</div>

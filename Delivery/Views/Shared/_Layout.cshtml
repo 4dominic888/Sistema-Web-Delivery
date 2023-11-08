@@ -36,15 +36,18 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Comida" asp-action="EditarMenu">Editar Menú</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Comida" asp-action="VerMenu">Ver Menú</a>
-                        </li>
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Chef"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Comida" asp-action="EditarMenu">Editar Menú</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Cliente"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Comida" asp-action="VerMenu">Ver Menú</a>
+                            </li>
+                        }
                     </ul>
                 </div>
 
