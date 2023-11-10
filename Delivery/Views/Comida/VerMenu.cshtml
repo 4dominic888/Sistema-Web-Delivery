@@ -3,6 +3,16 @@
 @model IEnumerable<Comida>
 @{
     var listaCategoria = Enum.GetValues(typeof(CategoriaComida)).Cast<CategoriaComida>().ToList();
+    int ID_Cliente = 0;
+
+    try
+    {
+        ID_Cliente = int.Parse(User.FindFirst("ID").Value);
+    }
+    catch (NullReferenceException)
+    {
+        
+    }
 }
 <body>
     @if (User.Identity.IsAuthenticated)
@@ -140,7 +150,7 @@
     </div>
     
     <div id="contenedorElegirCaracteristica">
-        @await Html.PartialAsync("_ElegirCaracComida", new Comida());
+        @await Html.PartialAsync("_ElegirCaracComida", new Comida())
     </div>
 
 </body>
@@ -149,8 +159,14 @@
     <script>
 
         var listadoComidasPedir = {};
+        let idCliente = @ID_Cliente;
         var agrupacion = 1;
         let contenedor = $('#divpedidosregistrados');
+
+        $('#formPedido').on('submit', function(evt){
+            $('#Order_param1').val(JSON.stringify(listadoComidasPedir));
+            $('#Order_param2').val(idCliente)
+        });
 
         //Vista parcial para elegir caracteristicas
         $('.btn.btn-success.pedir').click(function(){
@@ -243,7 +259,8 @@
                     $('#guardarpedido').on('click', function () {
                         //Quitar alert de no tener elementos
                         if (Object.keys(listadoComidasPedir).length === 0) {
-                            $('#quitarAlert').remove();
+                            $('#quitarAlert').hide();
+                            $('#butt_order_submit').prop('disabled', false);
                         }
 
                         listadoComidasPedir[agrupacion] = {};
@@ -306,7 +323,11 @@
                             console.log({ precioEliminar, precioActual });
                             $('#precioTotal').text(precioActual - precioEliminar);
                             accordeonItem.remove();
-                            console.log(listadoComidasPedir);
+
+                            if (Object.keys(listadoComidasPedir).length === 0) {
+                                $('#quitarAlert').show();
+                                $('#butt_order_submit').prop('disabled', true);
+                            }
                         });
 
                         //Agregación

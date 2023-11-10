@@ -17,7 +17,7 @@ namespace Delivery.Repositories.Implementations
 			_Comidacontext = context;
         }
 
-        public async Task<List<Comida_CaracteristicaPedido>> DeserealizarJSONPedidoCliente(string JSON, int IDCliente)
+        public List<Comida_CaracteristicaPedido> DeserealizarJSONPedidoCliente(string JSON, int IDCliente)
         {
             //Deserealizar el dato JSON
             var listado = JsonConvert.DeserializeObject< Dictionary<int, Dictionary<int, int[]>> >(JSON);
@@ -28,33 +28,35 @@ namespace Delivery.Repositories.Implementations
             var retorno = new List<Comida_CaracteristicaPedido>();
 
             //Variables auxiliares
-            var aux = new Comida_CaracteristicaPedido();
+            int agrupamiento;
+            int IdCliente;
+            int IdComida;
+
             //Recorrer cada comida pedida agrupacion
             foreach (var kvp in listado)
             {
-                aux.agrupamiento = kvp.Key;
-                aux.IdCliente = IDCliente;
+                agrupamiento = kvp.Key;
+                IdCliente = IDCliente;
 
                 //Recorrer cada comida pedida idcomida
                 foreach(var item in kvp.Value)
                 {
-                    aux.IdComida = item.Key;
-                    if(item.Value.Count() == 0)
+                    IdComida = item.Key;
+                    if(item.Value.Length == 0)
                     {
-                        aux.IdCaracteristicaComida = 0;
-                        retorno.Add(aux);
+                        retorno.Add(new Comida_CaracteristicaPedido(
+                            IdComida, 0, IdCliente, agrupamiento));
                     }
                     else
                     {
                         //Recorrer cada caracteristica de comida
                         foreach (int carac in item.Value)
                         {
-                            aux.IdCaracteristicaComida = carac;
-                            retorno.Add(aux);
+                            retorno.Add(new Comida_CaracteristicaPedido(
+                                IdComida, carac, IdCliente, agrupamiento));
                         }
                     }
                 }
-                aux = new Comida_CaracteristicaPedido();
             }
 
             return retorno;

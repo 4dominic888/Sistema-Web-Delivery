@@ -17,10 +17,11 @@ namespace Delivery.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> RealizarPedido(string listaComidasPedido, int idcliente)
+        public async Task<IActionResult> RealizarPedido(string listaComidasPedido, string idcliente)
         {
-            var lista = await _comidaRepository.DeserealizarJSONPedidoCliente(listaComidasPedido, idcliente);
-            return RedirectToAction("Pedido", "CrearPedido", lista);
+            TempData["lista"] = listaComidasPedido;
+            TempData["idCliente"] = idcliente;
+            return RedirectToAction("CrearPedido", "Pedido");
         }
 
         //Vista parcial para ver las comidas pedidas antes de hacer el envio

@@ -7,6 +7,16 @@ namespace Delivery.Domain.Food
     {
         public Comida_CaracteristicaPedido() { }
 
+        public Comida_CaracteristicaPedido(int IdComida, 
+            int IdCaracteristicaComida,
+            int IdCliente, int agrupamiento)
+        {
+            this.IdComida = IdComida;
+            this.IdCaracteristicaComida = IdCaracteristicaComida;
+            this.IdCliente = IdCliente;
+            this.agrupamiento = agrupamiento;
+        }
+
         public int IdComida { get; set; }
         public Comida? Comida { get; set; }
         public int? IdCaracteristicaComida { get; set; }
