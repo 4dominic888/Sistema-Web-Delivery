@@ -38,7 +38,7 @@
     <!--Body-->
     <div class="container mt-3">
         <h1>Menú del día</h1>
-        <div class="row container">
+        <div id="container_Menu" class="row container">
             <div class="row mb-3">
                 <div class="col">
                     <select class="form-select">
@@ -86,7 +86,7 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        @item.Nombre
+                                        <strong>@item.Nombre</strong>
                                     </h5>
 
                                     <div class="mb-4 overflow-auto" style="height:90px">
@@ -165,7 +165,9 @@
 
         $('#formPedido').on('submit', function(evt){
             $('#Order_param1').val(JSON.stringify(listadoComidasPedir));
-            $('#Order_param2').val(idCliente)
+            $('#Order_param2').val(idCliente);
+            let precioFinal = parseFloat($('#precioTotal').text());
+            $('#pasar_precio').val(precioFinal);
         });
 
         //Vista parcial para elegir caracteristicas
@@ -211,14 +213,11 @@
 
                             let valor = $('#SeleccionarCaracteristicas').find("option:selected").html();
                             let precioCarac = $('#SeleccionarCaracteristicas').find("option:selected").data("price");
-                            let valorRepetido = false;
 
-                            listacaracteristicas.forEach((x) => {
-                                if (x == seleccion) valorRepetido = true;
-                            });
+
 
                             //Si se agrega un valor no repetido
-                            if (!valorRepetido) {
+                            if ($('#listadoCaracteristicas').find("li").length < 10) {
                                 let li = $('<li class="list-group-item border d-flex">  <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p>  <div class="form-text" style="display:inline">S/. ' + precioCarac + '</div>  </li>');
                                 let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" data-name="' + valor + '" data-price="' + precioCarac + '" ></button>');
 
@@ -239,11 +238,10 @@
 
                                 listacaracteristicas.push(parseInt(seleccion));
                                 listacaracteristicasNombre.push(valor);
-                                listacaracteristicasPrecio.push(parseFloat(precioCarac));
-
+                                listacaracteristicasPrecio.push(precioCarac);
                             }
                             else {
-                                $('#validacionCaracteristicas').text('Esta característica ya ha sido registrada');
+                                $('#validacionCaracteristicas').text('Ya no puedes agregar más características');
                                 setTimeout(function () {
                                     $("#validacionCaracteristicas").fadeOut();
                                 }, 1500);
@@ -269,9 +267,10 @@
                         //Sumar precios dinamicamente
                         let anteriorPrecio = parseFloat($('#precioTotal').text());
 
-                        let precioComida = 0;
+
+                        let precioComida = 0.0;
                         listacaracteristicasPrecio.forEach((item) => {
-                            precioComida += item;
+                            precioComida += parseFloat(item.toString().replace(',', '.'));
                         });
                         precioComida += parseFloat(comidaPrice);
                         anteriorPrecio += precioComida;

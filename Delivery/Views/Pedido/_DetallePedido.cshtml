@@ -1,0 +1,120 @@
+﻿@using Delivery.Domain.Order
+@using Delivery.Domain.Food
+@model IEnumerable<Comida_CaracteristicaPedido>
+
+@{
+    Pedido pedido = new Pedido();
+    var listado_comida_pedido = new Dictionary<int, Comida>();
+    if(Model.Count() > 0)
+    {
+        pedido = ViewBag.pedido;
+
+        int aux = 0;
+        var comidaAux = new Comida();
+        var enum_aux = Enumerable.Empty<Comida_CaracteristicaPedido>();
+
+        foreach (var item in Model)
+        {
+            //Comida pedida nueva
+            if (aux != item.agrupamiento)
+            {
+                enum_aux = Model.Where(x => x.agrupamiento == item.agrupamiento).ToList();
+                comidaAux = item.Comida;
+                comidaAux.Comida_CaracteristicasPedido = Model.Where(c => c.agrupamiento == item.agrupamiento).ToList();
+                listado_comida_pedido.Add(item.agrupamiento, new Comida(comidaAux));
+            }
+            else continue;
+            aux = item.agrupamiento;
+        }
+    }
+
+}
+
+@if (Model.Count() > 0)
+{
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_detalle" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Pedido de: @pedido.Cliente.Name @pedido.Cliente.Surname </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+
+            @foreach (var item in listado_comida_pedido)
+            {
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_@item.Key" aria-expanded="false" aria-controls="flush-collapseOne">
+                                @item.Value.Nombre
+                            </button>
+                        </h2>
+                        <div id="flush-collapse_@item.Key" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    @foreach (var c in item.Value.Comida_CaracteristicasPedido)
+                                    {
+                                        if(c.caracteristicaComida is not null)
+                                        {
+                                            <li class="list-group-item">@c.caracteristicaComida.Nombre</li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            <hr>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Dirección:</th>
+                                <td>
+                                    @pedido.Direccion.Nombre_Calle N° @pedido.Direccion.Numero
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Detalle de la dirección</th>
+                                @if (pedido.Direccion.Detalle is not null)
+                                {
+                                    <td>@pedido.Direccion.Detalle</td>
+                                }
+                                else
+                                {
+                                    <td>No especificado</td>
+                                }
+                            </tr>
+                            <tr>
+                                <th>Teléfono</th>
+                                <td>@pedido.Cliente.Phone</td>
+                            </tr>
+
+                            <tr>
+                                <th>Método de pago</th>
+                                @if(pedido.MetodoPago is not null)
+                                {
+                                    <td>@pedido.MetodoPago.Tipo</td>
+                                }
+                                else
+                                {
+                                    <td>En efectivo</td>
+                                }
+                            </tr>
+                            <tr>
+                                <th>Total a pagar</th>
+                                <td>S/. @pedido.Total</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}

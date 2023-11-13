@@ -71,5 +71,10 @@ namespace Delivery.Repositories.Implementations
         {
             return await _context.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
         }
+
+        public async Task<Repartidor> BuscarRepartidorID(int? id)
+        {
+            return await _context.Repartidores.Where(r => r.Id == id).FirstOrDefaultAsync();
+        }
     }
 }

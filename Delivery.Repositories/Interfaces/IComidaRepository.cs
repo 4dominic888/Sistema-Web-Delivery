@@ -14,6 +14,14 @@ namespace Delivery.Repositories.Interfaces
         /// <returns></returns>
         public List<Comida_CaracteristicaPedido> DeserealizarJSONPedidoCliente(string JSON, int IDCliente);
 
+
+        /// <summary>
+        /// Para poder agregar en rango las comidas pedidas por el usuario
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <returns></returns>
+        public Task Registrar_Comidas_Pedido(List<Comida_CaracteristicaPedido> lista);
+
         #region Caracteristicas Comida
 
         /// <summary>

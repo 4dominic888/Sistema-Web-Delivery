@@ -36,7 +36,7 @@ namespace Delivery.Domain.Order
         public string? Detalle { get; set; }
 
         public int IdDireccion { get; set; }
-        public int IdMetodoPago { get; set; }
+        public int? IdMetodoPago { get; set; }
 
         [NotNull]
         public int IdCliente { get; set; }
@@ -54,7 +54,7 @@ namespace Delivery.Domain.Order
 
 
         [ForeignKey(nameof(IdMetodoPago))]
-        public MetodoPago MetodoPago { get; set; }
+        public MetodoPago? MetodoPago { get; set; }
 
 
         public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }

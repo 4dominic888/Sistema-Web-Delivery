@@ -9,6 +9,7 @@ namespace Delivery.Repositories.Interfaces
         Task<Usuario> ValidarUsuario(string correo, string password);
         Task RegistrarCliente(Cliente cliente);
         Task<Cliente> BuscarClienteID(int id);
+        Task<Repartidor> BuscarRepartidorID(int? id);
         string EncriptarSHA256(string password);
     }
 }

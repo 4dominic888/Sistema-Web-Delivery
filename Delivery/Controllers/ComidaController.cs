@@ -17,10 +17,13 @@ namespace Delivery.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> RealizarPedido(string listaComidasPedido, string idcliente)
+        #region VerMenu
+
+        public async Task<IActionResult> RealizarPedido(string listaComidasPedido, string idcliente, string precio)
         {
             TempData["lista"] = listaComidasPedido;
             TempData["idCliente"] = idcliente;
+            TempData["PrecioTotal"] = precio;
             return RedirectToAction("CrearPedido", "Pedido");
         }
 
@@ -52,6 +55,7 @@ namespace Delivery.Controllers
             return View("VerMenu", listaComidas);
         }
 
+        #endregion
 
         #region Editar Menú
 

@@ -17,6 +17,12 @@ namespace Delivery.Repositories.Implementations
 			_Comidacontext = context;
         }
 
+        public async Task Registrar_Comidas_Pedido(List<Comida_CaracteristicaPedido> lista)
+        {
+            _context.Comida_CaracteristicasPedido.AddRange(lista);
+            await Guardar();
+        }
+
         public List<Comida_CaracteristicaPedido> DeserealizarJSONPedidoCliente(string JSON, int IDCliente)
         {
             //Deserealizar el dato JSON

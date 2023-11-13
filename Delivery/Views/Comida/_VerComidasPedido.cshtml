@@ -93,6 +93,7 @@
         <br>
         <div class="row container">
             <form id="formPedido" method="post" asp-action="RealizarPedido">
+                <input type="hidden" name="precio" id="pasar_precio"/>
                 <input type="hidden" name="listaComidasPedido" id="Order_param1" />
                 <input type="hidden" name="idcliente" id="Order_param2" />
                 <button disabled id="butt_order_submit" class="btn btn-primary" type="submit">Realizar el pedido</button>

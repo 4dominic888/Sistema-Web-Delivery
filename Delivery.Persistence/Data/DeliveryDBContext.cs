@@ -90,18 +90,6 @@ namespace Delivery.Persistence.Data
                 WithMany(am => am.comida_CaracteristicasMenu).HasForeignKey(c => c.IdCaracteristicaComida);
 
 
-            modelBuilder.Entity<Comida_CaracteristicaPedido>().HasKey(am => new
-            {
-                am.IdComida,
-                am.IdCaracteristicaComida,
-            });
-
-            modelBuilder.Entity<Comida_CaracteristicaPedido>().HasOne(c => c.Comida).
-                WithMany(am => am.Comida_CaracteristicasPedido).HasForeignKey(c => c.IdComida);
-
-            modelBuilder.Entity<Comida_CaracteristicaPedido>().HasOne(c => c.CaracteristicaComida).
-                WithMany(am => am.Comida_CaracteristicasPedido).HasForeignKey(c => c.IdCaracteristicaComida);
-
             base.OnModelCreating(modelBuilder);
         }
 

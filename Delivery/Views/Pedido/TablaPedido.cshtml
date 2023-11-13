@@ -1,153 +1,105 @@
-﻿
+﻿@using Delivery.Domain.Order
+@using Delivery.Domain.Food
+@model IEnumerable<Pedido>
+@{
+
+}
+
 <div class="container mt-4">
     <h3>Pedidos</h3>
     <br>
 
     <div class="row container">
-        <div class="row mb-3">
-            <div class="col">
-                <select class="form-select">
-                    <option selected>Pedidos recientes</option>
-                    <option value="1">Pedidos habilitados</option>
-                    <option value="2">Pedidos con mayor costo</option>
-                </select>
-            </div>
-            <div class="col input-group">
-                <input type="text" class="form-control" placeholder="Busqueda por cliente...">
-                <button class="btn btn-light">Buscar</button>
-            </div>
-        </div>
 
+        @if (Model.Count() > 0)
+        {
+            <table id="tabla_pedidos" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Repartidor asignado</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Código VC</th>
-                    <th scope="col">Detalle VC</th>
-                    <th scope="col">Estado VC</th>
-                    <th scope="col">Repartidor asignado VC</th>
-                    <th scope="col">Recibir pedido VA VR</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <button class="btn btn-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Ver detalle</button>
-                    </td>
-                    <td>En curso...</td>
-                    <td>Nombre repartidor</td>
-                    <td>
-                        <button class="btn btn-primary">Acepta pedido</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    @{
+
+                    }
+
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.Codigo</th>
+                            <td>
+                                <button class="btn btn-dark detalle" data-id="@item.Codigo">Ver detalle</button>
+                            </td>
+
+                            @if(item.Estado == EstadoPedido.En_Proceso)
+                            {
+                                <td>En proceso</td>
+                            }
+                            else
+                            {
+                                <td>@item.Estado</td>
+                            }
+                            @if (item.IdRepartidor is null)
+                            {
+                                <td>No asignado</td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @item.Repartidor.Name
+                                </td>
+                            }
+                            <td>
+                                <button class="btn btn-danger">Cancelar pedido</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else{
+            <div class="alert alert-primary" role="alert">
+                No tiene ningún pedido en el historial
+            </div>
+        }
     </div>
 
-    <div class="container" style="width: 300px;">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+    <div id="contenedor_detalle">
+        @await Html.PartialAsync("_DetallePedido", Enumerable.Empty<Comida_CaracteristicaPedido>())
     </div>
 
-    <!--Mas info-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">Pedidos de: Cliente</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-
-
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Comida 1
-                        </button>
-                    </h2>
-                    <div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Con papas fritas</li>
-                                <li class="list-group-item">Mostaza</li>
-                                <li class="list-group-item">AJI</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Comida 1
-                        </button>
-                    </h2>
-                    <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Con papas fritas</li>
-                                <li class="list-group-item">Mostaza</li>
-                                <li class="list-group-item">AJI</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Comida 1
-                        </button>
-                    </h2>
-                    <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Con papas fritas</li>
-                                <li class="list-group-item">Mostaza</li>
-                                <li class="list-group-item">AJI</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <th>Dirección:</th>
-                                <td>Av cccccc N° 888</td>
-                            </tr>
-                            <tr>
-                                <th>Detalle:</th>
-                                <td>por la casa verde de 9 pisos</td>
-                            </tr>
-                            <tr>
-                                <th>Método de pago:</th>
-                                <td>Paypal</td>
-                            </tr>
-                            <tr>
-                                <th>Total:</th>
-                                <td>S/.XX</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </div>
+
+@section Scripts{
+    <script>
+        $("#tabla_pedidos").DataTable({
+            "language":{
+                url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
+            }
+        });
+
+        $('.btn.btn-dark.detalle').on("click", function(){
+            let valor = $(this).data("id");
+
+            $.ajax({
+                type: 'GET',
+                url: '/Pedido/_DetallePedido',
+                data: { id: valor },
+                dataType: 'html',
+                async: true,
+                success: function (result) {
+                    $('#contenedor_detalle').html(result);
+                    $('#formulario').attr("action", "/Comida/EditarComida");
+                    $('#offcanvas_detalle').offcanvas('show');
+                }
+            });
+        });
+
+    </script>
+}

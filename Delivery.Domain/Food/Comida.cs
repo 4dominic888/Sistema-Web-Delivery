@@ -8,6 +8,27 @@ namespace Delivery.Domain.Food
 {
     public class Comida
     {
+
+        public Comida()
+        {
+            
+        }
+
+        public Comida(Comida comida)
+        {
+            ID = comida.ID;
+            Nombre = comida.Nombre;
+            Descripcion = comida.Descripcion;
+            Categoria = comida.Categoria;
+            Precio = comida.Precio;
+            MenuDelDia = comida.MenuDelDia;
+            Stock = comida.Stock;
+            Imagen = comida.Imagen;
+            comida_CaracteristicasMenu = comida.comida_CaracteristicasMenu;
+            Comida_CaracteristicasPedido = comida.Comida_CaracteristicasPedido;
+
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
@@ -46,5 +67,6 @@ namespace Delivery.Domain.Food
 
         public List<Comida_CaracteristicaMenu>? comida_CaracteristicasMenu { get; set; }
         public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
+
     }
 }

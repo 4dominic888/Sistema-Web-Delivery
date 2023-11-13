@@ -1,4 +1,5 @@
-﻿using Delivery.Domain.User;
+﻿using Delivery.Domain.Food;
+using Delivery.Domain.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +31,7 @@ namespace Delivery.Persistence.Data
                         }
                     });
                 }
+
                 context.SaveChanges();
             }
 
