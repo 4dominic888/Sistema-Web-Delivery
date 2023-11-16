@@ -3,6 +3,7 @@ namespace Delivery.Domain.User
 {
     public class Chef : Usuario
     {
-        public float Sueldo { get; set; }
+        public Chef(Usuario usuario) : base(usuario) { }
+        public Chef() { }
     }
 }

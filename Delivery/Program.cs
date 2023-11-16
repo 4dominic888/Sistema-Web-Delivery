@@ -12,6 +12,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.LoginPath = new PathString("/Usuario/Login");
         option.ExpireTimeSpan = TimeSpan.FromDays(1);
         option.LogoutPath = new PathString("/Usuario/Login");
+        option.AccessDeniedPath = new PathString("/Home/Index");
     });
 
 builder.Services.AddDbContext<DeliveryDBContext>(options => 

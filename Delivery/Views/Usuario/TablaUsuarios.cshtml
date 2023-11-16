@@ -1,0 +1,99 @@
+﻿@using Delivery.Domain.Auxiliares
+@using Delivery.Domain.User
+@{
+    var lista = ViewBag.usuarios;
+    string tipo = ViewBag.tipo;
+}
+
+
+<body>
+    <div class="container mt-5">
+
+        <h3>Panel de administración de usuarios</h3>
+
+        <div class="row">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" id="tcliente" asp-action="TablaUsuarios" asp-route-tipo="cliente">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="trepartidor" asp-action="TablaUsuarios" asp-route-tipo="repartidor">Repartidores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tchef" asp-action="TablaUsuarios" asp-route-tipo="chef">Chefs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tadministrador" asp-action="TablaUsuarios" asp-route-tipo="administrador">Administradores</a>
+                </li>
+            </ul>
+
+            <hr />
+
+            @if (tipo != "cliente")
+            {
+                <div class="col mt-3 mb-3">
+                    <a class="btn btn-primary" asp-action="RegisterEmpleados" asp-route-tipo="@tipo">Agregar nuevo</a>
+                </div>
+            }
+
+            <table id="tabla_usuarios" class="table table-striped table-responsive table-hover mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in lista)
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td>@item.Surname @item.Name</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Sexo</td>
+                            <td>@item.Email</td>
+                            <td>
+                                <button class="btn btn-danger">Borrar</button>
+                                <button class="btn btn-dark">Bloquear</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+@section Scripts{
+    <script>
+
+        $("#tabla_usuarios").DataTable({
+            "language": {
+                url: "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
+            }
+        });
+
+        if('@tipo' == 'cliente'){
+            $('#tcliente').addClass('active');
+        }
+        else if('@tipo' == 'repartidor'){
+            $('#trepartidor').addClass('active');
+        }
+        else if('@tipo' == 'chef'){
+            $('#tchef').addClass('active');
+        }
+        else if('@tipo' == 'administrador'){
+            $('#tadministrador').addClass('active');
+        }
+        else{
+            $('#tcliente').addClass('active');
+        }
+    </script>
+}

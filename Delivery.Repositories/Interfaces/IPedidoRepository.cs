@@ -12,5 +12,8 @@ namespace Delivery.Repositories.Interfaces
         public Task<Direccion> BuscarDirreccionId(int id);
         public Task<MetodoPago> BuscarMetodoPagoId(int? metodoPagoId);
         public Task<List<Comida_CaracteristicaPedido>> BuscarComidasPedido(int id);
+
+        public Task<MetodoPago> Buscar_MetodoPago_NumeroTarjeta(string numeroTarjeta);
+        public Task ActualizarMetodoPago(MetodoPago metodoPago);
     }
 }

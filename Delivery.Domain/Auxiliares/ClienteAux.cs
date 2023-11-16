@@ -13,6 +13,5 @@ namespace Delivery.Domain.Auxiliares
             this.Cliente = Cliente;
         }
         public Cliente Cliente { get; set; }
-        public PasswordAux PasswordAux { get; set; }
     }
 }

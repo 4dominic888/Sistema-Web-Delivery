@@ -19,6 +19,13 @@ namespace Delivery.Controllers
 
         #region VerMenu
 
+        public async Task<IActionResult> ConsultarStock(int idComida)
+        {
+            var comida = await _comidaRepository.ObtenerPorId(idComida);
+            int stock = comida.Stock;
+            return Json(stock);
+        }
+
         public async Task<IActionResult> RealizarPedido(string listaComidasPedido, string idcliente, string precio)
         {
             TempData["lista"] = listaComidasPedido;

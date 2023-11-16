@@ -27,6 +27,9 @@ namespace Delivery.Controllers
                 if (User.IsInRole("Repartidor"))
                     return RedirectToAction("IndexRepartidor", "Home");
 
+                if (User.IsInRole("Chef"))
+                    return RedirectToAction("IndexChef", "Home");
+
                 if (User.IsInRole("Administrador"))
                     return RedirectToAction("IndexAdministrador", "Home");
             }
@@ -47,6 +50,12 @@ namespace Delivery.Controllers
 
         [Authorize(Roles = "Administrador")]
         public IActionResult IndexAdministrador()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Chef")]
+        public IActionResult IndexChef()
         {
             return View();
         }

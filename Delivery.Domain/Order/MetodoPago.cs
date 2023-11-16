@@ -28,8 +28,5 @@ namespace Delivery.Domain.Order
 
 
         public string? CVV { get; set; }
-
-
-        public Pedido? Pedido { get; set; }
     }
 }

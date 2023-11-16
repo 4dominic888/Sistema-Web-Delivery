@@ -7,6 +7,15 @@ namespace Delivery.Domain.Food
 {
     public class CaracteristicaComida
     {
+        public CaracteristicaComida(CaracteristicaComida caracteristica)
+        {
+            Id = caracteristica.Id;
+            Nombre = caracteristica.Nombre;
+            Detalle = caracteristica.Detalle;
+            Precio = caracteristica.Precio;
+        }
+        public CaracteristicaComida(){ }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

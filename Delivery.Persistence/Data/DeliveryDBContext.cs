@@ -65,12 +65,6 @@ namespace Delivery.Persistence.Data
                 d.Property(e => e.Detalle).HasColumnType("text");
             });
 
-            modelBuilder.Entity<MetodoPago>(m =>
-            {
-                m.Property(e => e.fechaExpiracion).HasColumnType("Date");
-                m.Property(e => e.CVV).HasColumnType("char(3)");
-            });
-
             modelBuilder.Entity<Pedido>(p =>
             {
                 p.Property(e => e.Detalle).HasColumnType("text");

@@ -61,8 +61,6 @@
 <!--Carousel-->
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 
-    <h1>Administrador</h1>
-
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -89,7 +87,7 @@
                         con la creatividad en cada plato. En nuestro restaurante, cada bocado es una experiencia única que despierta
                         tus sentidos y te lleva a un mundo de sabores inigualables. ¡Ven y únete a nosotros para un festín inolvidable!
                     </p>
-                    <p><a class="btn btn-lg btn-success" href="#">Ver menú de hoy</a></p>
+                    <p><a class="btn btn-lg btn-success" asp-controller="Comida" asp-action="EditarMenu">Edita el menú</a></p>
                 </div>
             </div>
         </div>
@@ -114,7 +112,7 @@
                         en la comodidad de tu hogar con una amplia selección de platos cuidadosamente preparados para satisfacer tus
                         deseos. ¡Haz tu pedido ahora y descubre una nueva forma de disfrutar de la buena comida sin complicaciones!
                     </p>
-                    <p><a class="btn btn-lg btn-success" href="#">Realice un pedido</a></p>
+                    <p><a class="btn btn-lg btn-success" asp-controller="Pedido" asp-action="TablaPedidoTotal">Ver tabla de pedidos</a></p>
                 </div>
             </div>
         </div>
@@ -141,7 +139,7 @@
                         convertir tu comida en una experiencia memorable. ¡Realiza tu pedido hoy y déjate llevar por el deleite
                         de nuestros sabores!
                     </p>
-                    <p><a class="btn btn-lg btn-success" href="#">Create una cuenta ahora</a></p>
+                    <p><a class="btn btn-lg btn-success" asp-controller="Usuario" asp-action="TablaUsuarios">Registre empleados</a></p>
                 </div>
             </div>
         </div>

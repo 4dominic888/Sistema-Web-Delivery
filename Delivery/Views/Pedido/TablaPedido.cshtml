@@ -1,53 +1,90 @@
 ﻿@using Delivery.Domain.Order
 @using Delivery.Domain.Food
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
 @model IEnumerable<Pedido>
 @{
 
 }
 
+<style>
+    #tabla_pedidos thead th, tbody td {
+        text-align: center;
+    }
+</style>
+
 <div class="container mt-4">
     <h3>Pedidos</h3>
     <br>
 
-    <div class="row container">
+    <!-- Modal -->
+    <div class="modal fade" id="md_pedido" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="md_titulo">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="md_descripcion">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="Cerrar" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="md_ok">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
 
         @if (Model.Count() > 0)
         {
-            <table id="tabla_pedidos" class="table">
+            <table id="tabla_pedidos" class="table table-striped table-responsive table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Código</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Detalle</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Repartidor asignado</th>
-                        <th scope="col">Acción</th>
+                        <th scope="col">Repartidor</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Fecha inicio</th>
+                        <th scope="col">Fecha fin</th>
+                        @if (!User.IsInRole("Administrador"))
+                        {
+                            <th scope="col">Acción</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
-
-                    @{
-
-                    }
-
                     @foreach(var item in Model)
                     {
                         <tr>
+                            @*Codigo*@
                             <th scope="row">@item.Codigo</th>
                             <td>
                                 <button class="btn btn-dark detalle" data-id="@item.Codigo">Ver detalle</button>
                             </td>
 
+                            @*Estado del pedido*@
                             @if(item.Estado == EstadoPedido.En_Proceso)
                             {
-                                <td>En proceso</td>
+                                <td>
+                                    <span class="alert-info">En proceso</span>
+                                </td>
                             }
                             else
                             {
                                 <td>@item.Estado</td>
                             }
+
+                            @*Repartidor*@
                             @if (item.IdRepartidor is null)
                             {
-                                <td>No asignado</td>
+                                <td>
+                                    <span class="alert-dark">No asignado</span>
+                                </td>
                             }
                             else
                             {
@@ -55,9 +92,40 @@
                                     @item.Repartidor.Name
                                 </td>
                             }
-                            <td>
-                                <button class="btn btn-danger">Cancelar pedido</button>
-                            </td>
+
+                            @*Cliente*@
+                            <td>@item.Cliente.Name @item.Cliente.Surname</td>
+
+                            @*Fecha inicio*@
+                            <td>@item.Fecha_Inicio.ToShortDateString() @item.Fecha_Inicio.ToLongTimeString()</td>
+
+                            @*Fecha fin*@
+                            @if(item.Fecha_Fin == DateTime.MinValue)
+                            {
+                                <td>-</td>
+                            }
+                            else{
+                            <td>@item.Fecha_Inicio.ToShortDateString() @item.Fecha_Inicio.ToLongTimeString()</td>
+                            }
+
+
+                            @*Accion*@
+                            @if (User.IsInRole("Cliente"))
+                            {
+                                <td>
+                                    <button class="btn btn-danger">Cancelar pedido</button>
+                                </td>
+                            }
+                            else if(User.IsInRole("Repartidor"))
+                            {
+                                <td>
+                                    <div class="btn-group">
+                                        @*data-bs-toggle="modal" data-bs-target="#md_pedido"*@
+                                        <button data-id="@item.Codigo" class="btn btn-success aceptar">Aceptar pedido</button>
+                                        <button data-id="@item.Codigo" class="btn btn-danger cancelar">Cancelar pedido</button>
+                                    </div>
+                                </td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -84,6 +152,15 @@
             }
         });
 
+        //Aceptar
+        $('.btn.btn-success.aceptar').on("click", function(){
+            let valor = $(this).data("id");
+
+
+            $('#md_pedido').modal("show");
+        });
+
+        //Detalle
         $('.btn.btn-dark.detalle').on("click", function(){
             let valor = $(this).data("id");
 

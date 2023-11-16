@@ -7,6 +7,26 @@ namespace Delivery.Domain.User
     [NotMapped]
     public class Usuario
     {
+
+        public Usuario(Usuario usuario)
+        {
+            Surname = usuario.Surname;
+            Name = usuario.Name;
+            Phone = usuario.Phone;
+            Sexo = usuario.Sexo;
+            Email = usuario.Email;
+            Password = usuario.Password;
+            DateBirth = usuario.DateBirth;
+            Rol = usuario.Rol;
+            ContenidoDestacado = usuario.ContenidoDestacado;
+            Recomendaciones = usuario.Recomendaciones;
+        }
+
+        public Usuario()
+        {
+            
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

@@ -24,6 +24,10 @@
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexRepartidor"> <i class="fa-solid fa-truck"></i> Delivery</a>
                 }
+                @if (User.IsInRole("Chef"))
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexChef"> <i class="fa-solid fa-truck"></i> Delivery</a>
+                }
                 @if (User.IsInRole("Administrador"))
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexAdministrador"> <i class="fa-solid fa-truck"></i> Delivery</a>
@@ -38,18 +42,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Chef"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Comida" asp-action="EditarMenu">Editar Menú</a>
-                            </li>
-                        }
-                        @if (User.IsInRole("Cliente"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Comida" asp-action="VerMenu">Ver Menú</a>
-                            </li>
-                        }
                     </ul>
                 </div>
 
@@ -60,7 +52,7 @@
                         <ul class="navbar-nav flex-grow-1">
 
                             <li class="nav-item">
-                                <a class="nav-link link-secondary" asp-controller="Usuario" asp-action="EditarDatosCliente">
+                                <a class="nav-link link-secondary" asp-controller="Usuario" asp-action="EditarDatos">
                                     <i class="fa-solid fa-user"></i>
                                     <strong> Bienvenido </strong> @User.FindFirst("Nombre").Value @User.FindFirst("Apellido").Value 
                                     <p style="color:green" class="d-inline" >(@User.FindFirst(ClaimTypes.Role).Value)</p>

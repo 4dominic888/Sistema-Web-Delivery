@@ -18,14 +18,94 @@ namespace Delivery.Controllers
             _usuarioRepository = usuarioRepository;
         }
 
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> TablaUsuarios(string tipo = "cliente")
+        {
 
-        //Editar Datos pendiente
-        [Authorize(Roles = "Cliente")]
-        public async Task<IActionResult> EditarDatosCliente()
+            switch (tipo.ToLower())
+            {
+                case "cliente": ViewBag.usuarios = await _usuarioRepository.ObtenerClientes(); break;
+                case "repartidor": ViewBag.usuarios = await _usuarioRepository.ObtenerRepartidores(); break;
+                case "chef": ViewBag.usuarios = await _usuarioRepository.ObtenerChefs(); break;
+                case "administrador": ViewBag.usuarios = await _usuarioRepository.ObtenerAdministradores(int.Parse(User.FindFirst("ID").Value)); break;
+                default: ViewBag.usuarios = await _usuarioRepository.ObtenerClientes(); tipo = "cliente"; break;
+            }
+
+            ViewBag.tipo = tipo;
+
+            return View();
+        }
+
+        [Authorize(Roles = "Administrador")]
+        public IActionResult RegisterEmpleados(string tipo = "repartidor")
+        {
+            ViewBag.tipo_e = tipo;
+            return View();
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> RegisterEmpleados(
+             [Bind("Surname, Name, Phone, Sexo, Email, Password, DateBirth")] Usuario usuario, string tipo)
+        {
+            bool modelovalido = true;
+
+            if (await _usuarioRepository.EmailRepetido(usuario.Email))
+            {
+                modelovalido = false;
+                ViewBag.EmailRepetido = "El correo ingresado ya existe";
+            }
+            if (await _usuarioRepository.PhoneRepetido(usuario.Phone))
+            {
+                modelovalido = false;
+                ViewBag.PhoneRepetido = "El telefono ingresado ya fue registrado";
+            }
+
+            if (ModelState.IsValid && modelovalido)
+            {
+                usuario.Rol = tipo;
+                usuario.Password = _usuarioRepository.EncriptarSHA256(usuario.Password); //Encriptar contraseña
+
+                switch (tipo.ToLower())
+                {
+                    case "repartidor": await _usuarioRepository.RegistrarRepartidor(usuario); break;
+                    case "chef": await _usuarioRepository.RegistrarChef(usuario); break;
+                    case "administrador": await _usuarioRepository.RegistrarAdministrador(usuario); break;
+                    default: break;
+                }
+
+                return RedirectToAction("TablaUsuarios", "Usuario");
+
+            }
+
+
+            ViewBag.SurnameError = ModelState["Surname"].Errors.Count > 0;
+            ViewBag.NameError = ModelState["Name"].Errors.Count > 0;
+            ViewBag.PhoneError = ModelState["Phone"].Errors.Count > 0;
+            ViewBag.EmailError = ModelState["Email"].Errors.Count > 0;
+            ViewBag.PasswordError = ModelState["Password"].Errors.Count > 0;
+            ViewBag.DataBirthError = ModelState["DateBirth"].Errors.Count > 0;
+
+            /*
+            foreach (var estado in ModelState.Values)
+            {
+                foreach (var error in estado.Errors)
+                {
+                    Console.WriteLine($"Campo: {estado} - Error: {error.ErrorMessage}");
+                }
+            }
+            */
+
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditarDatos()
         {
             int idUser = int.Parse(User.FindFirstValue("ID"));
-            Cliente cliente = await _usuarioRepository.BuscarClienteID(idUser);
-            return View(new ClienteAux(cliente));
+            Usuario usuario = await _usuarioRepository.BuscarUsuarioID(idUser);
+            return View(usuario);
         }
 
         [HttpPost]
@@ -55,6 +135,9 @@ namespace Delivery.Controllers
 
                 if (User.IsInRole("Repartidor"))
                     return RedirectToAction("IndexRepartidor", "Home");
+
+                if (User.IsInRole("Chef"))
+                    return RedirectToAction("IndexChef", "Home");
 
                 if (User.IsInRole("Administrador"))
                     return RedirectToAction("IndexAdministrador", "Home");
@@ -87,6 +170,7 @@ namespace Delivery.Controllers
                 //variable
                 if(_usuario is Cliente) return RedirectToAction("IndexCliente", "Home");
                 if (_usuario is Repartidor) return RedirectToAction("IndexRepartidor", "Home");
+                if (_usuario is Chef) return RedirectToAction("IndexChef", "Home");
                 if (_usuario is Administrador) return RedirectToAction("IndexAdministrador", "Home");
                 return RedirectToAction("Index", "Home");
             }
@@ -107,6 +191,9 @@ namespace Delivery.Controllers
 
                 if (User.IsInRole("Repartidor"))
                     return RedirectToAction("IndexRepartidor", "Home");
+
+                if (User.IsInRole("Chef"))
+                    return RedirectToAction("IndexChef", "Home");
 
                 if (User.IsInRole("Administrador"))
                     return RedirectToAction("IndexAdministrador", "Home");
@@ -150,6 +237,8 @@ namespace Delivery.Controllers
 
             return View();
         }
+
+
 
         public async Task<IActionResult> Salir()
         {

@@ -6,8 +6,18 @@ namespace Delivery.Domain.User
 {
     public class Repartidor : Usuario
     {
+
+        public Repartidor(Usuario usuario) : base(usuario)
+        {
+
+        }
+
+        public Repartidor()
+        {
+            
+        }
+
         [DataType(DataType.Currency)]
-        public float? Sueldo { get; set; }
         public Pedido? PedidoEnCurso { get; set; }
     }
 }

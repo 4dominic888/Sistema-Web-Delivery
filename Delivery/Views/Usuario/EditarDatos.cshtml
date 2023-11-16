@@ -1,6 +1,6 @@
 ﻿@using Delivery.Domain.User;
 @using Delivery.Domain.Auxiliares;
-@model ClienteAux;
+@model Usuario;
 @*PENDIENTE*@
 @{
     var listaGeneros = Enum.GetValues(typeof(Sexo)).Cast<Sexo>().ToList();
@@ -28,10 +28,10 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text"> <i class="fa-regular fa-envelope"></i> </span>
                             <div class="form-floating">
-                                <input asp-for="Cliente.Email" type="email" id="inemail" class="form-control" placeholder="example@email.com" style="width:800px">
+                                <input asp-for="Email" type="email" id="inemail" class="form-control" placeholder="example@email.com" style="width:800px">
                                 <label>Correo electrónico</label>
                                 <div class="invalid-tooltip">
-                                    <span asp-validation-for="Cliente.Email"></span>
+                                    <span asp-validation-for="Email"></span>
                                 </div>
                             </div>
                         </div>
@@ -39,18 +39,18 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text"> <i class="fa-solid fa-id-card-clip"></i> </span>
                             <div class="form-floating">
-                                <input asp-for="Cliente.Surname" id="insurname" type="text" class="form-control" placeholder="name" style="width:400px">
+                                <input asp-for="Surname" id="insurname" type="text" class="form-control" placeholder="name" style="width:400px">
                                 <label>Apellidos</label>
                                 <div class="invalid-tooltip">
-                                    <span asp-validation-for="Cliente.Surname"></span>
+                                    <span asp-validation-for="Surname"></span>
                                 </div>
                             </div>
                             <span class="input-group-text"> <i class="fa-solid fa-image-portrait"></i> </span>
                             <div class="form-floating">
-                                <input asp-for="Cliente.Name" type="text" id="inname" class="form-control" placeholder="name" style="width:360px">
+                                <input asp-for="Name" type="text" id="inname" class="form-control" placeholder="name" style="width:360px">
                                 <label>Nombre</label>
                                 <div class="invalid-tooltip">
-                                    <span asp-validation-for="Cliente.Name"></span>
+                                    <span asp-validation-for="Name"></span>
                                 </div>
                             </div>
                         </div>
@@ -58,10 +58,10 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text"> <i class="fa-solid fa-phone"></i> </span>
                             <div class="form-floating">
-                                <input asp-for="Cliente.Phone" type="tel" id="inphone" class="form-control" placeholder="example@email.com" style="width:800px">
+                                <input asp-for="Phone" type="tel" id="inphone" class="form-control" placeholder="example@email.com" style="width:800px">
                                 <label>Telefono</label>
                                 <div class="invalid-tooltip">
-                                    <span asp-validation-for="Cliente.Phone"></span>
+                                    <span asp-validation-for="Phone"></span>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         <div class="input-group mb-3">
 
                             <label class="input-group-text" for="inputGroupSelect01"> <i class="fa-solid fa-genderless"></i> </label>
-                            <select asp-for="Cliente.Sexo" class="form-select form-control" id="selectGenero" style="max-width:404px">
+                            <select asp-for="Sexo" class="form-select form-control" id="selectGenero" style="max-width:404px">
                                 <option selected disabled hidden value="">Indique su sexo</option>
                                 @foreach (Sexo item in listaGeneros)
                                 {
@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="form-floating">
-                                <input asp-for="Cliente.DateBirth" type="date" id="inDateBirth" class="form-control" placeholder="example@email.com" style="width:400px">
+                                <input asp-for="DateBirth" type="date" id="inDateBirth" class="form-control" placeholder="example@email.com" style="width:400px">
                                 <label>Fecha de nacimiento</label>
                             </div>
                             <div class="invalid-tooltip">

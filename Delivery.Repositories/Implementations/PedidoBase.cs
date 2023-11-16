@@ -14,6 +14,12 @@ namespace Delivery.Repositories.Implementations
             _context = context;
         }
 
+        public async Task ActualizarMetodoPago(MetodoPago metodoPago)
+        {
+            _context.MetodoPagos.Update(metodoPago);
+            await Guardar();
+        }
+
         public async Task<List<Comida_CaracteristicaPedido>> BuscarComidasPedido(int id)
         {
             return await _context.Comida_CaracteristicasPedido.Where(c => c.IdPedido == id).ToListAsync();
@@ -27,6 +33,11 @@ namespace Delivery.Repositories.Implementations
         public async Task<MetodoPago> BuscarMetodoPagoId(int? metodoPagoId)
         {
             return await _context.MetodoPagos.FindAsync(metodoPagoId);
+        }
+
+        public async Task<MetodoPago> Buscar_MetodoPago_NumeroTarjeta(string numeroTarjeta)
+        {
+            return await _context.MetodoPagos.Where(m => m.Numero == numeroTarjeta).FirstOrDefaultAsync();
         }
 
         public async Task Registrar_Direccion(Direccion direccion)

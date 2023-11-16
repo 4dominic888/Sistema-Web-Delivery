@@ -1,9 +1,9 @@
 ﻿using Delivery.Domain.Food;
 using Delivery.Domain.Order;
-using Delivery.Domain.User;
 using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Delivery.Controllers
 {
@@ -36,6 +36,7 @@ namespace Delivery.Controllers
             return View();
         }
 
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         [Authorize(Roles = "Cliente")]
@@ -50,16 +51,25 @@ namespace Delivery.Controllers
             float precio = float.Parse(TempData["PrecioTotal_post"].ToString().Replace('.', ','));
             List<Comida_CaracteristicaPedido> lista = _comidaRepository.DeserealizarJSONPedidoCliente(listaStr.ToString(), int.Parse(idCliente.ToString()));
 
+            
+
             //Guardar data
             Direccion address = pedido.Direccion;
             MetodoPago method_pay = pedido.MetodoPago;
 
             await _pedidoRepository.Registrar_Direccion(address);
-
+            MetodoPago mp_aux = await _pedidoRepository.Buscar_MetodoPago_NumeroTarjeta(method_pay.Numero);
             //Evitar que se guarde un método de pago siendo este uno de efectivo
             if (method_pay.Tipo != TipoMetodoPago.Efectivo)
             {
-                await _pedidoRepository.Registrar_MetodoPago(method_pay);
+                if (mp_aux is not null)
+                {
+                    mp_aux.NombreTarjeta = method_pay.NombreTarjeta;
+                    mp_aux.CVV = method_pay.CVV;
+                    mp_aux.fechaExpiracion = method_pay.fechaExpiracion;
+                    await _pedidoRepository.ActualizarMetodoPago(mp_aux);
+                }
+                else await _pedidoRepository.Registrar_MetodoPago(method_pay);
             }
             
             pedido.IdCliente = lista.First().IdCliente;
@@ -73,7 +83,18 @@ namespace Delivery.Controllers
                 pedido.IdMetodoPago = null;
                 pedido.MetodoPago = null;
             }
-            else pedido.IdMetodoPago = method_pay.Id;
+            else
+            {
+                if (mp_aux is null)
+                {
+                    pedido.IdMetodoPago = method_pay.Id;
+                }
+                else
+                {
+                    pedido.IdMetodoPago= mp_aux.Id;
+                    pedido.MetodoPago= mp_aux;
+                }
+            }
 
 
             pedido.Total = precio;
@@ -85,6 +106,13 @@ namespace Delivery.Controllers
             {
                 if (item.IdCaracteristicaComida == 0) item.IdCaracteristicaComida = null;
                 item.IdPedido = pedido.Codigo;
+
+                item.Comida = await _comidaRepository.ObtenerPorId(item.IdComida);
+                if(item.Comida.Stock > 0)
+                {
+                    item.Comida.Stock--;
+                }
+                await _comidaRepository.EditarComida(item.Comida);
             }
             await _comidaRepository.Registrar_Comidas_Pedido(lista);
 
@@ -112,7 +140,26 @@ namespace Delivery.Controllers
 
             return View(lista_pedidos);
         }
-    
+
+
+        [Authorize(Roles = "Administrador, Repartidor")]
+        public async Task<IActionResult> TablaPedidoTotal()
+        {
+            //Inicia vacio
+            IEnumerable<Pedido> lista_pedidos = Enumerable.Empty<Pedido>();
+
+            lista_pedidos = await _pedidoRepository.ObtenerTodos();
+
+            foreach (var item in lista_pedidos)
+            {
+                item.Repartidor = await _usuarioRepository.BuscarRepartidorID(item.IdRepartidor.GetValueOrDefault());
+                item.Cliente = await _usuarioRepository.BuscarClienteID(item.IdCliente);
+                item.Direccion = await _pedidoRepository.BuscarDirreccionId(item.IdDireccion);
+                item.MetodoPago = await _pedidoRepository.BuscarMetodoPagoId(item.IdMetodoPago.GetValueOrDefault());
+            }
+
+            return View("TablaPedido", lista_pedidos);
+        }
         public async Task<IActionResult> _DetallePedido(int? id)
         {
             var lista_pedidos_comida = new List<Comida_CaracteristicaPedido>();
@@ -137,6 +184,7 @@ namespace Delivery.Controllers
             }
             return PartialView(lista_pedidos_comida);
         }
+    
     }
 }
 
