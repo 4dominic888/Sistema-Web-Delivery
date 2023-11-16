@@ -220,9 +220,6 @@ namespace Delivery.Persistence.Migrations
                     b.Property<int?>("IdRepartidor")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MetodoPagoId")
-                        .HasColumnType("int");
-
                     b.Property<float?>("Total")
                         .HasColumnType("real");
 
@@ -233,11 +230,11 @@ namespace Delivery.Persistence.Migrations
                     b.HasIndex("IdDireccion")
                         .IsUnique();
 
+                    b.HasIndex("IdMetodoPago");
+
                     b.HasIndex("IdRepartidor")
                         .IsUnique()
                         .HasFilter("[IdRepartidor] IS NOT NULL");
-
-                    b.HasIndex("MetodoPagoId");
 
                     b.ToTable("Pedidos");
                 });
@@ -339,9 +336,6 @@ namespace Delivery.Persistence.Migrations
 
                     b.Property<int>("Sexo")
                         .HasColumnType("int");
-
-                    b.Property<float>("Sueldo")
-                        .HasColumnType("real");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -454,9 +448,6 @@ namespace Delivery.Persistence.Migrations
                     b.Property<int>("Sexo")
                         .HasColumnType("int");
 
-                    b.Property<float?>("Sueldo")
-                        .HasColumnType("real");
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -531,13 +522,13 @@ namespace Delivery.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Delivery.Domain.Order.MetodoPago", "MetodoPago")
+                        .WithMany()
+                        .HasForeignKey("IdMetodoPago");
+
                     b.HasOne("Delivery.Domain.User.Repartidor", "Repartidor")
                         .WithOne("PedidoEnCurso")
                         .HasForeignKey("Delivery.Domain.Order.Pedido", "IdRepartidor");
-
-                    b.HasOne("Delivery.Domain.Order.MetodoPago", "MetodoPago")
-                        .WithMany()
-                        .HasForeignKey("MetodoPagoId");
 
                     b.Navigation("Cliente");
 

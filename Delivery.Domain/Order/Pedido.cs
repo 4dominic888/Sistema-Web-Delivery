@@ -52,7 +52,7 @@ namespace Delivery.Domain.Order
         [ForeignKey(nameof(IdDireccion))]
         public Direccion Direccion { get; set; }
 
-
+        [ForeignKey(nameof(IdMetodoPago))]
         public MetodoPago? MetodoPago { get; set; }
 
 
