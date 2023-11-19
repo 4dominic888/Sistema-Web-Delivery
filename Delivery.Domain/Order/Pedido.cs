@@ -9,6 +9,15 @@ namespace Delivery.Domain.Order
 {
     public class Pedido
     {
+
+        public Pedido() { }
+
+        public Pedido(string vacio)
+        {
+            Direccion = new Direccion();
+            MetodoPago = new MetodoPago();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Codigo { get; set; }
@@ -41,21 +50,21 @@ namespace Delivery.Domain.Order
         [NotNull]
         public int IdCliente { get; set; }
 
+        [NotNull]
+        public string Cliente { get; set; }
+        [NotNull]
+        public string Telefono { get; set; }
+
         [AllowNull]
         public int? IdRepartidor { get; set; }
 
-
-        public Cliente Cliente { get; set; }
-        public Repartidor? Repartidor { get; set; }
-
+        [AllowNull]
+        public string? Repartidor { get; set; }
 
         [ForeignKey(nameof(IdDireccion))]
         public Direccion Direccion { get; set; }
 
         [ForeignKey(nameof(IdMetodoPago))]
         public MetodoPago? MetodoPago { get; set; }
-
-
-        public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
     }
 }

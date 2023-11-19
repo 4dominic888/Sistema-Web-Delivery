@@ -38,7 +38,5 @@ namespace Delivery.Domain.Food
         public float Precio { get; set; }
 
         public List<Comida_CaracteristicaMenu>? comida_CaracteristicasMenu { get; set; }
-
-        public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
     }
 }

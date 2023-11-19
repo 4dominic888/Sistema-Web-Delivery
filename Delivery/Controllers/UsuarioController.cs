@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Delivery.Domain.Auxiliares;
 
 namespace Delivery.Controllers
 {
@@ -21,16 +20,7 @@ namespace Delivery.Controllers
         [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> TablaUsuarios(string tipo = "cliente")
         {
-
-            switch (tipo.ToLower())
-            {
-                case "cliente": ViewBag.usuarios = await _usuarioRepository.ObtenerClientes(); break;
-                case "repartidor": ViewBag.usuarios = await _usuarioRepository.ObtenerRepartidores(); break;
-                case "chef": ViewBag.usuarios = await _usuarioRepository.ObtenerChefs(); break;
-                case "administrador": ViewBag.usuarios = await _usuarioRepository.ObtenerAdministradores(int.Parse(User.FindFirst("ID").Value)); break;
-                default: ViewBag.usuarios = await _usuarioRepository.ObtenerClientes(); tipo = "cliente"; break;
-            }
-
+            ViewBag.usuarios = await _usuarioRepository.ObtenerTodos(u => u.Rol.ToLower() == tipo.ToLower());
             ViewBag.tipo = tipo;
 
             return View();
@@ -67,14 +57,7 @@ namespace Delivery.Controllers
                 usuario.Rol = tipo;
                 usuario.Password = _usuarioRepository.EncriptarSHA256(usuario.Password); //Encriptar contraseña
 
-                switch (tipo.ToLower())
-                {
-                    case "repartidor": await _usuarioRepository.RegistrarRepartidor(usuario); break;
-                    case "chef": await _usuarioRepository.RegistrarChef(usuario); break;
-                    case "administrador": await _usuarioRepository.RegistrarAdministrador(usuario); break;
-                    default: break;
-                }
-
+                await _usuarioRepository.RegistrarUsuario(usuario);
                 return RedirectToAction("TablaUsuarios", "Usuario");
 
             }
@@ -104,17 +87,15 @@ namespace Delivery.Controllers
         public async Task<IActionResult> EditarDatos()
         {
             int idUser = int.Parse(User.FindFirstValue("ID"));
-            Usuario usuario = await _usuarioRepository.BuscarUsuarioID(idUser);
+            Usuario usuario = await _usuarioRepository.BuscarUsuario(idUser);
             return View(usuario);
         }
 
         [HttpPost]
         public IActionResult EditarDatosCliente(
-            [Bind("Cliente.Email, Cliente.Surname, Cliente.Name, Cliente.Phone," +
-            "Cliente.Sexo, Cliente.DateBirth")] ClienteAux clienteAux)
+            [Bind("Id, Surname, Name, Phone, Email, Sexo, DateBirth, ContenidoDestacado, Recomendaciones")] Usuario usuario)
         {
             Console.WriteLine(ModelState.IsValid);
-            Console.WriteLine(clienteAux.Cliente.Email);
 
             ViewBag.EmailError = ModelState["Email"].Errors.Count > 0;
             ViewBag.SurnameError = ModelState["Cliente.Surname"].Errors.Count > 0;
@@ -158,8 +139,9 @@ namespace Delivery.Controllers
                     new Claim("Correo", _usuario.Email),
                     new Claim("ID", _usuario.Id.ToString()),
                     new Claim("Destacado", _usuario.ContenidoDestacado.ToString()),
-                    new Claim("Apellido", _usuario.Surname)
-                    
+                    new Claim("Apellido", _usuario.Surname),
+                    new Claim("Telefono", _usuario.Phone)
+
                 };
 
                 claims.Add(new Claim(ClaimTypes.Role, _usuario.Rol));
@@ -168,10 +150,10 @@ namespace Delivery.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                 //variable
-                if(_usuario is Cliente) return RedirectToAction("IndexCliente", "Home");
-                if (_usuario is Repartidor) return RedirectToAction("IndexRepartidor", "Home");
-                if (_usuario is Chef) return RedirectToAction("IndexChef", "Home");
-                if (_usuario is Administrador) return RedirectToAction("IndexAdministrador", "Home");
+                if(_usuario.Rol == "Cliente") return RedirectToAction("IndexCliente", "Home");
+                if (_usuario.Rol == "Repartidor") return RedirectToAction("IndexRepartidor", "Home");
+                if (_usuario.Rol == "Chef") return RedirectToAction("IndexChef", "Home");
+                if (_usuario.Rol == "Administrador") return RedirectToAction("IndexAdministrador", "Home");
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -203,7 +185,7 @@ namespace Delivery.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register(
-            [Bind("Surname, Name, Phone, Sexo, Email, Password, DateBirth")] Cliente cliente)
+            [Bind("Surname, Name, Phone, Sexo, Email, Password, DateBirth")] Usuario cliente)
         {
             bool modelovalido = true;
 
@@ -222,7 +204,7 @@ namespace Delivery.Controllers
             {
                 cliente.Rol = "Cliente";
                 cliente.Password = _usuarioRepository.EncriptarSHA256(cliente.Password); //Encriptar contraseña
-                await _usuarioRepository.RegistrarCliente(cliente);
+                await _usuarioRepository.RegistrarUsuario(cliente);
                 return RedirectToAction("Login");
 
             }

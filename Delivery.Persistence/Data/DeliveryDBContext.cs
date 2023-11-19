@@ -16,42 +16,10 @@ namespace Delivery.Persistence.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Cliente>(c =>
-            {
-                c.HasMany(e => e.Pedidos)
-                .WithOne(e => e.Cliente)
-                .HasForeignKey(e => e.IdCliente);
-
-                c.Property(e => e.DateBirth).HasColumnType("Date");
-                c.Property(e => e.Phone).HasMaxLength(9);
-            });
-
-            modelBuilder.Entity<Repartidor>(r =>
-            {
-                r.HasOne(e => e.PedidoEnCurso)
-                .WithOne(e => e.Repartidor)
-                .HasForeignKey<Pedido>(e => e.IdRepartidor);
-                r.Property(e => e.DateBirth).HasColumnType("Date");
-                r.Property(e => e.Phone).HasMaxLength(9);
-            });
-
-            modelBuilder.Entity<Administrador>(a =>
+            modelBuilder.Entity<Usuario>(a =>
             {
                 a.Property(e => e.DateBirth).HasColumnType("Date");
                 a.Property(e => e.Phone).HasMaxLength(9);
-            });
-
-            modelBuilder.Entity<Chef>(c =>
-            {
-                c.Property(e => e.DateBirth).HasColumnType("Date");
-                c.Property(e => e.Phone).HasMaxLength(9);
-            });
-
-
-            modelBuilder.Entity<Comida>(c =>
-            {
-                c.Property(e => e.Descripcion).HasColumnType("text");
-                c.Property(e => e.Precio).HasColumnType("money");
             });
 
             modelBuilder.Entity<CaracteristicaComida>(ca =>
@@ -68,8 +36,15 @@ namespace Delivery.Persistence.Data
             modelBuilder.Entity<Pedido>(p =>
             {
                 p.Property(e => e.Detalle).HasColumnType("text");
+                p.Property(e => e.Cliente).HasColumnType("nvarchar(200)");
+                p.Property(e => e.Repartidor).HasColumnType("nvarchar(200)");
+                p.Property(e => e.Telefono).HasColumnType("nvarchar(9)");
             });
 
+            modelBuilder.Entity<MetodoPago>(mp =>
+            {
+                mp.Property(x => x.CVV).HasColumnType("char(3)");
+            });
 
             modelBuilder.Entity<Comida_CaracteristicaMenu>().HasKey(am => new
             {
@@ -83,16 +58,17 @@ namespace Delivery.Persistence.Data
             modelBuilder.Entity<Comida_CaracteristicaMenu>().HasOne(c => c.CaracteristicaComida).
                 WithMany(am => am.comida_CaracteristicasMenu).HasForeignKey(c => c.IdCaracteristicaComida);
 
+            modelBuilder.Entity<Comida_CaracteristicaPedido>(cc =>
+            {
+                cc.Property(x => x.Contenido).HasColumnType("text");
+            });
 
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Direccion> Direcciones { get; set; }
         public DbSet<MetodoPago> MetodoPagos { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Administrador> Administradores { get; set; }
-        public DbSet<Chef> Chefs { get; set; }
-        public DbSet<Repartidor> Repartidores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Comida> Comidas { get; set; }
         public DbSet<CaracteristicaComida> CaracteristicaComidas { get; set; }

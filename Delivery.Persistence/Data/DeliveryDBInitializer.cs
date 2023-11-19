@@ -14,11 +14,11 @@ namespace Delivery.Persistence.Data
                 var context = serviceScope.ServiceProvider.GetService<DeliveryDBContext>();
                 context.Database.EnsureCreated();
 
-                if(!context.Administradores.Any())
+                if(!context.Usuarios.Any())
                 {
-                    context.Administradores.AddRange(new List<Administrador>()
+                    context.Usuarios.AddRange(new List<Usuario>()
                     {
-                        new Administrador()
+                        new Usuario()
                         {
                             Surname= "Torres",
                             Name="Admin",

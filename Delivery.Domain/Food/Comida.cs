@@ -25,8 +25,6 @@ namespace Delivery.Domain.Food
             Stock = comida.Stock;
             Imagen = comida.Imagen;
             comida_CaracteristicasMenu = comida.comida_CaracteristicasMenu;
-            Comida_CaracteristicasPedido = comida.Comida_CaracteristicasPedido;
-
         }
 
         [Key]
@@ -66,7 +64,6 @@ namespace Delivery.Domain.Food
 
 
         public List<Comida_CaracteristicaMenu>? comida_CaracteristicasMenu { get; set; }
-        public List<Comida_CaracteristicaPedido>? Comida_CaracteristicasPedido { get; set; }
 
     }
 }

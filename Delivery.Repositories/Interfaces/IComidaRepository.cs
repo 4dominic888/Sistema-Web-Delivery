@@ -1,26 +1,29 @@
 ﻿using Delivery.Domain.Food;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
-
+using System.Linq.Expressions;
 
 namespace Delivery.Repositories.Interfaces
 {
 	public interface IComidaRepository : IRepositoryBase<Comida>
 	{
         /// <summary>
-        /// Para convertir el JSON pasado de la vista al modelo establecido
+        /// Registra en la base de datos las comidas pedidas junto a las características
         /// </summary>
-        /// <param name="JSON">String JSON</param>
+        /// <param name="comidaLog">JSON a guardar</param>
+        /// <param name="IdPedido">ID del pedido</param>
         /// <returns></returns>
-        public List<Comida_CaracteristicaPedido> DeserealizarJSONPedidoCliente(string JSON, int IDCliente);
+        Task Registrar_Comida_Log(string comidaLog, int IdPedido);
 
 
         /// <summary>
-        /// Para poder agregar en rango las comidas pedidas por el usuario
+        /// Listas comidas pedidas en base al filtro
         /// </summary>
-        /// <param name="lista"></param>
+        /// <param name="filtro">query</param>
         /// <returns></returns>
-        public Task Registrar_Comidas_Pedido(List<Comida_CaracteristicaPedido> lista);
+        Task<List<Comida_CaracteristicaPedido>?> Obtener_ComidasPedido(Expression<Func<Comida_CaracteristicaPedido, bool>> filtro);
+
+        Task<Comida_CaracteristicaPedido?> Obtener_comidaPedidoId(int idPedido);
 
         #region Caracteristicas Comida
 

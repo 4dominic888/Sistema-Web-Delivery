@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace Delivery.Repositories.Implementations
 {
@@ -17,57 +18,17 @@ namespace Delivery.Repositories.Implementations
 			_Comidacontext = context;
         }
 
-        public async Task Registrar_Comidas_Pedido(List<Comida_CaracteristicaPedido> lista)
+        public async Task Registrar_Comida_Log(string comidaLog, int IdPedido)
         {
-            _context.Comida_CaracteristicasPedido.AddRange(lista);
+            await _context.Comida_CaracteristicasPedido.AddAsync(new Comida_CaracteristicaPedido(comidaLog, IdPedido));
             await Guardar();
         }
 
-        public List<Comida_CaracteristicaPedido> DeserealizarJSONPedidoCliente(string JSON, int IDCliente)
-        {
-            //Deserealizar el dato JSON
-            var listado = JsonConvert.DeserializeObject< Dictionary<int, Dictionary<int, int[]>> >(JSON);
+        public async Task<List<Comida_CaracteristicaPedido>?> Obtener_ComidasPedido(Expression<Func<Comida_CaracteristicaPedido, bool>> filtro)
+            => await _context.Comida_CaracteristicasPedido.Where(filtro).ToListAsync();
 
-            if (listado.IsNullOrEmpty()) return new List<Comida_CaracteristicaPedido>();
-
-            //Inicializar el retorno
-            var retorno = new List<Comida_CaracteristicaPedido>();
-
-            //Variables auxiliares
-            int agrupamiento;
-            int IdCliente;
-            int IdComida;
-
-            //Recorrer cada comida pedida agrupacion
-            foreach (var kvp in listado)
-            {
-                agrupamiento = kvp.Key;
-                IdCliente = IDCliente;
-
-                //Recorrer cada comida pedida idcomida
-                foreach(var item in kvp.Value)
-                {
-                    IdComida = item.Key;
-                    if(item.Value.Length == 0)
-                    {
-                        retorno.Add(new Comida_CaracteristicaPedido(
-                            IdComida, 0, IdCliente, agrupamiento));
-                    }
-                    else
-                    {
-                        //Recorrer cada caracteristica de comida
-                        foreach (int carac in item.Value)
-                        {
-                            retorno.Add(new Comida_CaracteristicaPedido(
-                                IdComida, carac, IdCliente, agrupamiento));
-                        }
-                    }
-                }
-            }
-
-            return retorno;
-        }
-
+        public async Task<Comida_CaracteristicaPedido?> Obtener_comidaPedidoId(int idPedido)
+            => await _context.Comida_CaracteristicasPedido.Where(x => x.IdPedido == idPedido).FirstOrDefaultAsync();
 
         #region Caracteristicas Comida
 

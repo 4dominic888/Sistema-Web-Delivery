@@ -1,45 +1,27 @@
 ﻿@using Delivery.Domain.Order
 @using Delivery.Domain.Food
-@model IEnumerable<Comida_CaracteristicaPedido>
+@model Pedido
 
 @{
-    Pedido pedido = new Pedido();
-    var listado_comida_pedido = new Dictionary<int, Comida>();
-    if(Model.Count() > 0)
+    Dictionary<int, ComidaLog> comida_pedido = new Dictionary<int, ComidaLog>();
+    if (ViewBag.Comida_pedidoJSON is not null)
     {
-        pedido = ViewBag.pedido;
-
-        int aux = 0;
-        var comidaAux = new Comida();
-        var enum_aux = Enumerable.Empty<Comida_CaracteristicaPedido>();
-
-        foreach (var item in Model)
-        {
-            //Comida pedida nueva
-            if (aux != item.agrupamiento)
-            {
-                enum_aux = Model.Where(x => x.agrupamiento == item.agrupamiento).ToList();
-                comidaAux = item.Comida;
-                comidaAux.Comida_CaracteristicasPedido = Model.Where(c => c.agrupamiento == item.agrupamiento).ToList();
-                listado_comida_pedido.Add(item.agrupamiento, new Comida(comidaAux));
-            }
-            else continue;
-            aux = item.agrupamiento;
-        }
+        comida_pedido = ViewBag.Comida_pedidoJSON;
     }
-
 }
 
-@if (Model.Count() > 0)
-{
+
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_detalle" aria-labelledby="offcanvasRightLabel">
+
+    @if (Model is not null)
+    {
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Pedido de: @pedido.Cliente.Name @pedido.Cliente.Surname </h5>
+            <h5 class="offcanvas-title">Pedido de: @Model.Cliente </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
 
-            @foreach (var item in listado_comida_pedido)
+            @foreach (var item in comida_pedido)
             {
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -52,17 +34,14 @@
                         <div id="flush-collapse_@item.Key" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <ul class="list-group overflow-auto">
-                                    @foreach (var c in item.Value.Comida_CaracteristicasPedido)
+                                    @foreach (var c in item.Value.Caracteristicas)
                                     {
-                                        if(c.caracteristicaComida is not null)
-                                        {
-                                            <li class="list-group-item d-flex">
-                                                <p class="p-0 m-0 flex-grow-1 overflow-auto">
-                                                    @c.caracteristicaComida.Nombre
-                                                </p>
-                                                <div style="display:inline">S/. @c.caracteristicaComida.Precio</div>
-                                            </li>
-                                        }
+                                        <li class="list-group-item d-flex">
+                                            <p class="p-0 m-0 flex-grow-1 overflow-auto">
+                                                @c.Value.Nombre
+                                            </p>
+                                            <div style="display:inline">S/. @c.Value.Precio</div>
+                                        </li>
                                     }
                                 </ul>
                             </div>
@@ -71,6 +50,7 @@
                 </div>
             }
 
+            @*Adicional*@
 
             <hr>
             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -80,14 +60,14 @@
                             <tr>
                                 <th>Dirección:</th>
                                 <td>
-                                    @pedido.Direccion.Nombre_Calle N° @pedido.Direccion.Numero
+                                    @Model.Direccion.Nombre_Calle N° @Model.Direccion.Numero
                                 </td>
                             </tr>
                             <tr>
                                 <th>Detalle de la dirección</th>
-                                @if (pedido.Direccion.Detalle is not null)
+                                @if (@Model.Direccion.Detalle is not null)
                                 {
-                                    <td>@pedido.Direccion.Detalle</td>
+                                    <td>@Model.Direccion.Detalle</td>
                                 }
                                 else
                                 {
@@ -96,14 +76,14 @@
                             </tr>
                             <tr>
                                 <th>Teléfono</th>
-                                <td>@pedido.Cliente.Phone</td>
+                                <td>@Model.Telefono</td>
                             </tr>
 
                             <tr>
                                 <th>Método de pago</th>
-                                @if(pedido.MetodoPago is not null)
+                                @if (@Model.MetodoPago is not null)
                                 {
-                                    <td>@pedido.MetodoPago.Tipo</td>
+                                    <td>@Model.MetodoPago.Tipo</td>
                                 }
                                 else
                                 {
@@ -112,7 +92,7 @@
                             </tr>
                             <tr>
                                 <th>Total a pagar</th>
-                                <td>S/. @pedido.Total</td>
+                                <td>S/. @Model.Total</td>
                             </tr>
 
                         </tbody>
@@ -121,6 +101,6 @@
             </div>
 
         </div>
-    </div>
+    }
+</div>
 
-}

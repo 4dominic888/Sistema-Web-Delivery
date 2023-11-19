@@ -59,7 +59,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Imagen")
                         .HasColumnType("nvarchar(max)");
@@ -72,8 +72,8 @@ namespace Delivery.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("money");
+                    b.Property<float>("Precio")
+                        .HasColumnType("real");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -106,28 +106,13 @@ namespace Delivery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("IdCaracteristicaComida")
-                        .HasColumnType("int");
+                    b.Property<string>("Contenido")
+                        .HasColumnType("text");
 
-                    b.Property<int>("IdCliente")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdComida")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdPedido")
-                        .HasColumnType("int");
-
-                    b.Property<int>("agrupamiento")
+                    b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("IdCaracteristicaComida");
-
-                    b.HasIndex("IdCliente");
-
-                    b.HasIndex("IdComida");
 
                     b.HasIndex("IdPedido");
 
@@ -167,7 +152,7 @@ namespace Delivery.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CVV")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("char(3)");
 
                     b.Property<string>("NombreTarjeta")
                         .HasMaxLength(150)
@@ -196,6 +181,10 @@ namespace Delivery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Codigo"));
 
+                    b.Property<string>("Cliente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Detalle")
                         .HasColumnType("text");
 
@@ -220,26 +209,27 @@ namespace Delivery.Persistence.Migrations
                     b.Property<int?>("IdRepartidor")
                         .HasColumnType("int");
 
+                    b.Property<string>("Repartidor")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(9)");
+
                     b.Property<float?>("Total")
                         .HasColumnType("real");
 
                     b.HasKey("Codigo");
-
-                    b.HasIndex("IdCliente");
 
                     b.HasIndex("IdDireccion")
                         .IsUnique();
 
                     b.HasIndex("IdMetodoPago");
 
-                    b.HasIndex("IdRepartidor")
-                        .IsUnique()
-                        .HasFilter("[IdRepartidor] IS NOT NULL");
-
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("Delivery.Domain.User.Administrador", b =>
+            modelBuilder.Entity("Delivery.Domain.User.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,172 +280,7 @@ namespace Delivery.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Administradores");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Chef", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ContenidoDestacado")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DateBirth")
-                        .HasColumnType("Date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
-
-                    b.Property<bool>("Recomendaciones")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Rol")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Sexo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chefs");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ContenidoDestacado")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DateBirth")
-                        .HasColumnType("Date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
-
-                    b.Property<int>("PreferenciaCategoria")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Recomendaciones")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Rol")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Sexo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Repartidor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ContenidoDestacado")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DateBirth")
-                        .HasColumnType("Date");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
-
-                    b.Property<bool>("Recomendaciones")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Rol")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Sexo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Repartidores");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.Comida_CaracteristicaMenu", b =>
@@ -479,43 +304,17 @@ namespace Delivery.Persistence.Migrations
 
             modelBuilder.Entity("Delivery.Domain.Food.Comida_CaracteristicaPedido", b =>
                 {
-                    b.HasOne("Delivery.Domain.Food.CaracteristicaComida", "caracteristicaComida")
-                        .WithMany("Comida_CaracteristicasPedido")
-                        .HasForeignKey("IdCaracteristicaComida");
-
-                    b.HasOne("Delivery.Domain.User.Cliente", "Cliente")
-                        .WithMany("comida_CaracteristicaPedidos")
-                        .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Delivery.Domain.Food.Comida", "Comida")
-                        .WithMany("Comida_CaracteristicasPedido")
-                        .HasForeignKey("IdComida")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Delivery.Domain.Order.Pedido", "Pedido")
-                        .WithMany("Comida_CaracteristicasPedido")
-                        .HasForeignKey("IdPedido");
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Comida");
+                        .WithMany()
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Pedido");
-
-                    b.Navigation("caracteristicaComida");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Pedido", b =>
                 {
-                    b.HasOne("Delivery.Domain.User.Cliente", "Cliente")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Delivery.Domain.Order.Direccion", "Direccion")
                         .WithOne("Pedido")
                         .HasForeignKey("Delivery.Domain.Order.Pedido", "IdDireccion")
@@ -526,53 +325,24 @@ namespace Delivery.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("IdMetodoPago");
 
-                    b.HasOne("Delivery.Domain.User.Repartidor", "Repartidor")
-                        .WithOne("PedidoEnCurso")
-                        .HasForeignKey("Delivery.Domain.Order.Pedido", "IdRepartidor");
-
-                    b.Navigation("Cliente");
-
                     b.Navigation("Direccion");
 
                     b.Navigation("MetodoPago");
-
-                    b.Navigation("Repartidor");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.CaracteristicaComida", b =>
                 {
-                    b.Navigation("Comida_CaracteristicasPedido");
-
                     b.Navigation("comida_CaracteristicasMenu");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Food.Comida", b =>
                 {
-                    b.Navigation("Comida_CaracteristicasPedido");
-
                     b.Navigation("comida_CaracteristicasMenu");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Order.Direccion", b =>
                 {
                     b.Navigation("Pedido");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.Order.Pedido", b =>
-                {
-                    b.Navigation("Comida_CaracteristicasPedido");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Cliente", b =>
-                {
-                    b.Navigation("Pedidos");
-
-                    b.Navigation("comida_CaracteristicaPedidos");
-                });
-
-            modelBuilder.Entity("Delivery.Domain.User.Repartidor", b =>
-                {
-                    b.Navigation("PedidoEnCurso");
                 });
 #pragma warning restore 612, 618
         }

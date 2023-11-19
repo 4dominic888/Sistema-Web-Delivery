@@ -181,8 +181,7 @@
             }
 
             return contador;
-        }
-
+        };
 
         $('#formPedido').on('submit', function(evt){
             $('#Order_param1').val(JSON.stringify(listadoComidasPedir));
@@ -196,7 +195,7 @@
             let idcomida = $(this).data("id");
             let comidaName = $(this).data("name");
             let comidaPrice = $(this).data("price");
-            let listacaracteristicas = [];
+            let listacaracteristicas = {};
             let listacaracteristicasNombre = [];
             let listacaracteristicasPrecio = [];
 
@@ -230,6 +229,8 @@
                         }
                     });
 
+                    let agrupacionCarac = 1;
+
                     $('#contenedorElegirCaracteristica').html(result);
                     $('#elegirCaracteristicaComida').modal('show');
 
@@ -258,18 +259,19 @@
                             let precioCarac = $('#SeleccionarCaracteristicas').find("option:selected").data("price");
 
 
-
                             //Si se agrega un valor no repetido
                             if ($('#listadoCaracteristicas').find("li").length < 10) {
                                 let li = $('<li class="list-group-item border d-flex">  <p class="p-0 m-0 flex-grow-1 overflow-auto">' + valor + '</p>  <div class="form-text" style="display:inline">S/. ' + precioCarac + '</div>  </li>');
-                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + seleccion + '" data-name="' + valor + '" data-price="' + precioCarac + '" ></button>');
+                                let buttonclose = $('<button type="button" class="btn-close quitar" data-id="' + agrupacionCarac + '" data-name="' + valor + '" data-price="' + precioCarac + '" ></button>');
 
                                 //Close button action
                                 buttonclose.on('click', function () {
                                     let borrar = $(this).closest('li').find('button').data('id');
                                     let borrarNombre = $(this).closest('li').find('button').data('name');
                                     let borrarPrecio = $(this).closest('li').find('button').data('price');
-                                    listacaracteristicas = listacaracteristicas.filter(x => x != borrar);
+
+                                    delete listacaracteristicas[borrar];
+
                                     listacaracteristicasNombre = listacaracteristicasNombre.filter(x => x != borrarNombre);
                                     listacaracteristicasPrecio = listacaracteristicasPrecio.filter(x => x != borrarPrecio);
                                     $(this).closest('li').remove();
@@ -279,9 +281,13 @@
                                 li.append(buttonclose);
                                 $('#listadoCaracteristicas').append(li);
 
-                                listacaracteristicas.push(parseInt(seleccion));
+                                listacaracteristicas[agrupacionCarac] = {
+                                    Nombre: valor,
+                                    Precio: parseFloat(precioCarac.toString().replace(',', '.'))
+                                };
                                 listacaracteristicasNombre.push(valor);
                                 listacaracteristicasPrecio.push(precioCarac);
+                                agrupacionCarac++;
                             }
                             else {
                                 $('#validacionCaracteristicas').text('Ya no puedes agregar más características');
@@ -303,9 +309,12 @@
                             $('#quitarAlert').hide();
                             $('#butt_order_submit').prop('disabled', false);
                         }
-
                         listadoComidasPedir[agrupacion] = {};
-                        listadoComidasPedir[agrupacion][idcomida] = listacaracteristicas;
+                        listadoComidasPedir[agrupacion] = {
+                            Nombre: comidaName,
+                            Precio: comidaPrice,
+                            Caracteristicas: listacaracteristicas 
+                        };
 
                         //Sumar precios dinamicamente
                         let anteriorPrecio = parseFloat($('#precioTotal').text());
@@ -357,12 +366,12 @@
                             
                         `);
 
+                        //Borrar comida
                         accordeonButtondelete.find('.btn.btn-danger.borrarComida').on('click', function () {
                             let numeroAgrupacionBorrar = $(this).data('id');
                             delete listadoComidasPedir[numeroAgrupacionBorrar];
                             let precioEliminar = parseFloat(accordeonItem.data("price"));
                             let precioActual = parseFloat($('#precioTotal').text());
-                            console.log({ precioEliminar, precioActual });
                             $('#precioTotal').text(precioActual - precioEliminar);
                             accordeonItem.remove();
 
@@ -402,6 +411,7 @@
                         toastPlato.show();
 
                         agrupacion++;
+                        console.log(listadoComidasPedir);
                     });
                 }
             });

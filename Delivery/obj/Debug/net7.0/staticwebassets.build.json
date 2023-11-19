@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vV9Ds72HtRRpZANisBSyJi6+rMN3HF46qwwrTfW+YJ8=",
+  "Hash": "ELDYV2s2VFNwwo06Cv4fHVZmoMab4Q18lxTl1lGb7uk=",
   "Source": "Delivery",
   "BasePath": "_content/Delivery",
   "Mode": "Default",
@@ -289,12 +289,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\3cb49699-0cc8-499f-9305-ca47a57ebbfc.jpg",
+      "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\85836cbc-6561-4617-98d7-b55119d193f7.jpg",
       "SourceId": "Delivery",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\",
       "BasePath": "_content/Delivery",
-      "RelativePath": "imagenes/Comida/3cb49699-0cc8-499f-9305-ca47a57ebbfc.jpg",
+      "RelativePath": "imagenes/Comida/85836cbc-6561-4617-98d7-b55119d193f7.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -303,7 +303,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\3cb49699-0cc8-499f-9305-ca47a57ebbfc.jpg"
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\85836cbc-6561-4617-98d7-b55119d193f7.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\cbf42661-c5ad-469e-9a40-c3d40970e6f1.jpg",
+      "SourceId": "Delivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\",
+      "BasePath": "_content/Delivery",
+      "RelativePath": "imagenes/Comida/cbf42661-c5ad-469e-9a40-c3d40970e6f1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\Comida\\cbf42661-c5ad-469e-9a40-c3d40970e6f1.jpg"
     },
     {
       "Identity": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\js\\site.js",

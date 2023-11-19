@@ -30,7 +30,7 @@ namespace Delivery.Repositories.Implementations
 
         public async Task<T> ObtenerPorId(int id)
         {
-            return await dbSet.FindAsync(id); ;
+            return await dbSet.FindAsync(id);
         }
 
         public async Task<ICollection<T>> ObtenerTodos(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null, bool isTracking = true)
