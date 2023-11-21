@@ -8,6 +8,7 @@ namespace Delivery.Domain.Order
         En_Proceso,
         Aceptado,
         Cancelado,
-        Terminado
+        Terminado,
+        Pendiente
     }
 }

@@ -1,0 +1,14 @@
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\bin\Release\net7.0\Delivery.Domain.deps.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\bin\Release\net7.0\Delivery.Domain.runtimeconfig.json
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\bin\Release\net7.0\Delivery.Domain.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\bin\Release\net7.0\Delivery.Domain.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.csproj.AssemblyReference.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.AssemblyInfoInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.AssemblyInfo.cs
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.csproj.CoreCompileInputs.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\refint\Delivery.Domain.dll
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.pdb
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\Delivery.Domain.genruntimeconfig.cache
+C:\Users\4dominic888\Documents\cosas\VisualStudio cosas\Proyecto Delivery\Delivery.Domain\obj\Release\net7.0\ref\Delivery.Domain.dll

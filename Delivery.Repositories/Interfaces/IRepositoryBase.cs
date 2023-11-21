@@ -21,6 +21,7 @@ namespace Delivery.Repositories.Interfaces
 
         Task Agregar(T entity); //Agregar un registro
         void Remover(T entity); //Eliminar un registro
+        void Actualizar(T entity);
         Task Guardar();
     }
 }

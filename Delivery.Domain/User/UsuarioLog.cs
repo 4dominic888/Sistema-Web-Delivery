@@ -27,6 +27,6 @@ namespace Delivery.Domain.User
         public string Phone { get; set; }
         public Sexo Sexo { get; set; }
         public string Email { get; set; }
-        public string Rol { get; set; }
+        public Rol Rol { get; set; }
     }
 }

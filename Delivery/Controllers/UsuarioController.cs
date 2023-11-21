@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Delivery.Domain.Food;
+using System.Drawing;
+using System;
+using System.Runtime.CompilerServices;
 
 namespace Delivery.Controllers
 {
@@ -18,9 +22,15 @@ namespace Delivery.Controllers
         }
 
         [Authorize(Roles = "Administrador")]
-        public async Task<IActionResult> TablaUsuarios(string tipo = "cliente")
+        public async Task<IActionResult> TablaUsuarios(string tipo = "Cliente")
         {
-            ViewBag.usuarios = await _usuarioRepository.ObtenerTodos(u => u.Rol.ToLower() == tipo.ToLower());
+            Rol rol = (Rol)Enum.Parse(typeof(Rol), tipo);
+
+            if(rol == Rol.Administrador)
+            {
+                ViewBag.usuarios = await _usuarioRepository.ObtenerTodos(u => u.Rol == rol && u.Id != int.Parse(User.FindFirst("ID").Value));
+            }
+            else ViewBag.usuarios = await _usuarioRepository.ObtenerTodos(u => u.Rol == rol);
             ViewBag.tipo = tipo;
 
             return View();
@@ -32,7 +42,6 @@ namespace Delivery.Controllers
             ViewBag.tipo_e = tipo;
             return View();
         }
-
 
         [HttpPost]
         [Authorize(Roles = "Administrador")]
@@ -54,7 +63,13 @@ namespace Delivery.Controllers
 
             if (ModelState.IsValid && modelovalido)
             {
-                usuario.Rol = tipo;
+                usuario.Rol = tipo switch
+                {
+                    "Repartidor" => Rol.Repartidor,
+                    "Chef" => Rol.Chef,
+                    "Administrador" => Rol.Administrador,
+                    _ => Rol.Repartidor,
+                };
                 usuario.Password = _usuarioRepository.EncriptarSHA256(usuario.Password); //Encriptar contraseña
 
                 await _usuarioRepository.RegistrarUsuario(usuario);
@@ -83,6 +98,27 @@ namespace Delivery.Controllers
             return View();
         }
 
+
+
+        public async Task<IActionResult> Bloquear_Usuario(int UID)
+        {
+            string retorno = await _usuarioRepository.Bloquear_Usuario(UID);
+            return Json(retorno);
+        }
+
+        public async Task<IActionResult> Desbloquear_Usuario(int UID)
+        {
+            string retorno = await _usuarioRepository.Desbloquear_Usuario(UID);
+            return Json(retorno);
+        }
+
+        public async Task<IActionResult> Cambiar_Rol(int UID, string rol)
+        {
+            Rol aux = (Rol)Enum.Parse(typeof(Rol), rol);
+            await _usuarioRepository.Cambiar_Rol(UID, aux);
+            return Json(null);
+        }
+
         [Authorize]
         public async Task<IActionResult> EditarDatos()
         {
@@ -92,17 +128,24 @@ namespace Delivery.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditarDatosCliente(
-            [Bind("Id, Surname, Name, Phone, Email, Sexo, DateBirth, ContenidoDestacado, Recomendaciones")] Usuario usuario)
+        public async Task<IActionResult> EditarDatos(
+            [Bind("Id, Surname, Name, Phone, Email, Sexo, DateBirth, Password")] Usuario usuario)
         {
-            Console.WriteLine(ModelState.IsValid);
+            var update_Usuario = await _usuarioRepository.BuscarUsuario(usuario.Id);
+            update_Usuario.Surname = usuario.Surname;
+            update_Usuario.Name = usuario.Name;
+            update_Usuario.Phone = usuario.Phone;
+            update_Usuario.Sexo = usuario.Sexo;
+            update_Usuario.DateBirth = usuario.DateBirth;
 
-            ViewBag.EmailError = ModelState["Email"].Errors.Count > 0;
-            ViewBag.SurnameError = ModelState["Cliente.Surname"].Errors.Count > 0;
-            ViewBag.NameError = ModelState["Cliente.Name"].Errors.Count > 0;
-            ViewBag.PhoneError = ModelState["Cliente.Phone"].Errors.Count > 0;
+            if(usuario.Password is not null)
+                update_Usuario.Password = _usuarioRepository.EncriptarSHA256(usuario.Password);
 
-            return View();
+
+            _usuarioRepository.Actualizar(update_Usuario);
+            await _usuarioRepository.Guardar();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Usuario");
         }
 
 
@@ -134,26 +177,32 @@ namespace Delivery.Controllers
 
             if(_usuario != null)
             {
+
+                if (_usuario.Bloqueado)
+                {
+                    ViewBag.UserNoValid = "Tu cuenta ha sido bloqueada, consulte a un administrador del delivery para más detalles";
+                    return View();
+                }
+
                 var claims = new List<Claim> {
                     new Claim("Nombre", _usuario.Name),
                     new Claim("Correo", _usuario.Email),
                     new Claim("ID", _usuario.Id.ToString()),
-                    new Claim("Destacado", _usuario.ContenidoDestacado.ToString()),
                     new Claim("Apellido", _usuario.Surname),
                     new Claim("Telefono", _usuario.Phone)
 
                 };
 
-                claims.Add(new Claim(ClaimTypes.Role, _usuario.Rol));
+                claims.Add(new Claim(ClaimTypes.Role, _usuario.Rol.ToString()));
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                 //variable
-                if(_usuario.Rol == "Cliente") return RedirectToAction("IndexCliente", "Home");
-                if (_usuario.Rol == "Repartidor") return RedirectToAction("IndexRepartidor", "Home");
-                if (_usuario.Rol == "Chef") return RedirectToAction("IndexChef", "Home");
-                if (_usuario.Rol == "Administrador") return RedirectToAction("IndexAdministrador", "Home");
+                if(_usuario.Rol == Rol.Cliente) return RedirectToAction("IndexCliente", "Home");
+                if (_usuario.Rol == Rol.Repartidor) return RedirectToAction("IndexRepartidor", "Home");
+                if (_usuario.Rol == Rol.Chef) return RedirectToAction("IndexChef", "Home");
+                if (_usuario.Rol == Rol.Administrador) return RedirectToAction("IndexAdministrador", "Home");
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -202,7 +251,7 @@ namespace Delivery.Controllers
 
             if (ModelState.IsValid && modelovalido)
             {
-                cliente.Rol = "Cliente";
+                cliente.Rol = Rol.Cliente;
                 cliente.Password = _usuarioRepository.EncriptarSHA256(cliente.Password); //Encriptar contraseña
                 await _usuarioRepository.RegistrarUsuario(cliente);
                 return RedirectToAction("Login");

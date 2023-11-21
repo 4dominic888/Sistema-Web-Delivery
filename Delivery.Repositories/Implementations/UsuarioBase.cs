@@ -15,6 +15,42 @@ namespace Delivery.Repositories.Implementations
             _context = context;
         }
 
+        public async Task<string> Bloquear_Usuario(int UID)
+        {
+            var Usuario = await BuscarUsuario(UID);
+
+            if (Usuario.Bloqueado) return "Este usuario ya está bloqueado";
+            else
+            {
+                Usuario.Bloqueado = true;
+                _context.Usuarios.Update(Usuario);
+                await Guardar();
+                return null;
+            }
+        }
+
+        public async Task<string> Desbloquear_Usuario(int UID)
+        {
+            var Usuario = await BuscarUsuario(UID);
+
+            if (!Usuario.Bloqueado) return "Este usuario ya está desbloqueado";
+            else
+            {
+                Usuario.Bloqueado = false;
+                _context.Usuarios.Update(Usuario);
+                await Guardar();
+                return null;
+            }
+        }
+
+        public async Task Cambiar_Rol(int UID, Rol rol)
+        {
+            var Usuario = await BuscarUsuario(UID);
+            Usuario.Rol = rol;
+            _context.Update(Usuario);
+            await Guardar();
+        }
+
         public async Task RegistrarUsuario(Usuario usuario)
         {
             await Agregar(usuario);
@@ -42,5 +78,6 @@ namespace Delivery.Repositories.Implementations
             for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
             return sb.ToString();
         }
+
     }
 }

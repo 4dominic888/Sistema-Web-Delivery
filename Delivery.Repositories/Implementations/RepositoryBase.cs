@@ -28,6 +28,11 @@ namespace Delivery.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
+        public void Actualizar(T entity)
+        {
+            _context.Update(entity);
+        }
+
         public async Task<T> ObtenerPorId(int id)
         {
             return await dbSet.FindAsync(id);
@@ -82,6 +87,5 @@ namespace Delivery.Repositories.Implementations
         {
             dbSet.Remove(entity);
         }
-    
     }
 }

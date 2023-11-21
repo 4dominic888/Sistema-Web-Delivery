@@ -28,6 +28,15 @@ namespace Delivery.Repositories.Interfaces
         /// <returns></returns>
         Task Registrar_Pedido(Pedido pedido);
 
+
+
+        /// <summary>
+        /// Verifica si un pedido fue aceptado por un repartidor, para evitar que este acepte más de un pedido a la vez
+        /// </summary>
+        /// <param name="IdRepartidor"></param>
+        /// <returns></returns>
+        Task<bool> Aceptar_Pedido(int IdRepartidor);
+
         /// <summary>
         /// Para convertir la cadena guardada en JSON a un formato de vista para C#
         /// </summary>

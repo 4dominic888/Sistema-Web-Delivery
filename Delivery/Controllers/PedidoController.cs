@@ -145,6 +145,108 @@ namespace Delivery.Controllers
             return PartialView(pedido);
         }
 
+
+
+
+        #region Cambiar estado del pedido
+
+        [Authorize(Roles = "Repartidor")]
+        public async Task<IActionResult> Aceptar_Pedido(int idPedido)
+        {
+            var pedido = await _pedidoRepository.ObtenerPorId(idPedido);
+            int idRepartidor = int.Parse(User.FindFirst("ID").Value);
+
+            if (pedido.IdRepartidor is null)
+            {
+                //Indica si puede aceptar el pedido, validando que no tenga otro pedido pendiente
+                if(await _pedidoRepository.Aceptar_Pedido(idRepartidor))
+                {
+                    pedido.IdRepartidor = idRepartidor;
+                    pedido.Repartidor = User.FindFirst("Nombre").Value + " " + User.FindFirst("Apellido").Value;
+                    pedido.Estado = EstadoPedido.Aceptado;
+                    _pedidoRepository.Actualizar(pedido);
+                    await _pedidoRepository.Guardar();
+                    return Json(null);
+                }
+                else return Json("Tienes un pedido por terminar");
+            }
+            else return Json("Este pedido ya ha sido elegido");
+        }
+
+        [Authorize(Roles = "Repartidor, Cliente")]
+        public async Task<IActionResult> Terminar_Pedido(int idPedido)
+        {
+            int idUsuario = int.Parse(User.FindFirst("ID").Value);
+            var pedido = await _pedidoRepository.ObtenerPorId(idPedido);
+
+            if(pedido.IdCliente == idUsuario && pedido.Estado == EstadoPedido.Pendiente)
+            {
+                pedido.Estado = EstadoPedido.Terminado;
+                pedido.Fecha_Fin = DateTime.Now;
+                _pedidoRepository.Actualizar(pedido);
+                await _pedidoRepository.Guardar();
+                return Json(null);
+            }
+            else if (pedido.IdRepartidor == idUsuario)
+            {
+                pedido.Estado = EstadoPedido.Pendiente;
+                _pedidoRepository.Actualizar(pedido);
+                await _pedidoRepository.Guardar();
+                return Json(null);
+            }
+            else return Json("Ha ocurrido un error a la hora de terminar el pedido");
+        }
+
+        [Authorize(Roles = "Repartidor, Cliente")]
+        public async Task<IActionResult> Cancelar_Pedido(int idPedido, string detalle)
+        {
+            var pedido = await _pedidoRepository.ObtenerPorId(idPedido);
+            int idUsuario = int.Parse(User.FindFirst("ID").Value);
+
+            if (User.IsInRole("Repartidor"))
+            {
+                pedido.Estado = EstadoPedido.Cancelado;
+                pedido.Detalle = detalle;
+                pedido.Fecha_Fin = DateTime.Now;
+                pedido.IdRepartidor = idUsuario;
+                pedido.Repartidor = User.FindFirst("Nombre").Value + " " + User.FindFirst("Apellido").Value;
+                _pedidoRepository.Actualizar(pedido);
+                await _pedidoRepository.Guardar();
+                return Json(null);
+            }
+            else if (pedido.IdCliente == idUsuario)
+            {
+                pedido.Estado = EstadoPedido.Cancelado;
+                pedido.Detalle = detalle;
+                pedido.Fecha_Fin = DateTime.Now;
+                _pedidoRepository.Actualizar(pedido);
+                await _pedidoRepository.Guardar();
+                return Json("Se ha cancelado el pedido");
+            }
+            else return Json("No puedes cancelar un pedido ajeno");
+
+        }
+
+
+        [Authorize(Roles = "Repartidor")]
+        public async Task<IActionResult> Dejar_Pedido(int idPedido)
+        {
+            int idRepartidor = int.Parse(User.FindFirst("ID").Value);
+            var pedido = await _pedidoRepository.ObtenerPorId(idPedido);
+
+            if (pedido.IdRepartidor == idRepartidor)
+            {
+                pedido.IdRepartidor = null;
+                pedido.Repartidor = null;
+                pedido.Estado = EstadoPedido.En_Proceso;
+                _pedidoRepository.Actualizar(pedido);
+                await _pedidoRepository.Guardar();
+                return Json(null);
+            }
+            else return Json("No puede dejar un pedido que no haya sido aceptado por usted");
+        }
+
+        #endregion
     }
 }
 

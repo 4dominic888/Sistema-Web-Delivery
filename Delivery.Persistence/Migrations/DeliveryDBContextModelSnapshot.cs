@@ -237,7 +237,7 @@ namespace Delivery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("ContenidoDestacado")
+                    b.Property<bool>("Bloqueado")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("DateBirth")
@@ -263,12 +263,8 @@ namespace Delivery.Persistence.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<bool>("Recomendaciones")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Rol")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("Rol")
+                        .HasColumnType("int");
 
                     b.Property<int>("Sexo")
                         .HasColumnType("int");

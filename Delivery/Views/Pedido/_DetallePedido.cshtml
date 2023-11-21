@@ -95,6 +95,18 @@
                                 <td>S/. @Model.Total</td>
                             </tr>
 
+                            <tr>
+                                <th>Detalle del pedido</th>
+                                @if(Model.Detalle is not null)
+                                {
+                                    <td>@Model.Detalle</td>
+                                }
+                                else
+                                {
+                                    <td class="form-label">No proporcionado</td>
+                                }
+                            </tr>
+
                         </tbody>
                     </table>
                 </div>

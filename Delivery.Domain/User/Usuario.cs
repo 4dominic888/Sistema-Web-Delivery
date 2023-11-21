@@ -18,8 +18,6 @@ namespace Delivery.Domain.User
             Password = usuario.Password;
             DateBirth = usuario.DateBirth;
             Rol = usuario.Rol;
-            ContenidoDestacado = usuario.ContenidoDestacado;
-            Recomendaciones = usuario.Recomendaciones;
         }
 
         public Usuario()
@@ -85,13 +83,9 @@ namespace Delivery.Domain.User
         [DataType(DataType.Date)]
         public DateTime DateBirth { get; set; }
 
+        public Rol Rol { get; set; }
 
-        [MaxLength(100)]
-        public string Rol { get; set; }
-
-
-        public bool ContenidoDestacado { get; set; } = false;
-        public bool Recomendaciones { get; set; } = false;
+        public bool Bloqueado { get; set; } = false;
 
     }
 }

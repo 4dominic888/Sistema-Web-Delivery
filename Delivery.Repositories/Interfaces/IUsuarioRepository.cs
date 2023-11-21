@@ -4,6 +4,28 @@ namespace Delivery.Repositories.Interfaces
 {
     public interface IUsuarioRepository : IRepositoryBase<Usuario>
     {
+
+        /// <summary>
+        /// Bloqueas un usuario, te devuelve un string dependiendo de si se logró hacer la operación
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        Task<string> Bloquear_Usuario(int UID);
+
+        /// <summary>
+        /// Desbloqueas un usuario, te devuelve un string dependiendo de si se logró hacer la operación
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        Task<string> Desbloquear_Usuario(int UID);
+
+        /// <summary>
+        /// Permite cambiar el rol de un usuario
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        Task Cambiar_Rol(int UID, Rol rol);
+
         /// <summary>
         /// Registra usuarios
         /// </summary>

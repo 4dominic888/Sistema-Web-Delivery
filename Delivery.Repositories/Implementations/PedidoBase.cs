@@ -31,6 +31,15 @@ namespace Delivery.Repositories.Implementations
             await Guardar();
         }
 
+        public async Task<bool> Aceptar_Pedido(int IdRepartidor)
+        {
+            //Si hay un pedido ya aceptado por un repartidor, retornará false, indicando que no puede tomar el pedido
+            var pedido = await _context.Pedidos.Where(p => p.Estado == EstadoPedido.Aceptado && p.IdRepartidor == IdRepartidor).FirstOrDefaultAsync();
+            if (pedido is null) return true;
+            else return false;
+
+        }
+
         public Dictionary<int, ComidaLog> DeserealizarJSON(string JSON)
             => JsonConvert.DeserializeObject<Dictionary<int, ComidaLog>>(JSON);
 
