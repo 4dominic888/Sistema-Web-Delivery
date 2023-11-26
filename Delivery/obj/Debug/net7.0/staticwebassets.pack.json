@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\assets\\Hamburguesa.png"
     },
     {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\assets\\HorarioAtencion.jpg",
+      "PackagePath": "staticwebassets\\assets\\HorarioAtencion.jpg"
+    },
+    {
       "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\assets\\Pollo.png",
       "PackagePath": "staticwebassets\\assets\\Pollo.png"
     },
@@ -53,12 +57,44 @@
       "PackagePath": "staticwebassets\\assets\\platocarta.png"
     },
     {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\assets\\restaurante2.jpg",
+      "PackagePath": "staticwebassets\\assets\\restaurante2.jpg"
+    },
+    {
       "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\2859c67c-dc18-4140-93a9-2d036f5b955a.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\2859c67c-dc18-4140-93a9-2d036f5b955a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\2d318ace-6fcc-4dfe-92e5-43e663ff8d99.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\2d318ace-6fcc-4dfe-92e5-43e663ff8d99.jpg"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\33097d20-b1eb-4ba3-8730-9c7b90b2c049.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\33097d20-b1eb-4ba3-8730-9c7b90b2c049.jpg"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\7b2ae5fa-be04-48fa-ad6b-1b42b6834504.png",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\7b2ae5fa-be04-48fa-ad6b-1b42b6834504.png"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\a0c16e29-000b-47b9-afca-1249b3fcbd34.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\a0c16e29-000b-47b9-afca-1249b3fcbd34.jpg"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\a6ab7113-fa07-439d-a8ad-128e4d6bd8a9.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\a6ab7113-fa07-439d-a8ad-128e4d6bd8a9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\imagenes\\Comida\\ad6a8912-ce88-4b70-a241-ed61abfd40a3.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\Comida\\ad6a8912-ce88-4b70-a241-ed61abfd40a3.jpg"
     },
     {
       "Id": "C:\\Users\\4dominic888\\Documents\\cosas\\VisualStudio cosas\\Proyecto Delivery\\Delivery\\wwwroot\\js\\site.js",

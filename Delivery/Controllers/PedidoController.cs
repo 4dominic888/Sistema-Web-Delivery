@@ -136,12 +136,10 @@ namespace Delivery.Controllers
 
         public async Task<IActionResult> _DetallePedido(int? idPedido)
         {
-
             var comidas_pedido = await _comidaRepository.Obtener_comidaPedidoId(idPedido.GetValueOrDefault());
             ViewBag.Comida_pedidoJSON = _pedidoRepository.DeserealizarJSON(comidas_pedido.Contenido);
             var pedido = await _pedidoRepository.ObtenerPorId(idPedido.GetValueOrDefault());
             pedido.Direccion = await _pedidoRepository.Buscar_Direccion(d => d.Id == pedido.IdDireccion);
-
             return PartialView(pedido);
         }
 

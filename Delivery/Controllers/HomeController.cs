@@ -19,49 +19,6 @@ namespace Delivery.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if(User.IsInRole("Cliente")) 
-                    return RedirectToAction("IndexCliente", "Home");
-
-                if (User.IsInRole("Repartidor"))
-                    return RedirectToAction("IndexRepartidor", "Home");
-
-                if (User.IsInRole("Chef"))
-                    return RedirectToAction("IndexChef", "Home");
-
-                if (User.IsInRole("Administrador"))
-                    return RedirectToAction("IndexAdministrador", "Home");
-            }
-            return View();
-        }
-
-        [Authorize(Roles = "Cliente")]
-        public IActionResult IndexCliente()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Repartidor")]
-        public IActionResult IndexRepartidor()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Administrador")]
-        public IActionResult IndexAdministrador()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Chef")]
-        public IActionResult IndexChef()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
             return View();
         }
 

@@ -7,7 +7,6 @@ namespace Delivery.Domain.User
     [NotMapped]
     public class Usuario
     {
-
         public Usuario(Usuario usuario)
         {
             Surname = usuario.Surname;
@@ -86,6 +85,5 @@ namespace Delivery.Domain.User
         public Rol Rol { get; set; }
 
         public bool Bloqueado { get; set; } = false;
-
     }
 }

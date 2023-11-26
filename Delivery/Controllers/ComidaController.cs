@@ -2,6 +2,9 @@
 using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Delivery.Controllers
 {
@@ -9,12 +12,15 @@ namespace Delivery.Controllers
     {
         private readonly IComidaRepository _comidaRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ICompositeViewEngine _viewEngine;
         public ComidaController(
             IComidaRepository comidaRepository,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            ICompositeViewEngine viewEngine)
         {
             _comidaRepository = comidaRepository;
             _webHostEnvironment = webHostEnvironment;
+            _viewEngine = viewEngine;
         }
 
         #region VerMenu
@@ -54,11 +60,77 @@ namespace Delivery.Controllers
         }
 
 
+        //Función auxiliar para convertir un PartialView a String
+        private async Task<string> RenderPartialViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.ActionDescriptor.ActionName;
+
+            ViewData.Model = model;
+
+            using (var writer = new StringWriter())
+            {
+                ViewEngineResult viewResult =
+                    _viewEngine.FindView(ControllerContext, viewName, false);
+
+                ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    writer,
+                    new HtmlHelperOptions()
+                );
+
+                await viewResult.View.RenderAsync(viewContext);
+
+                return writer.GetStringBuilder().ToString();
+            }
+        }
+
+
+        //Función que devuelve la lista de comidas filtradas
+        public async Task<IActionResult> _ListaComidas(string busqueda = "", int? CategoriaComida = null, int page = 1)
+        {
+            IEnumerable<Comida> lista = Enumerable.Empty<Comida>();
+
+            //Lista según rol
+            if (User.IsInRole("Cliente"))
+                lista = await _comidaRepository.ObtenerTodos(c => c.MenuDelDia);
+            else
+                lista = await _comidaRepository.ObtenerTodos();
+
+            //Busqueda por nombre
+            if (busqueda.Trim() != string.Empty)
+                lista = lista.Where(c => c.Nombre.ToLower().Contains(busqueda.ToLower()));
+
+            //Filtrado categoría
+            if (CategoriaComida != null)
+                lista = lista.Where(c => ((int)c.Categoria) == CategoriaComida);
+
+            var paginas_Totales = _comidaRepository.PaginasTotales(lista);
+
+            //Paginación
+            lista = _comidaRepository.Obtener_comidas_paginado(lista, page);
+
+            //Retonar lista como HTML
+            string comidas_HTML = await RenderPartialViewToString("_ListaComidas", lista);
+            
+            //Pasar multiples objetos
+            var retorno = new
+            {
+                html = comidas_HTML,
+                paginas_totales = paginas_Totales
+
+            };
+
+            return Json(retorno);
+        }
+
         [HttpGet]
         public async Task<IActionResult> VerMenu()
         {
-            var listaComidas = await _comidaRepository.ObtenerComidas();
-            return View("VerMenu", listaComidas);
+            return View("VerMenu");
         }
 
         #endregion
@@ -70,11 +142,10 @@ namespace Delivery.Controllers
         [Authorize(Roles = "Chef, Administrador")]
         public async Task<IActionResult> EditarMenu()
         {
-            var comidas = await _comidaRepository.ObtenerComidas();
             ViewBag.caracteristicas = await _comidaRepository.ObtenerCaracteristicasComidas();
             ViewBag.modeloValido = true;
             ViewBag.modo = "Nada"; //Para la vista parcial
-            return View(comidas);
+            return View();
         }
 
 

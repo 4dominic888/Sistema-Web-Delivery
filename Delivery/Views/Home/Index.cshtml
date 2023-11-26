@@ -87,7 +87,14 @@
                         con la creatividad en cada plato. En nuestro restaurante, cada bocado es una experiencia única que despierta
                         tus sentidos y te lleva a un mundo de sabores inigualables. ¡Ven y únete a nosotros para un festín inolvidable!
                     </p>
-                    <p><a class="btn btn-lg btn-success" asp-controller="Comida" asp-action="VerMenu">Ver menú de hoy</a></p>
+                    @if (User.IsInRole("Cliente") || !User.Identity.IsAuthenticated)
+                    {
+                        <p><a class="btn btn-lg btn-success" asp-controller="Comida" asp-action="VerMenu">Ver menú de hoy</a></p>
+                    }
+                    else if (User.IsInRole("Chef") || User.IsInRole("Administrador"))
+                    {
+                        <p><a class="btn btn-lg btn-success" asp-controller="Comida" asp-action="EditarMenu">Editar Menú</a></p>
+                    }
                 </div>
             </div>
         </div>
@@ -112,7 +119,18 @@
                         en la comodidad de tu hogar con una amplia selección de platos cuidadosamente preparados para satisfacer tus
                         deseos. ¡Haz tu pedido ahora y descubre una nueva forma de disfrutar de la buena comida sin complicaciones!
                     </p>
-                    <p><a class="btn btn-lg btn-success" asp-controller="Usuario" asp-action="Login">Realice un pedido</a></p>
+                    @if (User.IsInRole("Cliente"))
+                    {
+                        <p><a class="btn btn-lg btn-success" asp-controller="Pedido" asp-action="TablaPedido">Ver tabla de pedidos</a></p>
+                    }
+                    else if (User.IsInRole("Repartidor") || User.IsInRole("Administrador"))
+                    {
+                        <p><a class="btn btn-lg btn-success" asp-controller="Pedido" asp-action="TablaPedido">Ver tabla de pedidos</a></p>
+                    }
+                    else if (!User.Identity.IsAuthenticated)
+                    {
+                        <p><a class="btn btn-lg btn-success" asp-controller="Usuario" asp-action="Login">Realice un pedido</a></p>
+                    }
                 </div>
             </div>
         </div>
@@ -139,7 +157,14 @@
                         convertir tu comida en una experiencia memorable. ¡Realiza tu pedido hoy y déjate llevar por el deleite
                         de nuestros sabores!
                     </p>
-                    <p><a asp-controller="Usuario" asp-action="Register" class="btn btn-lg btn-success">Create una cuenta ahora</a></p>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <p><a asp-controller="Usuario" asp-action="Register" class="btn btn-lg btn-success">Create una cuenta ahora</a></p>
+                    }
+                    else if (User.IsInRole("Administrador"))
+                    {
+                        <p><a asp-controller="Usuario" asp-action="TablaUsuarios" class="btn btn-lg btn-success">Administración de usuarios</a></p>
+                    }
                 </div>
             </div>
         </div>
@@ -161,75 +186,20 @@
 
 <div class="container">
 
-    <div class="row align-content-end">
-        <div class="col-lg-4 border-start">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <defs>
-                    <pattern id="bebidaImagen" width="100%" height="100%">
-                        <image x="-45" y="1" width="150%" xlink:href="/assets/Bebida.png" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#bebidaImagen)" />
-            </svg>
-
-            <h2 class="fw-normal">Bebidas</h2>
-            <p style="text-align: justify;">
-                Explora nuestra variedad de bebidas para satisfacer tu sed. Desde refrescantes limonadas hasta exquisitas infusiones
-                de frutas frescas, nuestras bebidas son ideales para tu comida.
-            </p>
-            <p><a class="btn btn-secondary" href="#">Ver bebidas &raquo;</a></p>
-        </div>
-
-
-        <div class="col-lg-4 border-end border-start">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <defs>
-                    <pattern id="platoCartaImagen" width="100%" height="100%">
-                        <image x="0" y="1" width="150%" xlink:href="/assets/platocarta.png" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#platoCartaImagen)" />
-            </svg>
-            <h2 class="fw-normal">Platos a la carta</h2>
-            <p style="text-align: justify;">
-                Personaliza tu comida exactamente como te gusta con nuestra selección de platos a la carta.
-                Elige tus ingredientes, salsas y guarniciones favoritas y crea una experiencia gastronómica única.
-            </p>
-            <p><a class="btn btn-secondary" href="#">Ver platos a la carta &raquo;</a></p>
-        </div>
-
-
-        <div class="col-lg-4 border-end">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid meet" focusable="false">
-                <defs>
-                    <pattern id="HamburguesaImagen" width="100%" height="100%">
-                        <image x="-30" y="1" width="150%" xlink:href="/assets/Hamburguesa.png" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#HamburguesaImagen)" />
-            </svg>
-            <h2 class="fw-normal">Comida rápida</h2>
-            <p style="text-align: justify;">
-                ¿Necesitas algo rápido y sabroso? Nuestra sección de comida rápida te ofrece opciones
-                deliciosas que se preparan en minutos, perfectas para cuando tienes hambre y poco tiempo.
-            </p>
-            <p><a class="btn btn-secondary" href="#">Ver comida rápida &raquo;</a></p>
-        </div>
-    </div><!-- /.row -->
-
-
-
-    <hr class="featurette-divider">
-
-
     <!--Colocar Imagenes luego-->
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-body-secondary">It’ll blow your mind.</span></h2>
-            <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+            <h2 class="featurette-heading fw-normal lh-1">Sea libre de pedir lo que <span class="text-body-secondary">usted desee</span></h2>
+            <p class="lead" style="text-align:justify">
+                En este espacio culinario, te invitamos a explorar un festín de sabores cuidadosamente seleccionados para 
+                satisfacer tu paladar. Sumérgete en nuestro menú diverso y descubre una sinfonía de opciones que abrazan 
+                desde los clásicos reconfortantes hasta las innovadoras creaciones culinarias.
+            </p>
         </div>
         <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="rgb(200,200,200)" /><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                <image href="/assets/restaurante2.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+            </svg>
         </div>
     </div>
     <hr class="featurette-divider">
@@ -237,23 +207,21 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span class="text-body-secondary">See for yourself.</span></h2>
-            <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+            <h2 class="featurette-heading fw-normal lh-1">Horario de <span class="text-body-secondary">Atención</span></h2>
+            <p class="lead">
+                Nos encantaría atenderte y ser parte de tus momentos especiales. Nuestro equipo está disponible para recibir tus pedidos en el siguiente horario:
+            </p>
+            <p class="lead">
+                <strong>Lunes a Viernes:</strong> 11:00 am - 9:00 pm
+            </p>
+            <p class="lead">
+                <strong>Sábados y Domingos:</strong> 12:00 pm - 10:00 pm
+            </p>
         </div>
         <div class="col-md-5 order-md-1">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="rgb(200,200,200)" /><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
-        </div>
-    </div>
-    <hr class="featurette-divider">
-
-
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
-            <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-        </div>
-        <div class="col-md-5">
-            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="rgb(200,200,200)" /><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                <image href="/assets/HorarioAtencion.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+            </svg>
         </div>
     </div>
     <hr class="featurette-divider">

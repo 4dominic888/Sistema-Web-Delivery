@@ -99,19 +99,21 @@ namespace Delivery.Controllers
         }
 
 
-
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Bloquear_Usuario(int UID)
         {
             string retorno = await _usuarioRepository.Bloquear_Usuario(UID);
             return Json(retorno);
         }
 
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Desbloquear_Usuario(int UID)
         {
             string retorno = await _usuarioRepository.Desbloquear_Usuario(UID);
             return Json(retorno);
         }
 
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Cambiar_Rol(int UID, string rol)
         {
             Rol aux = (Rol)Enum.Parse(typeof(Rol), rol);
@@ -152,20 +154,7 @@ namespace Delivery.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Cliente"))
-                    return RedirectToAction("IndexCliente", "Home");
-
-                if (User.IsInRole("Repartidor"))
-                    return RedirectToAction("IndexRepartidor", "Home");
-
-                if (User.IsInRole("Chef"))
-                    return RedirectToAction("IndexChef", "Home");
-
-                if (User.IsInRole("Administrador"))
-                    return RedirectToAction("IndexAdministrador", "Home");
-            }
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
             return View();
         }
 
@@ -198,11 +187,6 @@ namespace Delivery.Controllers
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                //variable
-                if(_usuario.Rol == Rol.Cliente) return RedirectToAction("IndexCliente", "Home");
-                if (_usuario.Rol == Rol.Repartidor) return RedirectToAction("IndexRepartidor", "Home");
-                if (_usuario.Rol == Rol.Chef) return RedirectToAction("IndexChef", "Home");
-                if (_usuario.Rol == Rol.Administrador) return RedirectToAction("IndexAdministrador", "Home");
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -215,20 +199,7 @@ namespace Delivery.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Cliente"))
-                    return RedirectToAction("IndexCliente", "Home");
-
-                if (User.IsInRole("Repartidor"))
-                    return RedirectToAction("IndexRepartidor", "Home");
-
-                if (User.IsInRole("Chef"))
-                    return RedirectToAction("IndexChef", "Home");
-
-                if (User.IsInRole("Administrador"))
-                    return RedirectToAction("IndexAdministrador", "Home");
-            }
+            if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
             return View();
         }
 

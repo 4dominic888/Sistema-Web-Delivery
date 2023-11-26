@@ -4,18 +4,18 @@ using Delivery.Repositories.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 
 namespace Delivery.Repositories.Implementations
 {
-	public class ComidaBase : RepositoryBase<Comida>, IComidaRepository
-	{
-		private readonly DeliveryDBContext _Comidacontext;
+    public class ComidaBase : RepositoryBase<Comida>, IComidaRepository
+    {
+        private readonly DeliveryDBContext _Comidacontext;
+        private readonly int ELEMENTOS_PAGINA = 4;
         public ComidaBase(DeliveryDBContext context) : base(context)
         {
-			_Comidacontext = context;
+            _Comidacontext = context;
         }
 
         public async Task Registrar_Comida_Log(string comidaLog, int IdPedido)
@@ -29,6 +29,26 @@ namespace Delivery.Repositories.Implementations
 
         public async Task<Comida_CaracteristicaPedido?> Obtener_comidaPedidoId(int idPedido)
             => await _context.Comida_CaracteristicasPedido.Where(x => x.IdPedido == idPedido).FirstOrDefaultAsync();
+
+
+        #region Paginacion
+
+        public IEnumerable<Comida> Obtener_comidas_paginado(IEnumerable<Comida> comidas, int page)
+        {
+            int indiceInicio = (page - 1) * ELEMENTOS_PAGINA;
+            return comidas.Skip(indiceInicio).Take(ELEMENTOS_PAGINA).ToList();
+        }
+
+        public int PaginasTotales(IEnumerable<Comida> comidas)
+        {
+            int total_paginas = comidas.Count();
+            return (int)Math.Ceiling((double)total_paginas / ELEMENTOS_PAGINA);
+        }
+
+
+
+        #endregion
+
 
         #region Caracteristicas Comida
 

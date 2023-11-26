@@ -8,7 +8,6 @@ namespace Delivery.Domain.User
 {
     public class UsuarioLog
     {
-
         public UsuarioLog() { }
         public UsuarioLog(Usuario usuario)
         {

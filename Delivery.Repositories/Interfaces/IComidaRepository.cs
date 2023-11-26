@@ -25,6 +25,26 @@ namespace Delivery.Repositories.Interfaces
 
         Task<Comida_CaracteristicaPedido?> Obtener_comidaPedidoId(int idPedido);
 
+
+        #region Paginacion
+        /// <summary>
+        /// Obtiene un listado de las comidas pero paginado
+        /// </summary>
+        /// <param name="page">Página a la que se hará referencia</param>
+        /// <returns></returns>
+        IEnumerable<Comida> Obtener_comidas_paginado(IEnumerable<Comida> comidas ,int page);
+
+
+        /// <summary>
+        /// Se obtiene las páginas totales
+        /// </summary>
+        /// <param name="total_elementos"></param>
+        /// <returns></returns>
+        int PaginasTotales(IEnumerable<Comida> comidas);
+
+        #endregion
+
+
         #region Caracteristicas Comida
 
         /// <summary>
