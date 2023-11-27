@@ -338,6 +338,9 @@
 
         //Filtro seleccionar categorías
         $('#select_categorias').change(function () {
+
+            paginaActual = 1;
+
             if (parseInt($(this).val()) == -1) {
                 categoria_seleccionada = null; //TODO
             }
@@ -349,6 +352,7 @@
 
         //Filtro por busqueda escrita
         $('#filtro_buscar').on("click", function () {
+            paginaActual = 1;
             busqueda = $('#filtro_texto').val();
             FiltroComidas()
         });

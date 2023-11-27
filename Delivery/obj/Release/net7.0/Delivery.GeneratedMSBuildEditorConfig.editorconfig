@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXF9FbGVnaXJDYXJhY0NvbWlkYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Comida/_ListaComidas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXF9MaXN0YUNvbWlkYXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Comida/_ModificarComida.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29taWRhXF9Nb2RpZmljYXJDb21pZGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,26 +46,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/IndexAdministrador.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleEFkbWluaXN0cmFkb3IuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/IndexChef.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleENoZWYuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/IndexCliente.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleENsaWVudGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/IndexRepartidor.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleFJlcGFydGlkb3IuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/4dominic888/Documents/cosas/VisualStudio cosas/Proyecto Delivery/Delivery/Views/Pedido/CrearPedido.cshtml]
